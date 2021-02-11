@@ -11,9 +11,6 @@ import { BodyComponent } from './body/body.component';
 import { ContentComponent } from './content/content.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
 
-import{ AngularFireModule } from '@angular/fire';
-import { FirebaseService } from './services/firebase.service';
-
 
 
 @NgModule({
@@ -29,19 +26,9 @@ import { FirebaseService } from './services/firebase.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
-    AngularFireModule.initializeApp({
-      apiKey: "AIzaSyDwSo9zgny2wG1q0d2r9aUZmssLIksVNX8",
-      authDomain: "projetprog-bc10f.firebaseapp.com",
-      databaseURL: "https://projetprog-bc10f-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "projetprog-bc10f",
-      storageBucket: "projetprog-bc10f.appspot.com",
-      messagingSenderId: "462392072798",
-      appId: "1:462392072798:web:dbdd794a347604226e72cf",
-      measurementId: "G-NF5HWMXRH1"
-    }),
+    NgbModule
   ],
-  providers: [FirebaseService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
