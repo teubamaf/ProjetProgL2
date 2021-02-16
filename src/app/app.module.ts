@@ -11,6 +11,9 @@ import { ContentComponent } from './content/content.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
 import { HomeComponent } from './home/home.component';
 import { FirebaseService } from './services/firebase.service';
+import { MesGroupesComponent } from './mes-groupes/mes-groupes.component';
+import { MesMessagesComponent } from './mes-messages/mes-messages.component';
+import { FilActualiteComponent } from './fil-actualite/fil-actualite.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { FirebaseService } from './services/firebase.service';
     ContentComponent,
     AddGroupeComponent,
     HomeComponent,
+    MesGroupesComponent,
+    MesMessagesComponent,
+    FilActualiteComponent,
   ],
   imports: [
     BrowserModule,
