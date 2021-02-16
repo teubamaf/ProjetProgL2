@@ -4,8 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { BodyComponent } from './body/body.component';
 import { ContentComponent } from './content/content.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
-import { HomeComponent } from './home/home.component';
-
 
 const routes: Routes = [
  { path: '', component: BodyComponent, children: [
