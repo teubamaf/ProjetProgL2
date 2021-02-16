@@ -1,3 +1,9 @@
-<p>
-    You are logged in</p>
-<button (click)="logout()">Logout</button>
+<div class="body-container">
+    <app-menu></app-menu>
+    <app-content></app-content>
+    <router-outlet></router-outlet>
+</div>
+
+
+<p>You are logged in</p>
+<button (click)="logout()">Log out</button>
