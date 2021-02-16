@@ -7,10 +7,10 @@ import { AddGroupeComponent } from './add-groupe/add-groupe.component';
 
 
 const routes: Routes = [
-  { path: '', component: BodyComponent, children: [
-    { path: 'page-1', component: ContentComponent },
-    { path: 'add-groupe', component: AddGroupeComponent},
-  ]}
+ // { path: '', component: BodyComponent, children: [
+   // { path: 'page-1', component: ContentComponent },
+   // { path: 'add-groupe', component: AddGroupeComponent},
+ // ] //}
 ];
 
 @NgModule({

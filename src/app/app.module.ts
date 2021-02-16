@@ -1,34 +1,42 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
+import { AngularFireModule } from '@angular/fire';
+
 import { AppComponent } from './app.component';
-import { LoginsystemComponent } from './loginsystem/loginsystem.component';
 import { MenuComponent } from './menu/menu.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MenuGroupeComponent } from './menu-groupe/menu-groupe.component';
 import { BodyComponent } from './body/body.component';
 import { ContentComponent } from './content/content.component';
 import { AddGroupeComponent } from './add-groupe/add-groupe.component';
-
-
+import { HomeComponent } from './home/home.component';
+import { FirebaseService } from './services/firebase.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginsystemComponent,
     MenuComponent,
-    MenuGroupeComponent,
     BodyComponent,
     ContentComponent,
-    AddGroupeComponent
+    AddGroupeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AngularFireModule.initializeApp({
+        apiKey: 'AIzaSyCpBll86ef4C-anE0tKRieL_sGMJQHfOUI',
+        authDomain: 'projet-2ea5d.firebaseapp.com',
+        databaseURLK: 'https://projet-2ea5d-default-rtdb.firebaseio.com/',
+        projectId: 'projet-2ea5d',
+        storageBucket: 'projet-2ea5d.appspot.com',
+        messagingSenderId: '908874767053',
+        appId: '1:908874767053:web:aab93ac0845117f5cca784',
+        measurementId: 'G-Q2FX7CT1LB'
+      })
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
