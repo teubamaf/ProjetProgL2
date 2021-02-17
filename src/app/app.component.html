@@ -1,6 +1,6 @@
-<h1 *ngIf="!isSignedIn" class="display-3">Bienvenue sur mon site préféré</h1>
+<h1 id="login-h1" *ngIf="!isSignedIn" class="display-3">Bienvenue sur mon site préféré</h1>
 <div *ngIf="!isSignedIn">
-    <h2>Inscription</h2><br/>
+    <h2 id="login-h2">Inscription</h2><br/>
     <p class="lead">
         <label>Adresse mail</label>
     </p>
@@ -16,7 +16,7 @@
     <button (click)="onSignup(emailSignup.value, passwordSignup.value) ">Inscription</button>
 </div>
 <div *ngIf="!isSignedIn">
-    <h2>Connexion</h2>
+    <h2 id="login-h2">Connexion</h2>
     <p class="lead">
         <label>Adresse mail</label>
     </p>

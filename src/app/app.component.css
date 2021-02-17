@@ -1,9 +1,9 @@
-h1 {
+#login-h1 {
     text-align: center;
     font-size: 40px;
 }
 
-h2 {
+#login-h2 {
     margin-top: 25px;
     margin-left: 65px;
     font-size: 30px;
