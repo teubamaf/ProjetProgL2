@@ -5,7 +5,6 @@
 
 #login-h2 {
     margin-top: 25px;
-    margin-left: 65px;
     font-size: 30px;
 }
 
@@ -36,6 +35,15 @@ select {
     transition-duration: 0.25s;
     font-weight: 300;
 }
+.connexion{
+    text-align: center;
+
+}
+
+.modal-title{
+    justify-content: center;
+}
+
 
 input:hover,
 select:hover {
@@ -99,10 +107,9 @@ button {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     color: white;
-    display: block;
+    display: inline-block;
     font-size: 1em;
     font-weight: bold;
-    margin-left: 65px;
     padding: 1em 2em;
     position: relative;
     text-transform: uppercase;
