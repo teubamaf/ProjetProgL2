@@ -1,0 +1,31 @@
+<div *ngIf="currentUser" class="edit-form">
+    <h4>Utilisateur</h4>
+    <form>
+        <div class="form-group">
+            <label for="name">Login de l'utilisateur</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="currentUser.login" name="name" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Mot de passe de l'utilisateur</label>
+            <input type="text" class="form-control" id="type" [(ngModel)]="currentUser.password" name="type" />
+        </div>
+
+        <div class="form-group">
+            <label for="createur">Adresse Mail de l'utilisateur :</label>
+            <input type="text" class="form-control" id="createur" [(ngModel)]="currentUser.adresseMail" name="createur" />
+        </div>
+
+        <div class="form-group">
+            <label for="photoUrl">Image de l'utilisateur :</label>
+            <img [src]="currentUser.photoUrl" class="rounded-circle" style="width: 125px; height: 100px; display:block;" />
+            <input type="text" class="form-control" id="photoUrl" [(ngModel)]="currentUser.photoUrl" name="photoUrl" />
+        </div>
+
+    </form>
+
+    <button class="btn btn-danger mr-2" (click)="deleteUser()">Supprimer l'utilisateur</button>
+    <button type="submit" class="btn btn-success" (click)="updateUser()">Modifier</button>
+
+    <p>{{ message }}</p>
+</div>

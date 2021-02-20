@@ -21,6 +21,9 @@ import { FilActualiteComponent } from './fil-actualite/fil-actualite.component';
 import { AddGroupeComponent } from './components/add-groupe/add-groupe.component';
 import { GroupeDetailsComponent } from './components/groupe-details/groupe-details.component';
 import { GroupesListComponent } from './components/groupes-list/groupes-list.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { UserListComponent } from './components/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { GroupesListComponent } from './components/groupes-list/groupes-list.com
     AddGroupeComponent,
     GroupeDetailsComponent,
     GroupesListComponent,
+    AddUserComponent,
+    UserDetailsComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,

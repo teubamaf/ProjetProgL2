@@ -1,0 +1,20 @@
+<div class="page-container">
+    <div class="item">
+        <h4>Liste des Utilisateurs</h4>
+    </div>
+    <div class="item">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let user of users; let i = index" [class.active]="i == currentIndex" (click)="setActiveUser(user, i)">
+                {{ user.login }}
+            </li>
+        </ul>
+    </div>
+    <div class="item">
+        <button class="btn btn-danger" (click)="removeAllUsers()">Supprimer tout les utilisateurs</button>
+    </div>
+    <div class="item">
+        <div *ngIf="currentUser">
+            <app-user-details (refreshList)="refreshList()" [user]="currentUser"></app-user-details>
+        </div>
+    </div>
+</div>
