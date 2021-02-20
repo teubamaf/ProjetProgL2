@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import User from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { FirebaseService } from './services/firebase.service';
 
 @Component({
@@ -6,11 +8,15 @@ import { FirebaseService } from './services/firebase.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  user: User = new User();
+  submitted = false;
+
   title = 'ProjetAngular';
   isSignedIn = false;
 
-  constructor(public firebaseService: FirebaseService) {
+  constructor(public firebaseService: FirebaseService, private userService: UserService) {
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
@@ -36,9 +42,20 @@ export class AppComponent {
     }
   }
 
+  saveUser(): void {
+    this.userService.create(this.user).then(() => {
+      console.log('Le groupe a été créé avec succès!');
+      this.submitted = true;
+    });
+  }
+
+  newUser(): void {
+    this.submitted = false;
+    this.user = new User();
+  }
+  
   handleLogout(): void {
     this.isSignedIn = false;
   }
 }
-
 

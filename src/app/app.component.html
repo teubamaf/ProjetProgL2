@@ -24,35 +24,34 @@
 <!-- Fenetre de type POP-UP qui fait déroule l'inscription -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="signin" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="signin">Inscription</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signin">Inscription</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <div class="modal-body">
-          <!-- systeme d'inscription -->
-            <div class="connexion" *ngIf="!isSignedIn">
-                <p class="lead">
-                    <label>Adresse mail</label>
-                </p>
-                <p class="lead">
-                    <input type="text" #emailSignup />
-                </p>
-                <p class="lead">
-                    <label>Mot de passe</label>
-                </p>
-                <p>
-                    <input type="password" #passwordSignup />
-                </p>
-                <button (click)="onSignup(emailSignup.value, passwordSignup.value) "data-dismiss="modal">Inscription</button>
+            </div>
+            <div class="modal-body">
+                <!-- systeme d'inscription -->
+                <div class="connexion" *ngIf="!isSignedIn">
+                    <p class="lead">
+                        <label for="adresseMail">Adresse mail</label>
+                    </p>
+                    <p class="lead">
+                        <input type="text" id="adresseMail" required [(ngModel)]="user.adresseMail" name="adresseMail" #emailSignup />
+                    </p>
+                    <p class="lead">
+                        <label for="password">Mot de passe</label>
+                    </p>
+                    <p>
+                        <input type="password" required [(ngModel)]="user.password" name="password" #passwordSignup />
+                    </p>
+                    <button (click)="onSignup(emailSignup.value, passwordSignup.value)" (click)="saveUser()" data-dismiss="modal">Inscription</button>
+                </div>
             </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-
-
-<app-home *ngIf="isSignedIn" (isLogout)="handleLogout() "></app-home>
+<app-home *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-home>
+<router-outlet></router-outlet>
