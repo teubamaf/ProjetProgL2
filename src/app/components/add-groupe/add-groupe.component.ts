@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import Groupe from 'src/app/shared/models/groupe.model';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 
 @Component({
   selector: 'app-add-groupe',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddGroupeComponent implements OnInit {
 
-  constructor() { }
+  groupe: Groupe = new Groupe();
+  submitted = false;
+
+  constructor(private groupeService: GroupeService) { }
 
   ngOnInit(): void {
+  }
+
+  saveGroupe(): void {
+    this.groupeService.create(this.groupe).then(() => {
+      console.log('Le groupe a été créé avec succès!');
+      this.submitted = true;
+    });
+  }
+
+  newGroupe(): void {
+    this.submitted = false;
+    this.groupe = new Groupe();
   }
 
 }

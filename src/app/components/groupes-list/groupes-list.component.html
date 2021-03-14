@@ -1,1 +1,31 @@
-<p>groupes-list works!</p>
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+
+        <div class="page-container">
+            <div class="item">
+                <h4>Liste des Groupes</h4>
+            </div>
+            <div class="item">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
+                        {{ groupe.name }}
+                    </li>
+                </ul>
+            </div>
+            <div class="item">
+                <button class="btn btn-danger" (click)="removeAllGroupes()">Supprimer tout les groupes</button>
+            </div>
+            <div class="item">
+                <div *ngIf="currentGroupe">
+                    <app-groupe-details (refreshList)="refreshList()" [groupe]="currentGroupe"></app-groupe-details>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

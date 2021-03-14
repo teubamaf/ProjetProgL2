@@ -1,0 +1,97 @@
+.page-container {
+    display: flex;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.page-content-container {
+    padding: 15px;
+    color: black;
+}
+
+.sidebar {
+    height: 700px;
+    width: 100px;
+    background: rgba(255, 255, 255, 0.6);
+    border-right: solid 1px gray;
+}
+
+.list-items {
+    padding-top: 25px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.85);
+    padding: 20px 35px;
+    font-family: 'Roboto';
+    cursor: pointer;
+}
+
+.list-item span.material-icons {
+    margin-right: 15px;
+}
+
+.list-item:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.list-item.selected {
+    color: black;
+}
+
+.list-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: black;
+    /*set opacity to 0 by default */
+    opacity: 0;
+    transform: scaleY(0);
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.liste-item:hover::before {
+    opacity: 0.5;
+    transform: scaleY(0.5) scaleX(2);
+}
+
+.list-item.selected::before {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.btn {
+    padding: 20px 25px;
+}
+
+.material-icons {
+    margin-left: 10px;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 30px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}

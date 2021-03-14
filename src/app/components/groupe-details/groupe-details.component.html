@@ -1,1 +1,31 @@
-<p>groupe-details works!</p>
+<div *ngIf="currentGroupe" class="edit-form">
+    <h4>Groupe</h4>
+    <form>
+        <div class="form-group">
+            <label for="name">Nom du groupe :</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="currentGroupe.name" name="name" />
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type du groupe :</label>
+            <input type="text" class="form-control" id="type" [(ngModel)]="currentGroupe.type" name="type" />
+        </div>
+
+        <div class="form-group">
+            <label for="createur">Pseudo du créateur :</label>
+            <input type="text" class="form-control" id="createur" [(ngModel)]="currentGroupe.createur" name="createur" />
+        </div>
+
+        <div class="form-group">
+            <label for="photoUrl">Image du groupe :</label>
+            <img [src]="currentGroupe.photoUrl" class="rounded-circle" style="width: 125px; height: 100px; display:block;" />
+            <input type="text" class="form-control" id="photoUrl" [(ngModel)]="currentGroupe.photoUrl" name="photoUrl" />
+        </div>
+
+    </form>
+
+    <button class="btn btn-danger mr-2" (click)="deleteGroupe()">Supprimer le groupe</button>
+    <button type="submit" class="btn btn-success" (click)="updateGroupe()">Modifier</button>
+
+    <p>{{ message }}</p>
+</div>

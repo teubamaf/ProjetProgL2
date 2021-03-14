@@ -1,1 +1,42 @@
 <p>sign-in works!</p>
+<h1 id="login-h1" class="display-3">Bienvenue sur mon site préféré</h1>
+
+<div class="connexion">
+    <div class="displayTable">
+        <div class="displayTableCell">
+            <div class="authBlock">
+                <h2 id="login-h2">Connexion</h2>
+                <div class="formGroup">
+                    <p class="lead">
+                        <label>Adresse mail</label>
+                    </p>
+                    <p class="lead">
+                        <input type="text" class="formControl" placeholder="Username" #userName required>
+                    </p>
+                </div>
+
+                <div class="formGroup">
+                    <p class="lead">
+                        <label>Mot de passe</label>
+                    </p>
+                    <p class="lead">
+                        <input type="password" class="formControl" placeholder="Password" #userPassword required>
+                    </p>
+                </div>
+
+                <!-- Calling SignIn Api from AuthService -->
+                <div class="formGroup">
+                    <input type="button" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
+                </div>
+
+                <div class="forgotPassword">
+                    <span routerLink="/forgot-password">Forgot Password?</span>
+                </div>
+            </div>
+
+            <div class="redirectToLogin">
+                <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign Up</span></span>
+            </div>
+        </div>
+    </div>
+</div>
