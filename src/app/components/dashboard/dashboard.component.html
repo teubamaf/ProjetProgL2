@@ -15,28 +15,51 @@
                     <h1 class="h2">Mon Profil</h1>
                 </div>
                 <!-- Show user data when logged in -->
-                <div class="row" *ngIf="authService.userData as user">
-                    <div class="col-md-12">
-                        <div class="media">
-                            <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}" alt="{{user.displayName}}">
-                            <div class="media-body">
-                                <h1>Hello: <strong>{{user.displayName}}</strong></h1>
-                                <p>User ID: <strong>{{user.uid}}</strong></p>
-                                <p>Email: <strong>{{user.email}}</strong></p>
-                                <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+                <div *ngFor="let item of items | async">
+                    <div class="row" *ngIf="authService.userData as user">
+                        <div *ngIf="item.uid == user.uid">
+                            <div class="col-md-12">
+                                <div class="media">
+                                    <img [src]="item.photoUrl" class="rounded-circle" style="width: 125px; height: 100px; display:block;" />
+                                    <div class="media-body">
+                                        <h1>Hello: <strong>{{item.displayName}}</strong></h1>
+                                        <p>User ID: <strong>{{item.uid}}</strong></p>
+                                        <p>Email: <strong>{{item.email}}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">Modifier mon profil</h1>
+                            </div>
+                            <div class="formGroup">
+                                <p class="lead">
+                                    <label for="displayName">Nom d'utilisateur</label>
+                                </p>
+                                <p class="lead">
+                                    <input type="text" class="formControl" placeholder="Nom d'utilisateur" #userDisplayName required>
+                                </p>
+                            </div>
+                            <div class="formGroup">
+                                <p class="lead">
+                                    <label for="displayName">Adresse Mail</label>
+                                </p>
+                                <p class="lead">
+                                    <input type="text" class="formControl" placeholder="Adresse email" #userEmail required>
+                                </p>
+                            </div>
+                            <div class="formGroup">
+                                <p class="lead">
+                                    <label for="displayName">Image de profil</label>
+                                </p>
+                                <p class="lead">
+                                    <input type="text" class="formControl" placeholder="https://blabla.com" #userPhotoURL required>
+                                </p>
+                            </div>
+                            <div class="formGroup">
+                                <input type="button" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value, userEmail.value, userPhotoURL.value)">
                             </div>
                         </div>
-                    </div>
-                    <div class="formGroup">
-                        <p class="lead">
-                            <label for="displayName">Nom d'utilisateur</label>
-                        </p>
-                        <p class="lead">
-                            <input type="text" class="formControl" placeholder="Nom d'utilisateur" #userDisplayName required>
-                        </p>
-                    </div>
-                    <div class="formGroup">
-                        <input type="button" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value)">
                     </div>
                 </div>
             </div>
