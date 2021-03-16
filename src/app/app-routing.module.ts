@@ -12,9 +12,10 @@ import { VerifyEmailComponent } from '././components/verify-email/verify-email.c
 import { AuthGuard } from '././shared/guard/auth.guard';
 
 import { PageAccueilComponent } from '././components/page-accueil/page-accueil.component';
-import { MesGroupesComponent } from '././components/mes-groupes/mes-groupes.component';
+import { GroupesListComponent } from '././components/groupes-list/groupes-list.component';
 import { MesMessagesComponent } from '././components/mes-messages/mes-messages.component';
 import { AllGroupesPostComponent } from '././components/all-groupes-post/all-groupes-post.component';
+import { AddGroupeComponent } from '././components/add-groupe/add-groupe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -24,9 +25,10 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'mes-groupes', component: MesGroupesComponent},
+  { path: 'mes-groupes', component: GroupesListComponent},
   { path: 'mes-messages', component: MesMessagesComponent},
   { path: 'fil-actualite', component: AllGroupesPostComponent},
+  { path: 'add-groupe', component: AddGroupeComponent }
 ];
 
 @NgModule({

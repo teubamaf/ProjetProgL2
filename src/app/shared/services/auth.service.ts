@@ -4,6 +4,9 @@ import auth from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
+import { Observable } from 'rxjs';
+
+import { flatMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +44,9 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-        this.SetUserData(result.user);
+       // this.SetUserData(result.user);
       }).catch((error) => {
-        window.alert(error.message)
+        window.alert(error.message);
       });
   }
 
@@ -123,4 +126,13 @@ export class AuthService {
     });
   }
 
+  UpdateUser(uid: string, displayName2: string) {
+    this.afs.collection('users').doc(uid).update({ displayName: displayName2 });
+  }
+
+  ReadUser(uid: string): any {
+    return this.afs.doc<User>(`users/${uid}`).valueChanges();
+  }
+
 }
+

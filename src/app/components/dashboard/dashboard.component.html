@@ -27,8 +27,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="formGroup">
+                        <p class="lead">
+                            <label for="displayName">Nom d'utilisateur</label>
+                        </p>
+                        <p class="lead">
+                            <input type="text" class="formControl" placeholder="Nom d'utilisateur" #userDisplayName required>
+                        </p>
+                    </div>
+                    <div class="formGroup">
+                        <input type="button" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value)">
+                    </div>
                 </div>
-
             </div>
         </main>
 
