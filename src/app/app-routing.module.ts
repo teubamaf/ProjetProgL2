@@ -16,6 +16,7 @@ import { GroupesListComponent } from '././components/groupes-list/groupes-list.c
 import { MesMessagesComponent } from '././components/mes-messages/mes-messages.component';
 import { AllGroupesPostComponent } from '././components/all-groupes-post/all-groupes-post.component';
 import { AddGroupeComponent } from '././components/add-groupe/add-groupe.component';
+import { GroupeDetailsComponent } from '././components/groupe-details/groupe-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'mes-groupes', component: GroupesListComponent},
   { path: 'mes-messages', component: MesMessagesComponent},
   { path: 'fil-actualite', component: AllGroupesPostComponent},
-  { path: 'add-groupe', component: AddGroupeComponent }
+  { path: 'add-groupe', component: AddGroupeComponent },
+  { path: 'update-groupe', component: GroupeDetailsComponent }
 ];
 
 @NgModule({

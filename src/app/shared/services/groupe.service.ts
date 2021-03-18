@@ -1,37 +1,46 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import Groupe from '../models/groupe.model';
+import { Injectable, NgZone } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Groupe } from '../models/groupe.model';
+
+import { flatMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class GroupeService {
 
-  private dbPath = '/groupes';
+  constructor(
+    public afs: AngularFirestore,   // Inject Firestore service
+    public router: Router,
+    public ngZone: NgZone // NgZone service to remove outside scope warning
+  ) { }
 
-  groupesRef: AngularFireList<Groupe>;
+  getGroupeDoc(idGroupe: string): any {
+    return this.afs.collection('groupes').doc(idGroupe).valueChanges();
+  }
 
-  constructor(private db: AngularFireDatabase) {
-    this.groupesRef = db.list(this.dbPath);
-   }
+  getGroupeList(): any {
+    return this.afs.collection('groupes').snapshotChanges();
+  }
 
-   getAll(): AngularFireList<Groupe> {
-     return this.groupesRef;
-   }
+  createGroupe(groupe: Groupe): any {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('groupes').add(groupe).then(response => {
+        console.log(response);
+      }, error => reject(error));
+    });
+  }
 
-   create(groupe: Groupe): any {
-     return this.groupesRef.push(groupe);
-   }
+  deleteGroupe(groupe: Groupe): any {
+    return this.afs.collection('groupes').doc(groupe.idGroupe).delete();
+  }
 
-   update(key: string, value: any): Promise<void> {
-     return this.groupesRef.update(key, value);
-   }
-
-   delete(key: string): Promise<void> {
-    return this.groupesRef.remove(key);
-   }
-
-   deleteAll(): Promise<void> {
-      return this.groupesRef.remove();
-   }
+  updateGroupe(groupe: Groupe, idGroupe: string): any {
+    return this.afs.collection('groupes').doc(idGroupe).update({
+        nom: groupe.nom,
+      });
+  }
 }

@@ -1,7 +1,8 @@
-export default class Groupe {
-    key?: string | null;
-    name?: string;
+export class Groupe {
+    idGroupe?: string;
+    nom?: string;
     type?: string;
     photoUrl?: string;
-    createur?: string;
+    idCreateur?: string;
+    idMembres?: string;
 }

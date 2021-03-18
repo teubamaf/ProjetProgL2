@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
-import Groupe from 'src/app/shared/models/groupe.model';
 import { map } from 'rxjs/operators';
+import { Groupe } from 'src/app/shared/models/groupe.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-groupes-list',
@@ -10,33 +12,25 @@ import { map } from 'rxjs/operators';
 })
 export class GroupesListComponent implements OnInit {
 
-  groupes?: Groupe[];
-  currentGroupe?: Groupe;
-  currentIndex = -1;
-  name = '';
+  Groupes!: Groupe[];
+  items: Observable<any[]>;
 
-  constructor(private groupeService: GroupeService) { }
+  currentIndex = -1;
+  currentGroupe: Groupe | undefined;
+
+  constructor(
+    private groupeService: GroupeService,
+    firestore: AngularFirestore
+    ) {
+    this.items = firestore.collection(`groupes`).valueChanges();
+   }
 
   ngOnInit(): void {
-    this.retrieveGroupes();
   }
 
   refreshList(): void {
     this.currentGroupe = undefined;
     this.currentIndex = -1;
-    this.retrieveGroupes();
-  }
-
-  retrieveGroupes(): void {
-    this.groupeService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-    ).subscribe(data => {
-      this.groupes = data;
-    });
   }
 
   setActiveGroupe(groupe: Groupe, index: number): void {
@@ -44,9 +38,5 @@ export class GroupesListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  removeAllGroupes(): void {
-    this.groupeService.deleteAll()
-        .then(() => this.refreshList())
-        .catch(err => console.log(err));
-  }
+  removeGroupe = (groupe: any) => this.groupeService.deleteGroupe(groupe);
 }

@@ -1,59 +1,54 @@
 import { Component, OnInit, OnChanges, Output, EventEmitter, Input } from '@angular/core';
-import Groupe from 'src/app/shared/models/groupe.model';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
+import { Groupe } from 'src/app/shared/models/groupe.model';
+
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-groupe-details',
   templateUrl: './groupe-details.component.html',
   styleUrls: ['./groupe-details.component.css']
 })
-export class GroupeDetailsComponent implements OnInit, OnChanges {
+export class GroupeDetailsComponent implements OnInit {
 
-  @Input() groupe?: Groupe;
-  @Output() refreshList: EventEmitter<any> = new EventEmitter();
-  currentGroupe: Groupe = {
-    name: '',
-    type: '',
-    createur: '',
-    photoUrl: '',
-  };
+  public editForm: FormGroup;
+  groupeRef: any;
 
-  message = '';
-
-  constructor(private groupeService: GroupeService) { }
+  constructor(
+    public groupeService: GroupeService,
+    public formBuilder: FormBuilder,
+    private act: ActivatedRoute,
+    private router: Router
+  ) {
+    this.editForm = this.formBuilder.group({
+      nom: [''],
+      type: [''],
+      photoUrl: ['']
+    });
+  }
 
   ngOnInit(): void {
-    this.message = '';
-  }
+    const idGroupe = this.act.snapshot.paramMap.get('idGroupe');
 
-  ngOnChanges(): void {
-    this.message = '';
-    this.currentGroupe = { ...this.groupe };
-  }
-
-  updateGroupe(): void {
-    const data = {
-      name: this.currentGroupe.name,
-      type: this.currentGroupe.type,
-      createur: this.currentGroupe.createur,
-      photoUrl: this.currentGroupe.photoUrl
-    };
-
-    if (this.currentGroupe.key) {
-      this.groupeService.update(this.currentGroupe.key, data)
-          .then(() => this.message = 'Le groupe a été modifié avec succès!')
-          .catch(err => console.log(err));
+    if (idGroupe  != null) {
+      this.groupeService.getGroupeDoc(idGroupe).subscribe((res: any) => {
+        this.groupeRef = res;
+        this.editForm = this.formBuilder.group({
+          nom: [this.groupeRef.nom],
+          type: [this.groupeRef.type],
+          photoUrl: [this.groupeRef.contact]
+        });
+      });
     }
   }
 
-  deleteGroupe(): void {
-    if (this.currentGroupe.key) {
-      this.groupeService.delete(this.currentGroupe.key)
-          .then(() => {
-            this.refreshList.emit();
-            this.message = 'Le groupe a été supprimé avec succès!';
-          })
-          .catch(err => console.log(err));
+  onSubmit(): void {
+    const idGroupe = 'q2DzYsr7gI6vBg3D8hsJ';
+
+    if (idGroupe != null) {
+      this.groupeService.updateGroupe(this.editForm.value, idGroupe);
+      this.router.navigate(['groupe-list']);
     }
   }
 

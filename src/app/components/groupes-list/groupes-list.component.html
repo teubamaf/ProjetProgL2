@@ -13,18 +13,12 @@
             </div>
             <div class="item">
                 <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
-                        {{ groupe.name }}
+                    <li class="list-group-item" *ngFor="let item of items | async; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(item, i)">
+                        {{ item.nom }}<br/>
+                        <span (click)="removeGroupe(item)" class="text-danger">Delete</span> &nbsp;
+                        <span routerLink="/update-groupe/{{item.idGroupe}}" class="text-primary">Edit</span>
                     </li>
                 </ul>
-            </div>
-            <div class="item">
-                <button class="btn btn-danger" (click)="removeAllGroupes()">Supprimer tout les groupes</button>
-            </div>
-            <div class="item">
-                <div *ngIf="currentGroupe">
-                    <app-groupe-details (refreshList)="refreshList()" [groupe]="currentGroupe"></app-groupe-details>
-                </div>
             </div>
         </div>
     </div>
