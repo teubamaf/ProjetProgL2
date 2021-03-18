@@ -126,7 +126,7 @@ export class AuthService {
     });
   }
 
-  UpdateUser(uid: string, newDisplayName: string, newEmail: string, newPhotoUrl: string) {
+  UpdateUser(uid: string, newDisplayName: string, newEmail: string, newPhotoUrl: string): any {
     this.afs.collection('users').doc(uid).update({ displayName: newDisplayName, email: newEmail, photoUrl: newPhotoUrl });
   }
 

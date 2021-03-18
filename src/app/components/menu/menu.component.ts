@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -8,9 +10,14 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
+  items: Observable<any[]>;
+
   constructor(
-    public authService: AuthService
-  ) { }
+    public authService: AuthService,
+    firestore: AngularFirestore
+  ) {
+    this.items = firestore.collection(`users`).valueChanges();
+  }
 
   ngOnInit(): void {
   }

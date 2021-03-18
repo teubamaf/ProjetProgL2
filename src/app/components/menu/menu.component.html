@@ -17,26 +17,33 @@
                         <a routerLink="/mes-messages" class="nav-link" href="#">Mes Messages</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" id="milieu">
                     <input class="form-control mr-sm-2" type="search" placeholder="Ecrire votre recherche ici..." aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
                 </form>
-                <ul class="navbar-nav" id="droite">
-                    <li class="nav-item dropdown">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <div class="btn-group" ngbDropdown role="group">
-                                    <button class="btn btn-secondary" ngbDropdownToggle>Mon Compte</button>
-                                    <div class="dropdown-menu" ngbDropdownMenu>
-                                        <button routerLink="/dashboard" class="dropdown-item">Gérer mon profil</button>
-                                        <button class="dropdown-item">Liste d'amis</button>
-                                        <button class="dropdown-item" (click)="authService.SignOut()">Déconnexion</button>
-                                    </div>
-                                </div>
+                <div class="btn-group">
+                    <div *ngFor="let item of items | async">
+                        <div class="row" *ngIf="authService.userData as user">
+                            <div *ngIf="item.uid == user.uid">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img [src]="item.photoUrl" class="rounded-circle" style="width: 50px; height: 35px;"/>
+                                    Mon Compte
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" routerLink="/dashboard" title="Profil">Gérer mon profil</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Select this card">Liste d'amis</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Deconnexion" (click)="authService.SignOut()">Déconnexion</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </nav>
     </div>
