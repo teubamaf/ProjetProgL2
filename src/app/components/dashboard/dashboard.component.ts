@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

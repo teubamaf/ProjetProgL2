@@ -33,6 +33,10 @@ import { AddGroupeComponent } from './components/add-groupe/add-groupe.component
 import { GroupeDetailsComponent } from './components/groupe-details/groupe-details.component';
 import { GroupesListComponent } from './components/groupes-list/groupes-list.component';
 
+import { AddPostComponent } from './components/add-post/add-post.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +54,10 @@ import { GroupesListComponent } from './components/groupes-list/groupes-list.com
     AllGroupesPostComponent,
     AddGroupeComponent,
     GroupeDetailsComponent,
-    GroupesListComponent
+    GroupesListComponent,
+    AddPostComponent,
+    PostDetailsComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule,

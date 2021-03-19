@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Router } from '@angular/router';
 import Groupe from '../models/groupe.model';
 
-
 @Injectable({
   providedIn: 'root'
 })

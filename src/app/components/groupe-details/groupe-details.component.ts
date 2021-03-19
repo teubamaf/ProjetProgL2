@@ -2,12 +2,6 @@ import { Component, OnInit, OnChanges, Output, EventEmitter, Input } from '@angu
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 import Groupe from 'src/app/shared/models/groupe.model';
 
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { Observable } from 'rxjs';
-
 @Component({
   selector: 'app-groupe-details',
   templateUrl: './groupe-details.component.html',
