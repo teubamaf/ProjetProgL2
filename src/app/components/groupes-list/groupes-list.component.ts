@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Groupe } from 'src/app/shared/models/groupe.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-groupes-list',
@@ -20,7 +21,8 @@ export class GroupesListComponent implements OnInit {
 
   constructor(
     private groupeService: GroupeService,
-    firestore: AngularFirestore
+    firestore: AngularFirestore,
+    public authService: AuthService
     ) {
     this.items = firestore.collection(`groupes`).valueChanges();
    }
