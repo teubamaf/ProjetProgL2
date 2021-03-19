@@ -1,10 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Groupe } from '../models/groupe.model';
+import Groupe from '../models/groupe.model';
 
-import { flatMap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,35 +10,35 @@ import { flatMap, map } from 'rxjs/operators';
 
 export class GroupeService {
 
+  private dbPath = '/groupes';
+
+  groupesRef: AngularFirestoreCollection<Groupe>;
+
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) { }
-
-  getGroupeDoc(idGroupe: string): any {
-    return this.afs.collection('groupes').doc(idGroupe).valueChanges();
+  ) {
+    this.groupesRef = afs.collection(this.dbPath);
   }
 
-  getGroupeList(): any {
-    return this.afs.collection('groupes').snapshotChanges();
+  getAll(): AngularFirestoreCollection<Groupe> {
+    return this.groupesRef;
   }
 
-  createGroupe(groupe: Groupe): any {
-    return new Promise<any>((resolve, reject) => {
-      this.afs.collection('groupes').add(groupe).then(response => {
-        console.log(response);
-      }, error => reject(error));
-    });
+  create(groupe: Groupe): any {
+    return this.groupesRef.add({ ...groupe });
   }
 
-  deleteGroupe(groupe: Groupe): any {
-    return this.afs.collection('groupes').doc(groupe.idGroupe).delete();
+  update(id: string, data: any): Promise<void> {
+    return this.groupesRef.doc(id).update(data);
   }
 
-  updateGroupe(groupe: Groupe, idGroupe: string): any {
-    return this.afs.collection('groupes').doc(idGroupe).update({
-        nom: groupe.nom,
-      });
+  delete(id: string): Promise<void> {
+    return this.groupesRef.doc(id).delete();
+  }
+
+  updateIdCreateur(id: string, uid: string): any {
+    this.afs.collection('groupes').doc(id).update({ idCreateur: uid });
   }
 }

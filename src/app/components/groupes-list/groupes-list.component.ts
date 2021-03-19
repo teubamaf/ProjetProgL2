@@ -1,44 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { map } from 'rxjs/operators';
-import { Groupe } from 'src/app/shared/models/groupe.model';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  selector: 'app-groupes-list',
+  selector: 'app-ggroupes-list',
   templateUrl: './groupes-list.component.html',
   styleUrls: ['./groupes-list.component.css']
 })
 export class GroupesListComponent implements OnInit {
 
-  Groupes!: Groupe[];
-  items: Observable<any[]>;
-
+  groupes: any;
+  currentGroupe = null;
   currentIndex = -1;
-  currentGroupe: Groupe | undefined;
-
+  nom = '';
   constructor(
     private groupeService: GroupeService,
-    firestore: AngularFirestore,
     public authService: AuthService
-    ) {
-    this.items = firestore.collection(`groupes`).valueChanges();
-   }
+    ) { }
 
   ngOnInit(): void {
+    this.retrieveGroupes();
   }
 
   refreshList(): void {
-    this.currentGroupe = undefined;
+    this.currentGroupe = null;
     this.currentIndex = -1;
+    this.retrieveGroupes();
   }
 
-  setActiveGroupe(groupe: Groupe, index: number): void {
+  retrieveGroupes(): void {
+    this.groupeService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.groupes = data;
+    });
+  }
+
+  setActiveGroupe(groupe: any, index: any): void {
     this.currentGroupe = groupe;
     this.currentIndex = index;
   }
-
-  removeGroupe = (groupe: any) => this.groupeService.deleteGroupe(groupe);
 }

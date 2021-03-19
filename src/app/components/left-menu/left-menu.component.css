@@ -72,6 +72,10 @@
     padding: 20px 25px;
 }
 
+#btn_groupe {
+    margin-right: -30px;
+}
+
 .material-icons {
     margin-left: 10px;
     font-family: 'Material Icons';

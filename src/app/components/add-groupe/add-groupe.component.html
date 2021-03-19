@@ -7,31 +7,30 @@
 
         <app-left-menu></app-left-menu>
 
-        <form [formGroup]="groupeForm" (ngSubmit)="onSubmit()" novalidate>
-            <div class="mb-3">
-                <label for="name">Nom du groupe :</label>
-                <input type="text" class="form-control" id="nom" name="nom" formControlName="nom" placeholder="Ex: Entre amoureux des chats" required>
-            </div>
+        <div *ngIf="!submitted">
+            <form>
+                <div class="mb-3">
+                    <label for="name">Nom du groupe :</label>
+                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="groupe.nom" placeholder="Ex: Entre amoureux des chats" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="type">Type du groupe :</label>
-                <input type="email" formControlName="type" id="type" name="type" class="form-control" placeholder="Ex: Animaux" required>
-            </div>
+                <div class="mb-3">
+                    <label for="type">Type du groupe :</label>
+                    <input type="email" [(ngModel)]="groupe.type" id="type" name="type" class="form-control" placeholder="Ex: Animaux" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="photoUrl">Image du groupe :</label>
-                <input type="text" formControlName="photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
-            </div>
+                <div class="mb-3">
+                    <label for="photoUrl">Image du groupe :</label>
+                    <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="photoUrl">Createur :</label>
-                <input type="text" [(ngModel)]="this.uid" id="createur" name="createur" formControlName="createur" class="form-control" required>
-            </div>
+                <button (click)="saveGroupe()" class=" btn btn-success">Submit</button>
+            </form>
+        </div>
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary" [disabled]="!groupeForm.valid">Create</button>
-            </div>
-        </form>
-
+        <div *ngIf="submitted ">
+            <h4>La groupe a été ajouté avec succès !</h4>
+            <button class="btn btn-success " (click)="newGroupe() ">Add</button>
+        </div>
     </div>
 </div>
