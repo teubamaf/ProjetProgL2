@@ -1,0 +1,28 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+
+        <div class="container">
+            <h2>Rejoindre un groupe</h2>
+            <div class="list row">
+                <div class="col-md-12">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
+                            {{ groupe.nom }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <div *ngIf="currentGroupe">
+                        <app-join-groupe-details (refreshList)="refreshList()" [groupe]="currentGroupe"></app-join-groupe-details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,6 +8,7 @@
         <app-left-menu></app-left-menu>
 
         <div *ngIf="!submitted">
+            <h2>Créer un groupe</h2>
             <form>
                 <div class="mb-3">
                     <label for="name">Nom du groupe :</label>
@@ -24,9 +25,14 @@
                     <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
                 </div>
 
-                <button (click)="saveGroupe()" class=" btn btn-success">Submit</button>
+                <button (click)="saveGroupe()" class="btn btn-success">Créer mon groupe</button>
             </form>
+
+            <h2>Rejoindre un groupe existant</h2>
+            <button routerLink="/rejoindre_groupe" class="btn btn-light">Rejoindre un groupe</button>
         </div>
+
+
 
         <div *ngIf="submitted ">
             <h4>La groupe a été ajouté avec succès !</h4>

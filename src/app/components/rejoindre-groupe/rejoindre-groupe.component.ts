@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { map } from 'rxjs/operators';
-import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
-  selector: 'app-ggroupes-list',
-  templateUrl: './groupes-list.component.html',
-  styleUrls: ['./groupes-list.component.css']
+  selector: 'app-rejoindre-groupe',
+  templateUrl: './rejoindre-groupe.component.html',
+  styleUrls: ['./rejoindre-groupe.component.css']
 })
-export class GroupesListComponent implements OnInit {
+export class RejoindreGroupeComponent implements OnInit {
 
   groupes: any;
   currentGroupe = null;
@@ -18,7 +20,7 @@ export class GroupesListComponent implements OnInit {
   constructor(
     private groupeService: GroupeService,
     public authService: AuthService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.retrieveGroupes();
@@ -46,4 +48,5 @@ export class GroupesListComponent implements OnInit {
     this.currentGroupe = groupe;
     this.currentIndex = index;
   }
+
 }

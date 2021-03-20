@@ -8,13 +8,18 @@
         <app-left-menu></app-left-menu>
         <div class="page-container">
             <div class="container">
-                <div class="item">
-                    <h1>Liste de mes groupes préférés</h1>
-                </div>
-                <div class="item">
-                    <p>Il semblerait qu'il n'y ait rien à afficher pour le moment...</p>
+                <br />
+                <h2>Les publications du groupe {{nom}}</h2>
+                <br />
+                <div *ngFor="let item of items | async">
+                    <div *ngIf="item.idGroupe == nom">
+                        <p>Titre :{{item.titre}}</p>
+                        <p>Contenu: {{item.contenu}}</p>
+                        <p>Créateur {{item.idCreateur}}</p>
+                        <p>Nombre de likes: {{item.nbLikes}}</p>
+                        <p>Nombre de vues: {{item.nbVues}}</p>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>

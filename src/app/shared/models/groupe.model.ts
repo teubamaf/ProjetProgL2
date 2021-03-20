@@ -5,5 +5,4 @@ export default class Groupe {
     photoUrl: string;
     idCreateur: string;
     idMembres: string;
-
 }

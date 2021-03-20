@@ -37,6 +37,15 @@ import { AddPostComponent } from './components/add-post/add-post.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 
+import { RouterModule, Routes } from '@angular/router';
+import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
+import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
+
+const appRoutes: Routes = [
+  { path: 'left-menu', component: LeftMenuComponent },
+  { path: 'groupe/:id', component: MesGroupesComponent },
+
+];
 
 @NgModule({
   declarations: [
@@ -57,7 +66,9 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
     GroupesListComponent,
     AddPostComponent,
     PostDetailsComponent,
-    PostsListComponent
+    PostsListComponent,
+    RejoindreGroupeComponent,
+    JoinGroupeDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +78,11 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
     AngularFirestoreModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

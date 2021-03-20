@@ -1,0 +1,5 @@
+<div *ngIf="currentGroupe" class="edit-form">
+    <h4>Rejoindre le groupe {{currentGroupe.nom}}</h4>
+    <button type="submit" class="btn btn-success" (click)="joinGroupe()">Rejoindre</button>
+    <p>{{ message }}</p>
+</div>

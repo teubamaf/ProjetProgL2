@@ -40,4 +40,8 @@ export class GroupeService {
   updateIdCreateur(id: string, uid: string): any {
     this.afs.collection('groupes').doc(id).update({ idCreateur: uid });
   }
+
+  updateIdMembre(id: string, uid: string): any {
+    this.afs.collection('groupes').doc(id).update({ idMembres: uid });
+  }
 }

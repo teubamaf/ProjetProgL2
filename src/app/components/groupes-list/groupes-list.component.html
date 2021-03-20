@@ -14,15 +14,17 @@
                     <div class="row" *ngIf="authService.userData as user">
                         <ul class="list-group">
                             <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
-                                <div *ngIf="groupe.idCreateur == user.uid">
+                                <div *ngIf="groupe.idCreateur== user.uid || groupe.idMembres == user.uid ">
                                     {{ groupe.nom }}
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-12">
-                        <div *ngIf="currentGroupe">
-                            <app-groupe-details (refreshList)="refreshList()" [groupe]="currentGroupe"></app-groupe-details>
+                    <div class="col-md-12 ">
+                        <div class="row" *ngIf="authService.userData as user">
+                            <div *ngIf="currentGroupe">
+                                <app-groupe-details (refreshList)="refreshList() " [groupe]="currentGroupe "></app-groupe-details>
+                            </div>
                         </div>
                     </div>
                 </div>

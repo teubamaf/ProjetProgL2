@@ -16,7 +16,7 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
   message = '';
 
   constructor(
-    public groupeService: GroupeService,
+    public groupeService: GroupeService
   ) { }
 
   ngOnInit(): void {
