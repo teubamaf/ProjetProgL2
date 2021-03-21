@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PostService } from 'src/app/shared/services/post.service';
 import Post from 'src/app/shared/models/post.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import Groupe from 'src/app/shared/models/groupe.model';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 
 @Component({
   selector: 'app-add-post',
@@ -21,10 +23,18 @@ export class AddPostComponent implements OnInit {
 
   datePost = new Date();
 
+  @Input()
+  idGroupe = '';
+
+  currentGroupe: Groupe = new Groupe();
+  message = '';
+
+
   constructor(
     private postService: PostService,
     public authService: AuthService,
-    firestore: AngularFirestore
+    firestore: AngularFirestore,
+    public groupeService: GroupeService
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
      }
@@ -34,10 +44,11 @@ export class AddPostComponent implements OnInit {
 
   savePost(): void {
     this.post.idCreateur = this.uid;
+    this.post.idGroupe = this.idGroupe;
     this.postService.create(this.post).then(() => {
-      this.submitted = true;
       console.log('Created new item successfully!');
     });
+    this.message = 'La publication a été créée avec succès';
   }
 
   newPost(): void {

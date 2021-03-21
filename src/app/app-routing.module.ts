@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'fil-actualite', component: AllGroupesPostComponent},
   { path: 'add-groupe', component: AddGroupeComponent },
   { path: 'update-groupe', component: GroupeDetailsComponent },
-  { path: 'groupe/:nom', component: MesGroupesComponent },
+  { path: 'groupe/:id', component: MesGroupesComponent },
   { path: 'rejoindre_groupe', component: RejoindreGroupeComponent }
 ];
 

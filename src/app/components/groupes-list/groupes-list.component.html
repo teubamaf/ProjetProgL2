@@ -9,21 +9,25 @@
 
         <div class="page-container">
             <div class="list row">
-                <div class="col-md-12">
-                    <h4>Liste de mes groupes</h4>
-                    <div class="row" *ngIf="authService.userData as user">
-                        <ul class="list-group">
-                            <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
-                                <div *ngIf="groupe.idCreateur== user.uid || groupe.idMembres == user.uid ">
-                                    {{ groupe.nom }}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-12 ">
+                <div class="list-item">
+                    <div class="col-md-12">
+                        <h4>Liste de mes groupes</h4>
                         <div class="row" *ngIf="authService.userData as user">
-                            <div *ngIf="currentGroupe">
-                                <app-groupe-details (refreshList)="refreshList() " [groupe]="currentGroupe "></app-groupe-details>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
+                                    <div *ngIf="groupe.idCreateur== user.uid || groupe.idMembres == user.uid ">
+                                        {{ groupe.nom }}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <div class="col-md-12 ">
+                            <div class="row" *ngIf="authService.userData as user">
+                                <div *ngIf="currentGroupe">
+                                    <app-groupe-details (refreshList)="refreshList() " [groupe]="currentGroupe "></app-groupe-details>
+                                </div>
                             </div>
                         </div>
                     </div>

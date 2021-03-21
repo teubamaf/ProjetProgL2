@@ -1,7 +1,15 @@
 .page-container {
-    display: block;
+    display: flex;
     margin-left: 40px;
     margin-top: 10px;
+}
+
+.details {
+    position: relative;
+    margin-left: 500px;
+    display: flex;
+    flex-direction: flex-end;
+    width: 500px;
 }
 
 .item:first-child {
@@ -24,6 +32,13 @@ h1 {
 h2 {
     font-size: 25px;
     margin: 0;
+}
+
+h4 {
+    margin-top: 25px;
+    font-size: 28px;
+    margin-left: 150px;
+    margin-bottom: 25px;
 }
 
 p {

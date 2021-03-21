@@ -8,15 +8,32 @@
         <app-left-menu></app-left-menu>
         <div class="page-container">
             <div class="container">
-                <br />
-                <h2>Les publications du groupe {{nom}}</h2>
+                <div *ngFor="let itemGroupe of itemGroupes | async">
+                    <div *ngIf="itemGroupe.id == id">
+                        <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                    </div>
+                </div>
+                <h2>Écrire une publication: </h2>
+                <app-add-post [idGroupe]="id"></app-add-post>
+                <br/>
+                <div *ngFor="let itemGroupe of itemGroupes | async">
+                    <div *ngIf="itemGroupe.id == id">
+                        <h2>Les publications du groupe <strong>{{itemGroupe.nom}}</strong></h2>
+                    </div>
+                </div>
                 <br />
                 <div *ngFor="let item of items | async">
-                    <div *ngIf="item.idGroupe == nom">
+                    <div *ngIf="item.idGroupe == id">
                         <p>Titre :{{item.titre}}</p>
                         <p>Contenu: {{item.contenu}}</p>
-                        <p>Créateur {{item.idCreateur}}</p>
-                        <p>Nombre de likes: {{item.nbLikes}}</p>
+                        <p>Créateur: </p>
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="item.idCreateur == itemUser.uid">
+                                {{itemUser.displayName}}
+                            </div>
+                        </div>
+                        <p>Nombre de likes: {{item.nbLikes}}
+                        </p>
                         <p>Nombre de vues: {{item.nbVues}}</p>
                         <hr>
                     </div>

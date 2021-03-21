@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 export class MesGroupesComponent implements OnInit {
 
   items: Observable<any[]>;
+  itemGroupes: Observable<any[]>;
+  itemUsers: Observable<any[]>;
 
   constructor(
     public router: Router,
@@ -18,14 +20,16 @@ export class MesGroupesComponent implements OnInit {
     firestore: AngularFirestore
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
+    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.itemUsers = firestore.collection(`users`).valueChanges();
   }
 
-  public nom: string;
+  public id: string;
 
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
-    this.nom = this.activatedRoute.snapshot.paramMap.get('nom');
-    console.log(this.nom);
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.id);
 
   }
 

@@ -2,18 +2,16 @@
     <div class="sidebar">
 
         <div class="list-items">
-            <a routerLink="/fil-actualite" routerLinkActive="selected" class="list-item">
-                All
-            </a>
             <button routerLink="/add-groupe" type="button " class="btn ">
                 <span class="material-icons ">
                     add_circle_outline
                     </span>
             </button>
+            <hr>
             <div *ngFor="let item of items | async; let i = index">
                 <div class="row" *ngIf="authService.userData as user">
                     <div *ngIf="item.idCreateur == user.uid || item.idMembres == user.uid">
-                        <a [routerLink]="['/groupe', item.nom]" type="button " class="btn " id="btn-groupe "><img [src]="item.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /></a>
+                        <a [routerLink]="['/groupe', item.id]" type="button " class="btn " id="btn-groupe "><img [src]="item.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /></a>
                     </div>
                 </div>
             </div>

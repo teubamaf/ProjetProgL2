@@ -8,28 +8,30 @@
         <app-left-menu></app-left-menu>
 
         <div *ngIf="!submitted">
-            <h2>Créer un groupe</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="name">Nom du groupe :</label>
-                    <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="groupe.nom" placeholder="Ex: Entre amoureux des chats" required>
-                </div>
+            <div class="container">
+                <h2>Créer une communauté</h2>
+                <form class="form-group">
+                    <div class="mb-3">
+                        <label for="name">Nom du groupe :</label>
+                        <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="groupe.nom" placeholder="Ex: Entre amoureux des chats" required>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="type">Type du groupe :</label>
-                    <input type="email" [(ngModel)]="groupe.type" id="type" name="type" class="form-control" placeholder="Ex: Animaux" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="type">Type du groupe :</label>
+                        <input type="email" [(ngModel)]="groupe.type" id="type" name="type" class="form-control" placeholder="Ex: Animaux" required>
+                    </div>
 
-                <div class="mb-3">
-                    <label for="photoUrl">Image du groupe :</label>
-                    <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="photoUrl">Image du groupe :</label>
+                        <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
+                    </div>
 
-                <button (click)="saveGroupe()" class="btn btn-success">Créer mon groupe</button>
-            </form>
+                    <button (click)="saveGroupe()" class="btn btn-outline-success">Créer mon groupe</button>
+                </form>
 
-            <h2>Rejoindre un groupe existant</h2>
-            <button routerLink="/rejoindre_groupe" class="btn btn-light">Rejoindre un groupe</button>
+                <h2>Rejoindre un groupe existant</h2>
+                <button routerLink="/rejoindre_groupe" class="btn btn-outline-success">Rejoindre un groupe</button>
+            </div>
         </div>
 
 
