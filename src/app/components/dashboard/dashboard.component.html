@@ -37,7 +37,7 @@
                                     <label for="displayName">Nom d'utilisateur</label>
                                 </p>
                                 <p class="lead">
-                                    <input type="text" class="formControl" placeholder="Nom d'utilisateur" #userDisplayName required>
+                                    <input type="text" class="formControl" [value]="item.displayName" #userDisplayName required>
                                 </p>
                             </div>
                             <div class="formGroup">
@@ -45,7 +45,7 @@
                                     <label for="displayName">Adresse Mail</label>
                                 </p>
                                 <p class="lead">
-                                    <input type="text" class="formControl" placeholder="Adresse email" #userEmail required>
+                                    <input type="text" class="formControl" placeholder="Adresse email" [value]="item.email" #userEmail required>
                                 </p>
                             </div>
                             <div class="formGroup">
@@ -53,12 +53,13 @@
                                     <label for="displayName">Image de profil</label>
                                 </p>
                                 <p class="lead">
-                                    <input type="text" class="formControl" placeholder="https://blabla.com" #userPhotoURL required>
+                                    <input type="text" class="formControl" placeholder="https://blabla.com" [value]="item.photoUrl" #userPhotoURL required>
                                 </p>
                             </div>
                             <div class="formGroup">
-                                <input type="button" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value, userEmail.value, userPhotoURL.value)">
+                                <input type="button" class="btn btn-success" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value, userEmail.value, userPhotoURL.value)">
                             </div>
+                            <br/>
                             <div class="formGroup">
                                 <input type="button" class="btn btn-danger" value="Supprimer mon compte" (click)="deleteUser()">
                             </div>
