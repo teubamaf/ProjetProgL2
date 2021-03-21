@@ -59,6 +59,9 @@
                             <div class="formGroup">
                                 <input type="button" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value, userEmail.value, userPhotoURL.value)">
                             </div>
+                            <div class="formGroup">
+                                <input type="button" class="btn btn-danger" value="Supprimer mon compte" (click)="deleteUser()">
+                            </div>
                         </div>
                     </div>
                 </div>

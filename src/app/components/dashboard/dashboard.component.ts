@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
 
-
+  uid = this.authService.userData.uid;
   items: Observable<any[]>;
 
   constructor(
@@ -25,5 +25,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  deleteUser(): any {
+    this.authService.delete(this.uid);
+  }
 
 }

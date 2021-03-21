@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { User } from '../services/user';
 import auth from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -14,6 +14,8 @@ import { flatMap, map } from 'rxjs/operators';
 
 export class AuthService {
   userData: any; // Save logged in user data
+
+  usersRef: AngularFirestoreCollection<User>;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -116,6 +118,16 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true
     });
+  }
+
+  async delete(uid: string): Promise<any> {
+    this.afs.collection('users').doc(uid).delete().then(() => {
+      console.log('Document successfully deleted!');
+    }).catch((error) => {
+      console.error('Error removing document: ', error);
+    });
+    localStorage.removeItem('user');
+    this.router.navigate(['sign-in']);
   }
 
   // Sign out
