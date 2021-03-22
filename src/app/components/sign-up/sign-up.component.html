@@ -1,7 +1,7 @@
 <body>
 
 
-<div class="connexion">
+    <div class="connexion">
         <div class="block">
             <div class="authentification">
                 <h3>Inscription</h3>
@@ -13,12 +13,12 @@
 
                 <div class="password">
                     <p class="lead">
-                        <input type="password"  class="formControl" placeholder="Password" #userPwd required>
+                        <input type="password" class="formControl" placeholder="Password" #userPwd required>
                     </p>
                 </div>
 
                 <div class="button">
-                    <input type="button" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)"  routerLink="/sign-in">
+                    <input type="button" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)" routerLink="/home">
                 </div>
             </div>
 
@@ -26,6 +26,6 @@
                 <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
             </div>
         </div>
-</div>
+    </div>
 
 </body>

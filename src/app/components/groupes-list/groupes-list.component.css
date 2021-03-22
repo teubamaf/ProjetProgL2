@@ -12,6 +12,10 @@
     width: 500px;
 }
 
+.list-group-item {
+    border: none;
+}
+
 .item:first-child {
     grid-column: 3 / 3;
     grid-row: 1 / 3;

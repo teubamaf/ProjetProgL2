@@ -15,7 +15,28 @@
                     <h1>La meilleure page d'accueil du monde o/</h1>
                 </div>
                 <div class="item">
-                    <p>Il semblerait qu'il n'y ait rien à afficher pour le moment...</p>
+                    <h2>Liste des dernières publications</h2>
+                </div>
+                <div *ngFor="let item of items | async">
+                    <div *ngIf="item.idMembres == this.uid || item.idCreateur == this.uid">
+                        <p><strong>{{item.nom}}</strong></p>
+                        <div *ngFor="let itemPost of itemPosts | async">
+                            <div *ngIf="itemPost.idGroupe == item.id">
+                                <p>Titre :{{itemPost.titre}}</p>
+                                <p>Contenu: {{itemPost.contenu}}</p>
+                                <p>Créateur: </p>
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="itemPost.idCreateur == itemUser.uid">
+                                        {{itemUser.displayName}}
+                                    </div>
+                                </div>
+                                <p>Nombre de likes: {{itemPost.nbLikes}}
+                                </p>
+                                <p>Nombre de vues: {{itemPost.nbVues}}</p>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
