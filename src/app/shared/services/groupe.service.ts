@@ -47,10 +47,18 @@ export class GroupeService {
   }
 
   updateIdMembre(id: string, uid: string): any {
-    this.afs.collection('groupes').doc(id).update({ idMembres: uid });
+    this.afs.collection('groupes').doc(id).collection('membres').add({
+      uid: uid
+    }).then((docRef) => {
+      this.updateMembre(docRef.id, id);
+    });
   }
 
   updateId(id: string): any {
     this.afs.collection('groupes').doc(id).update({ id: id });
+  }
+
+  updateMembre(idDoc: string, idGroupe: string): any {
+    this.afs.collection('groupes').doc(idGroupe).collection('membres').doc(idDoc).update({ id : idDoc });
   }
 }
