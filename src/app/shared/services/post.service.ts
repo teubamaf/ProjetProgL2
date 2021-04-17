@@ -11,7 +11,8 @@ export class PostService {
 
   postsRef: AngularFirestoreCollection<Post> = null;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore,
+              public afs: AngularFirestore) {
     this.postsRef = db.collection(this.dbPath);
    }
 
@@ -20,7 +21,10 @@ export class PostService {
   }
 
   create(post: Post): any {
-    return this.postsRef.add({ ...post });
+    return this.postsRef.add({ ...post })
+                        .then((docRef) => {
+                          this.updateId(docRef.id);
+                        });
   }
 
   update(id: string, data: any): Promise<void> {
@@ -29,5 +33,9 @@ export class PostService {
 
   delete(id: string): Promise<void> {
     return this.postsRef.doc(id).delete();
+  }
+
+  updateId(id: string): any {
+    this.afs.collection('posts').doc(id).update({ id : id });
   }
 }

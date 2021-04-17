@@ -12,6 +12,8 @@ export class GroupeService {
   private dbPath = '/groupes';
 
   groupesRef: AngularFirestoreCollection<Groupe>;
+  idGroupe: string;
+  id: any;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -26,7 +28,10 @@ export class GroupeService {
   }
 
   create(groupe: Groupe): any {
-    return this.groupesRef.add({ ...groupe });
+    return this.groupesRef.add({ ...groupe })
+                          .then((docRef) => {
+                            this.updateId(docRef.id);
+                          });
   }
 
   update(id: string, data: any): Promise<void> {
@@ -43,5 +48,9 @@ export class GroupeService {
 
   updateIdMembre(id: string, uid: string): any {
     this.afs.collection('groupes').doc(id).update({ idMembres: uid });
+  }
+
+  updateId(id: string): any {
+    this.afs.collection('groupes').doc(id).update({ id: id });
   }
 }
