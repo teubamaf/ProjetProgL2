@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupeService } from 'src/app/shared/services/groupe.service';
+import { GroupeService } from '../../shared/services/groupe.service';
 import { AuthService } from '../../shared/services/auth.service';
 import Groupe from 'src/app/shared/models/groupe.model';
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { GroupeService } from 'src/app/shared/services/groupe.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { GroupeService } from '../../shared/services/groupe.service';
 import { map } from 'rxjs/operators';
 
 @Component({

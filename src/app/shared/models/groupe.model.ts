@@ -4,5 +4,5 @@ export default class Groupe {
     type: string;
     photoUrl: string;
     idCreateur: string;
-    idMembres: string;
+    nbMembres = 0;
 }

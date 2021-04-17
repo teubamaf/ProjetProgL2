@@ -7,5 +7,6 @@ export default class Post {
     date: string;
     scorePost = 0;
     nbLikes = 0;
+    nbDislikes = 0;
     nbVues = 0;
 }

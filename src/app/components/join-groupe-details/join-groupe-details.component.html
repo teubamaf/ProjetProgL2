@@ -1,10 +1,12 @@
 <div *ngIf="currentGroupe" class="edit-form">
-    <div *ngIf="currentGroupe.idMembres != this.uid">
-        <h4>Rejoindre le groupe {{currentGroupe.nom}}</h4>
-        <button type="submit" class="btn btn-success" (click)="joinGroupe()">Rejoindre</button>
-        <p>{{ message }}</p>
-    </div>
+    <!-- <div *ngIf="currentGroupe.idMembres != this.uid">-->
+    <h4>Rejoindre le groupe {{currentGroupe.nom}}</h4>
+    <button type="submit" class="btn btn-success" (click)="joinGroupe()">Rejoindre</button>
+    <p>{{ message }}</p>
+    <!--</div>-->
+    <!--
     <div *ngIf="currentGroupe.idMembres == this.uid || currentGroupe.idCreateur == this.uid">
         <p>Il semblerait que vous soyez déjà membre de ce groupe...</p>
     </div>
+-->
 </div>
