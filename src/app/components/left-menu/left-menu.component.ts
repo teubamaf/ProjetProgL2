@@ -12,16 +12,32 @@ import { Router } from '@angular/router'; // import router
 export class LeftMenuComponent implements OnInit {
 
   items: Observable<any[]>;
+  myArray: any[] = [];
+  tab: any[] = [];
+  uid = this.authService.userData.uid;
+  itemGroupes: any[] = [];
 
   constructor(
     public authService: AuthService,
-    firestore: AngularFirestore,
+    public firestore: AngularFirestore,
     public router: Router
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
   }
 
   ngOnInit(): void {
+    this.firestore.collection(`membres`, ref => ref.where('uid', '==', this.uid)).get().subscribe(snap => {
+      snap.forEach(doc => {
+        this.myArray.push(doc.data());
+      });
+      this.tab = Array.from(new Set(this.myArray));
+      this.tab.forEach(docs => {
+        const groupes = this.firestore.collection(`groupes`, ref => ref.where('id', '==', docs.idGroupe)).get().subscribe(snaps => {
+          snaps.forEach(docGroupe => {
+            this.itemGroupes.push(docGroupe.data());
+          });
+        });
+      });
+    });
   }
-
 }

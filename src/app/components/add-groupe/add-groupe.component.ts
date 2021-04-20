@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { MembreService } from 'src/app/shared/services/membre.service';
+import Membre from 'src/app/shared/models/membre.model';
 
 @Component({
   selector: 'app-add-groupe',
@@ -20,7 +22,7 @@ export class AddGroupeComponent implements OnInit {
 
   groupe: Groupe = new Groupe();
   submitted = false;
-
+  membre: Membre = new Membre();
   uid = this.authService.userData.uid;
 
   items: Observable<any[]>;
@@ -29,6 +31,7 @@ export class AddGroupeComponent implements OnInit {
     public groupeService: GroupeService,
     public authService: AuthService,
     firestore: AngularFirestore,
+    public membreService: MembreService,
     public formBuilder: FormBuilder,
     public router: Router
     ) {

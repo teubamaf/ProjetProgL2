@@ -1,3 +1,5 @@
+import { AngularFirestoreCollection } from "@angular/fire/firestore";
+
 export default class Groupe {
     id: string;
     nom: string;
@@ -5,4 +7,5 @@ export default class Groupe {
     photoUrl: string;
     idCreateur: string;
     nbMembres = 0;
+    membres: AngularFirestoreCollection;
 }
