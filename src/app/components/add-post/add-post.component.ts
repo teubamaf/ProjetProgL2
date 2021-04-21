@@ -28,6 +28,7 @@ export class AddPostComponent implements OnInit {
 
   currentGroupe: Groupe = new Groupe();
   message = '';
+  currentDate = new Date();
 
 
   constructor(
@@ -40,9 +41,11 @@ export class AddPostComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    console.log(this.currentDate);
   }
 
   savePost(): void {
+    this.post.date = this.currentDate;
     this.post.idCreateur = this.uid;
     this.post.idGroupe = this.idGroupe;
     this.postService.create(this.post).then(() => {

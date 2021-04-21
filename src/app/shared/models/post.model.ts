@@ -4,7 +4,7 @@ export default class Post {
     idGroupe: string;
     titre: string;
     contenu: string;
-    date: string;
+    date: Date;
     scorePost = 0;
     nbLikes = 0;
     nbDislikes = 0;
