@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PostService } from 'src/app/shared/services/post.service';
 import Post from 'src/app/shared/models/post.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -9,28 +9,23 @@ import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-add-post',
-  templateUrl: './add-post.component.html',
-  styleUrls: ['./add-post.component.css']
+  selector: 'app-menu-add-post',
+  templateUrl: './menu-add-post.component.html',
+  styleUrls: ['./menu-add-post.component.css']
 })
-export class AddPostComponent implements OnInit {
+export class MenuAddPostComponent implements OnInit {
 
   items: Observable<any[]>;
-
   post: Post = new Post();
   submitted = false;
-
   uid = this.authService.userData.uid;
-
   datePost = new Date();
-
   @Input()
   idGroupe = '';
-
   currentGroupe: Groupe = new Groupe();
   message = '';
   currentDate = new Date();
-
+  public id: string;
 
   constructor(
     private postService: PostService,
@@ -38,11 +33,9 @@ export class AddPostComponent implements OnInit {
     firestore: AngularFirestore,
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
-    ) {
-      this.items = firestore.collection(`groupes`).valueChanges();
-     }
-
-  public id: string;
+  ) {
+    this.items = firestore.collection(`groupes`).valueChanges();
+   }
 
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements

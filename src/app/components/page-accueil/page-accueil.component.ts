@@ -14,10 +14,13 @@ export class PageAccueilComponent implements OnInit {
   itemPosts: Observable<any[]>;
   itemUsers: Observable<any[]>;
 
+  myArray: any[] = [];
+  tab: any[] = [];
   uid = this.authService.userData.uid;
+  itemGroupes: any[] = [];
 
   constructor(
-    firestore: AngularFirestore,
+    public firestore: AngularFirestore,
     public authService: AuthService
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
@@ -26,6 +29,19 @@ export class PageAccueilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.firestore.collection(`membres`, ref => ref.where('uid', '==', this.uid)).get().subscribe(snap => {
+      snap.forEach(doc => {
+        this.myArray.push(doc.data());
+      });
+      this.tab = Array.from(new Set(this.myArray));
+      this.tab.forEach(docs => {
+        const groupes = this.firestore.collection(`groupes`, ref => ref.where('id', '==', docs.idGroupe)).get().subscribe(snaps => {
+          snaps.forEach(docGroupe => {
+            this.itemGroupes.push(docGroupe.data());
+          });
+        });
+      });
+    });
   }
 
 }

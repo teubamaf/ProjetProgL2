@@ -40,6 +40,8 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
 import { RouterModule, Routes } from '@angular/router';
 import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
 import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
+import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
+import { AddDocComponent } from './components/add-doc/add-doc.component';
 
 const appRoutes: Routes = [
   { path: 'left-menu', component: LeftMenuComponent },
@@ -68,7 +70,9 @@ const appRoutes: Routes = [
     PostDetailsComponent,
     PostsListComponent,
     RejoindreGroupeComponent,
-    JoinGroupeDetailsComponent
+    JoinGroupeDetailsComponent,
+    MenuAddPostComponent,
+    AddDocComponent
   ],
   imports: [
     BrowserModule,

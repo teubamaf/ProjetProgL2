@@ -13,8 +13,23 @@
                         <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
                     </div>
                 </div>
-                <h2>Écrire une publication: </h2>
-                <app-add-post [idGroupe]="id"></app-add-post>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" routerLink="\posts-groupe">Les publications du groupe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['\menu-add-post']">Ecrire une publication</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="">Liste des membres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="#">Modifier mon groupe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="#">Les statistiques de mon groupe</a>
+                    </li>
+                </ul>
                 <br/>
                 <div *ngFor="let itemGroupe of itemGroupes | async">
                     <div *ngIf="itemGroupe.id == id">
@@ -35,7 +50,7 @@
                         <p>Date de création: {{item.date?.toDate() | date:'d/M/yyyy, HH:mm'}}</p>
                         <p>Nombre de likes: {{item.nbLikes}}
                         </p>
-                        <p>Nombre de vues: {{item.nbVues}}</p>
+                        <p>Nombre de disLikes: {{item.nbdislikes}}</p>
                         <hr>
                     </div>
                 </div>
