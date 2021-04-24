@@ -28,13 +28,22 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
     this.currentMembre = { ...this.membre };
   }
 
-  deleteGroupe(): void {
+  deleteMembre(): void {
     this.membreService.delete(this.currentMembre.id)
       .then(() => {
         this.refreshList.emit();
-        this.message = 'Le groupe a été supprimé avec succès !';
+        this.message = 'Le membre a été supprimé du groupe avec succès !';
       })
       .catch(err => console.log(err));
+  }
+
+  updateMembre(): void {
+    this.membreService.updateModo(this.currentMembre.id)
+    .then(() => {
+      this.refreshList.emit();
+      this.message = 'Le membre a été promu avec succès ! ';
+    })
+    .catch(err => console.log(err));
   }
 
 }

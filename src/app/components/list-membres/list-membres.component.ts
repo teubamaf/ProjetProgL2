@@ -30,6 +30,9 @@ export class ListMembresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.id);
     this.retrieveMembre();
   }
 

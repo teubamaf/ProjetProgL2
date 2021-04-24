@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import Post from '../models/membre.model';
+import Membre from '../models/membre.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +9,22 @@ export class MembreService {
 
   private dbPath = '/membres';
 
-  membresRef: AngularFirestoreCollection<Post> = null;
+  membresRef: AngularFirestoreCollection<Membre> = null;
 
   constructor(private db: AngularFirestore,
               public afs: AngularFirestore) {
     this.membresRef = db.collection(this.dbPath);
    }
 
-   getAll(): AngularFirestoreCollection<Post> {
+   getAll(): AngularFirestoreCollection<Membre> {
     return this.membresRef;
   }
 
-  create(post: Post): any {
-    return this.membresRef.add({ ...post })
+  create(membre: Membre): any {
+    return this.membresRef.add({ ...membre })
                         .then((docRef) => {
                           this.updateId(docRef.id);
+                          this.updateGrade(docRef.id);
                         });
   }
 
@@ -36,6 +37,14 @@ export class MembreService {
   }
 
   updateId(id: string): any {
-    this.afs.collection('posts').doc(id).update({ id : id });
+    this.afs.collection('membres').doc(id).update({ id : id });
+  }
+
+  updateGrade(id: string): any {
+    this.afs.collection('membres').doc(id).update({ grade : 'Membre'});
+  }
+
+  updateModo(id: string): any {
+    this.afs.collection('membres').doc(id).update({ grade : 'Modérateur' });
   }
 }

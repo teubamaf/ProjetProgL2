@@ -40,6 +40,7 @@ export class GroupeService {
                             this.updateId(docRef.id);
                             this.membre.idGroupe = docRef.id;
                             this.membre.uid = this.uid;
+                            this.membre.grade = 'Administrateur';
                             this.membreService.create(this.membre);
                           });
   }
