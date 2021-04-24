@@ -1,0 +1,19 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    < class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <h2>Liste des membres du groupe</h2>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let membre of membres; let i = index" [class.active]="i == currentIndex" (click)="setActiveMembre(membre, i)">
+                    {{ membre.uid }}
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="currentMembre">
+            <app-list-membres-details (refreshList)="refreshList() " [membre]="currentMembre"></app-list-membres-details>
+        </div>

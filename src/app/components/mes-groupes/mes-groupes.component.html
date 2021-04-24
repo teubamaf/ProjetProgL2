@@ -21,13 +21,16 @@
                         <a class="nav-link" [routerLink]="['\menu-add-post']">Ecrire une publication</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="">Liste des membres</a>
+                        <a class="nav-link" [routerLink]="['\list-membre-groupe']">Liste des membres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="#">Modifier mon groupe</a>
+                        <a class="nav-link" [routerLink]="['\list-post-groupe']">Gérer les publications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="#">Les statistiques de mon groupe</a>
+                        <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['\statistiques-groupe']">Les statistiques de mon groupe</a>
                     </li>
                 </ul>
                 <br/>

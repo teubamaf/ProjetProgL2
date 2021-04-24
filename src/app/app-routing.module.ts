@@ -23,6 +23,10 @@ import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindr
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
 import { AddDocComponent } from './components/add-doc/add-doc.component';
+import { ListMembresComponent } from './components/list-membres/list-membres.component';
+import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
+import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
+import { StatistiquesGroupeComponent } from './components/statistiques-groupe/statistiques-groupe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -41,7 +45,11 @@ const routes: Routes = [
   { path: 'rejoindre_groupe', component: RejoindreGroupeComponent },
   { path: 'groupe/:id/menu-add-post', component: MenuAddPostComponent },
   { path: 'groupe/:id/menu-add-post/add-post', component: AddPostComponent},
-  { path: 'groupe/:id/menu-add-post/add-doc', component: AddDocComponent }
+  { path: 'groupe/:id/menu-add-post/add-doc', component: AddDocComponent },
+  { path: 'groupe/:id/list-membre-groupe', component: ListMembresComponent },
+  { path: 'groupe/:id/list-post-groupe', component: ListPostGroupeComponent },
+  { path: 'groupe/:id/groupe-update', component: UpdateGroupeComponent },
+  { path: 'groupe/:id/statistiques-groupe', component: StatistiquesGroupeComponent }
 ];
 
 @NgModule({

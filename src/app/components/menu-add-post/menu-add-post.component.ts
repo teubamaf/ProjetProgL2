@@ -26,6 +26,8 @@ export class MenuAddPostComponent implements OnInit {
   message = '';
   currentDate = new Date();
   public id: string;
+  str1 = 'groupe/';
+  str3 = '';
 
   constructor(
     private postService: PostService,
@@ -41,6 +43,9 @@ export class MenuAddPostComponent implements OnInit {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.id);
+    let str2 = this.id;
+    this.str3 = this.str1.concat(str2.toString());
+    console.log(this.str3);
   }
 
   savePost(): void {

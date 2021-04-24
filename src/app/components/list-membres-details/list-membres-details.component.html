@@ -1,0 +1,16 @@
+<div *ngIf="currentMembre" class="edit-form">
+    <h4>Modifier mon groupe</h4>
+    <form class="form">
+        <div class="form-group ">
+            <label for="photoUrl ">Image du groupe</label>
+            <input type="text " class="basic-slide " id="photoUrl " [(ngModel)]="currentMembre.idGroupe " name="photoUrl " />
+        </div>
+        <div class="form-group ">
+            <label for="createur ">Créateur</label>
+            <input type="text " class="basic-slide " id="createur " [(ngModel)]="currentMembre.uid " name="createur " />
+        </div>
+
+        <button class="btn btn-danger " (click)="deleteGroupe() ">Supprimer</button>
+        <p>{{ message }}</p>
+    </form>
+</div>

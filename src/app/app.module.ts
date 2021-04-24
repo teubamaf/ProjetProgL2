@@ -42,6 +42,11 @@ import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindr
 import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
 import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
 import { AddDocComponent } from './components/add-doc/add-doc.component';
+import { ListMembresComponent } from './components/list-membres/list-membres.component';
+import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
+import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
+import { StatistiquesGroupeComponent } from './components/statistiques-groupe/statistiques-groupe.component';
+import { ListMembresDetailsComponent } from './components/list-membres-details/list-membres-details.component';
 
 const appRoutes: Routes = [
   { path: 'left-menu', component: LeftMenuComponent },
@@ -72,7 +77,12 @@ const appRoutes: Routes = [
     RejoindreGroupeComponent,
     JoinGroupeDetailsComponent,
     MenuAddPostComponent,
-    AddDocComponent
+    AddDocComponent,
+    ListMembresComponent,
+    ListPostGroupeComponent,
+    UpdateGroupeComponent,
+    StatistiquesGroupeComponent,
+    ListMembresDetailsComponent
   ],
   imports: [
     BrowserModule,
