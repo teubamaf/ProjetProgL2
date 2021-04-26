@@ -1,0 +1,24 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <div *ngFor="let itemGroupe of itemGroupes | async">
+                <div *ngIf="itemGroupe.id == id">
+                    <h1>Quitter le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <button type="button" class="btn btn-danger" (click)="quitter(itemMembre.id)">Quitter le groupe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -27,6 +27,7 @@ import { ListMembresComponent } from './components/list-membres/list-membres.com
 import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
 import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
 import { StatistiquesGroupeComponent } from './components/statistiques-groupe/statistiques-groupe.component';
+import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-groupe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -49,7 +50,8 @@ const routes: Routes = [
   { path: 'groupe/:id/list-membre-groupe', component: ListMembresComponent },
   { path: 'groupe/:id/list-post-groupe', component: ListPostGroupeComponent },
   { path: 'groupe/:id/groupe-update', component: UpdateGroupeComponent },
-  { path: 'groupe/:id/statistiques-groupe', component: StatistiquesGroupeComponent }
+  { path: 'groupe/:id/statistiques-groupe', component: StatistiquesGroupeComponent },
+  { path: 'groupe/:id/quit', component: QuitterGroupeComponent }
 ];
 
 @NgModule({

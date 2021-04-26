@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MembreService } from 'src/app/shared/services/membre.service';
@@ -15,8 +16,9 @@ export class ListMembresComponent implements OnInit {
   public id: string;
   myArray: any[] = [];
   tab: any[] = [];
-  itemUsers: any[] = [];
-  idMembres: any[] = [];
+  items: Observable<any[]>;
+  itemGroupes: Observable<any[]>;
+  itemUsers: Observable<any[]>;
   membres: any;
   currentMembre = null;
   currentIndex = -1;
@@ -27,7 +29,11 @@ export class ListMembresComponent implements OnInit {
     public firestore: AngularFirestore,
     private membreService: MembreService,
     public authService: AuthService
-  ) { }
+  ) {
+    this.items = firestore.collection(`posts`).valueChanges();
+    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.itemUsers = firestore.collection(`users`).valueChanges();
+   }
 
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements

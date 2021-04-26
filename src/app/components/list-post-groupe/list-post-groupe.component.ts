@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-post-groupe',
@@ -12,12 +13,20 @@ export class ListPostGroupeComponent implements OnInit {
   public id: string;
   myArray: any[] = [];
   tab: any[] = [];
-  itemUsers: any[] = [];
+  tabUsers: any[] = [];
+
+  items: Observable<any[]>;
+  itemGroupes: Observable<any[]>;
+  itemUsers: Observable<any[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore
-  ) { }
+  ) {
+    this.items = firestore.collection(`posts`).valueChanges();
+    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.itemUsers = firestore.collection(`users`).valueChanges();
+   }
 
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
@@ -31,12 +40,11 @@ export class ListPostGroupeComponent implements OnInit {
       this.tab.forEach(docs => {
         const users = this.firestore.collection(`users`, ref => ref.where('uid', '==', docs.idCreateur)).get().subscribe(snaps => {
           snaps.forEach(docGroupe => {
-            this.itemUsers.push(docGroupe.data());
+            this.tabUsers.push(docGroupe.data());
           });
         });
       });
     });
-    console.log(this.itemUsers);
   }
 
 }

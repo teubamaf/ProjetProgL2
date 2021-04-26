@@ -1,7 +1,15 @@
 <div *ngIf="currentMembre" class="edit-form">
     <form class="form">
-        <button class="btn btn-success" (click)="updateMembre()">Promouvoir le membre</button>
-        <button class="btn btn-danger " (click)="deleteMembre() ">Supprimer le membre</button>
+        <div *ngFor="let itemUser of itemUsers | async">
+            <div *ngIf="currentMembre.uid == itemUser.uid">
+                <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
+            </div>
+        </div>
+        <p>Grade: {{currentMembre.grade }}</p>
+        <div *ngIf="currentMembre.grade == 'Membre'">
+            <button class="btn btn-success" (click)="updateMembre()">Promouvoir le membre</button>
+            <button class="btn btn-danger " (click)="deleteMembre() ">Supprimer le membre</button>
+        </div>
         <p>{{ message }}</p>
     </form>
 </div>

@@ -13,10 +13,20 @@
                     <div class="list-item">
                         <div class="col-md-12">
                             <h4>Liste des membres</h4>
-                            <ul class="list-group">
+                            <nav class="navbar navbar-light bg-light">
+                                <form class="form-inline">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre" aria-label="Rechercher">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                                </form>
+                            </nav>
+                            <ul class="list-group list-group-flush">
                                 <li class="list-group-item" *ngFor="let membre of membres; let i = index" [class.active]="i == currentIndex" (click)="setActiveMembre(membre, i)">
                                     <div *ngIf="membre.idGroupe == this.id">
-                                        {{ membre.uid }}
+                                        <div *ngFor="let itemUser of itemUsers | async">
+                                            <div *ngIf="membre.uid == itemUser.uid">
+                                                {{ itemUser.displayName }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>

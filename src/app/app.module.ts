@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -11,6 +11,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { AuthService } from './shared/services/auth.service';
 
@@ -38,6 +40,7 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 import { RouterModule, Routes } from '@angular/router';
+
 import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
 import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
 import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
@@ -47,6 +50,8 @@ import { ListPostGroupeComponent } from './components/list-post-groupe/list-post
 import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
 import { StatistiquesGroupeComponent } from './components/statistiques-groupe/statistiques-groupe.component';
 import { ListMembresDetailsComponent } from './components/list-membres-details/list-membres-details.component';
+import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-groupe.component';
+
 
 const appRoutes: Routes = [
   { path: 'left-menu', component: LeftMenuComponent },
@@ -82,7 +87,8 @@ const appRoutes: Routes = [
     ListPostGroupeComponent,
     UpdateGroupeComponent,
     StatistiquesGroupeComponent,
-    ListMembresDetailsComponent
+    ListMembresDetailsComponent,
+    QuitterGroupeComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +105,7 @@ const appRoutes: Routes = [
     )
   ],
   providers: [AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

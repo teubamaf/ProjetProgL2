@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import Membre from 'src/app/shared/models/membre.model';
 import { MembreService } from 'src/app/shared/services/membre.service';
 
@@ -15,9 +17,18 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
   currentMembre: Membre = new Membre();
   message = '';
 
+  items: Observable<any[]>;
+  itemGroupes: Observable<any[]>;
+  itemUsers: Observable<any[]>;
+
   constructor(
-    public membreService: MembreService
-  ) { }
+    public membreService: MembreService,
+    public firestore: AngularFirestore,
+  ) {
+    this.items = firestore.collection(`posts`).valueChanges();
+    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.itemUsers = firestore.collection(`users`).valueChanges();
+  }
 
   ngOnInit(): void {
     this.message = '';

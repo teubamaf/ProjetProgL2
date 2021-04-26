@@ -20,18 +20,63 @@
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['\menu-add-post']">Ecrire une publication</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['\list-membre-groupe']">Liste des membres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['\list-post-groupe']">Gérer les publications</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['\statistiques-groupe']">Les statistiques de mon groupe</a>
-                    </li>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\list-membre-groupe']">Liste des membres</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\list-post-groupe']">Gérer les publications</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                -->
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\statistiques-groupe']">Les statistiques de mon groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Administrateur'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\quit']">Quitter le groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </ul>
                 <br/>
                 <div *ngFor="let itemGroupe of itemGroupes | async">

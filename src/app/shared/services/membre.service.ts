@@ -41,10 +41,11 @@ export class MembreService {
   }
 
   updateGrade(id: string): any {
-    this.afs.collection('membres').doc(id).update({ grade : 'Membre'});
+    this.afs.collection('membres').doc(id).update({ grade : 'Membre' });
   }
 
   updateModo(id: string): any {
     this.afs.collection('membres').doc(id).update({ grade : 'Modérateur' });
   }
+
 }
