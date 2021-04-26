@@ -52,6 +52,10 @@ import { StatistiquesGroupeComponent } from './components/statistiques-groupe/st
 import { ListMembresDetailsComponent } from './components/list-membres-details/list-membres-details.component';
 import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-groupe.component';
 
+import { UploadFormComponent } from './components/upload-form/upload-form.component';
+import { UploadListComponent } from './components/upload-list/upload-list.component';
+import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
+
 
 const appRoutes: Routes = [
   { path: 'left-menu', component: LeftMenuComponent },
@@ -88,7 +92,10 @@ const appRoutes: Routes = [
     UpdateGroupeComponent,
     StatistiquesGroupeComponent,
     ListMembresDetailsComponent,
-    QuitterGroupeComponent
+    QuitterGroupeComponent,
+    UploadFormComponent,
+    UploadListComponent,
+    UploadDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -99,6 +106,8 @@ const appRoutes: Routes = [
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
