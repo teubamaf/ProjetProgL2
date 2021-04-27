@@ -20,7 +20,18 @@
                         <textarea class="form-control" id="contenu" required [(ngModel)]="post.contenu" name="contenu"></textarea>
                     </div>
 
-                    <button (click)="savePost()" class="btn btn-success">Créer</button> {{message}}
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" (change)="selectFile($event)">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+
+                    <div *ngIf="currentFileUpload" class="progress mt-2">
+                        <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
+                            {{ percentage }}%
+                        </div>
+                    </div>
+
+                    <button (click)="savePost()" (click)="upload()" class="btn btn-success">Créer</button> {{message}}
                 </div>
             </div>
         </div>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { PromiseType } from 'protractor/built/plugins';
 import Post from '../models/post.model';
+import { FileUploadService } from './file-upload.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +10,16 @@ import Post from '../models/post.model';
 export class PostService {
 
   private dbPath = '/posts';
+  postData: any;
+  myArray: any[] = [];
+  tab: any[] = [];
 
   postsRef: AngularFirestoreCollection<Post> = null;
 
-  constructor(private db: AngularFirestore,
-              public afs: AngularFirestore) {
+  constructor(
+    private db: AngularFirestore,
+    public afs: AngularFirestore
+    ) {
     this.postsRef = db.collection(this.dbPath);
    }
 
@@ -38,4 +45,18 @@ export class PostService {
   updateId(id: string): any {
     this.afs.collection('posts').doc(id).update({ id : id });
   }
+
+  updateIdDocument(key: string, date: Date): any {
+    this.afs.collection(`posts`, ref => ref.where('date', '==', date)).get().subscribe(snap => {
+      snap.forEach(doc => {
+        this.myArray.push(doc.data());
+      });
+      this.tab = Array.from(new Set(this.myArray));
+      this.tab.forEach(docs => {
+        this.afs.collection('posts').doc(docs.id).update({ idDocument: key });
+      });
+    });
+
+  }
+
 }

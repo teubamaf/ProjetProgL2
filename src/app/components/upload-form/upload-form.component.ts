@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import FileUpload from 'src/app/shared/models/file-upload.model';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-upload-form',
@@ -12,12 +14,21 @@ export class UploadFormComponent implements OnInit {
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
   percentage = 0;
+  public id: string;
+
+  currentDate = new Date();
+  uid = this.authService.userData.uid;
 
   constructor(
-    private uploadService: FileUploadService
+    private uploadService: FileUploadService,
+    private activatedRoute: ActivatedRoute,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    console.log(this.id);
   }
 
   selectFile(event: any): void {
@@ -31,7 +42,10 @@ export class UploadFormComponent implements OnInit {
 
       if (file) {
         this.currentFileUpload = new FileUpload(file);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+        this.currentFileUpload.date = this.currentDate;
+        this.currentFileUpload.idAuteur = this.uid;
+        this.currentFileUpload.idGroupe = this.id;
+        this.uploadService.pushFileToStorage(this.currentFileUpload, this.id).subscribe(
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
           },
@@ -39,6 +53,7 @@ export class UploadFormComponent implements OnInit {
             console.log(error);
           }
         );
+        console.log('Fichier uploadé');
       }
     }
 

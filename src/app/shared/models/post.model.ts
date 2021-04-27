@@ -9,4 +9,5 @@ export default class Post {
     nbLikes = 0;
     nbDislikes = 0;
     nbVues = 0;
+    idDocument: string;
 }

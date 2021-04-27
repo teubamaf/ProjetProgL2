@@ -18,7 +18,7 @@
                         <a class="nav-link active" aria-current="page" routerLink="\posts-groupe">Les publications du groupe</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['\menu-add-post']">Ecrire une publication</a>
+                        <a class="nav-link" [routerLink]="['\add-post']">Ecrire une publication</a>
                     </li>
                     <div *ngFor="let itemMembre of itemMembres | async">
                         <div *ngIf="itemMembre.idGroupe == id">
@@ -37,6 +37,17 @@
                                 <div *ngIf="itemMembre.grade != 'Membre'">
                                     <li class="nav-item">
                                         <a class="nav-link" [routerLink]="['\list-post-groupe']">Gérer les publications</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['\list-doc-groupe']">Gérer les documents</a>
                                     </li>
                                 </div>
                             </div>
@@ -99,6 +110,11 @@
                         <p>Nombre de likes: {{item.nbLikes}}
                         </p>
                         <p>Nombre de disLikes: {{item.nbdislikes}}</p>
+                        <div *ngFor="let file of fileUploads">
+                            <div *ngIf="file.id == item.idDocument">
+                                <a href="{{ file.url }}">{{ file.name }}</a>
+                            </div>
+                        </div>
                         <hr>
                     </div>
                 </div>

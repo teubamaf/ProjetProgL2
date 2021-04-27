@@ -44,7 +44,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
 import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
 import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
-import { AddDocComponent } from './components/add-doc/add-doc.component';
 import { ListMembresComponent } from './components/list-membres/list-membres.component';
 import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
 import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
@@ -86,7 +85,6 @@ const appRoutes: Routes = [
     RejoindreGroupeComponent,
     JoinGroupeDetailsComponent,
     MenuAddPostComponent,
-    AddDocComponent,
     ListMembresComponent,
     ListPostGroupeComponent,
     UpdateGroupeComponent,
