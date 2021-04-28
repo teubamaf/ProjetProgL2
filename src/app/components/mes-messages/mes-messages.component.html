@@ -1,21 +1,11 @@
-<!-- Top navigation -->
-<app-menu></app-menu>
-
-<!-- Sidebar navigation -->
-<div class="container-fluid">
-    <div class="row">
-
-        <app-left-menu></app-left-menu>
-
-        <div class="page-container">
-            <div class="container">
-                <div class="item">
-                    <h1>Conversations récentes</h1>
-                </div>
-                <div class="item">
-                    <p>Il semblerait qu'il n'y ait rien à afficher pour le moment...</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<div *ngFor="let message of messages">
+    <b>{{ message.user }}</b>: {{ message.text }}
 </div>
+
+<label for="userName">Username</label>
+<input type="text" id="userName" [(ngModel)]="userName">
+
+<label for="message">Message</label>
+<input type="text" id="message" [(ngModel)]="messageText">
+
+<button (click)="sendMessage(userName, messageText)">Send</button>
