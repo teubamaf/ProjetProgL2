@@ -54,6 +54,22 @@ import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-grou
 import { UploadFormComponent } from './components/upload-form/upload-form.component';
 import { UploadListComponent } from './components/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
+import { RoomlistComponent } from './components/roomlist/roomlist.component';
+import { AddroomComponent } from './components/addroom/addroom.component';
+import { ChatroomComponent } from './components/chatroom/chatroom.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { DatePipe } from '@angular/common';
+import { LoginComponent } from './components/login/login.component';
 
 
 const appRoutes: Routes = [
@@ -93,7 +109,11 @@ const appRoutes: Routes = [
     QuitterGroupeComponent,
     UploadFormComponent,
     UploadListComponent,
-    UploadDetailsComponent
+    UploadDetailsComponent,
+    RoomlistComponent,
+    AddroomComponent,
+    ChatroomComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -109,9 +129,21 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatSidenavModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

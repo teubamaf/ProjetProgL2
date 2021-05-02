@@ -11,6 +11,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class MenuComponent implements OnInit {
 
   items: Observable<any[]>;
+  uid = this.authService.userData.uid;
 
   constructor(
     public authService: AuthService,

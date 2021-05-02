@@ -30,6 +30,11 @@ import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-grou
 
 import { UploadListComponent } from './components/upload-list/upload-list.component';
 
+import { RoomlistComponent } from './components/roomlist/roomlist.component';
+import { AddroomComponent } from './components/addroom/addroom.component';
+import { ChatroomComponent } from './components/chatroom/chatroom.component';
+import { LoginComponent } from './components/login/login.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
@@ -52,7 +57,11 @@ const routes: Routes = [
   { path: 'groupe/:id/groupe-update', component: UpdateGroupeComponent },
   { path: 'groupe/:id/statistiques-groupe', component: StatistiquesGroupeComponent },
   { path: 'groupe/:id/quit', component: QuitterGroupeComponent },
-  { path: 'groupe/:id/list-doc-groupe', component: UploadListComponent}
+  { path: 'groupe/:id/list-doc-groupe', component: UploadListComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'roomlist', component: RoomlistComponent },
+  { path: 'addroom', component: AddroomComponent },
+  { path: 'chatroom/:roomname', component: ChatroomComponent },
 ];
 
 @NgModule({
