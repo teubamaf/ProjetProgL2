@@ -14,7 +14,6 @@ import { flatMap, map } from 'rxjs/operators';
 
 export class AuthService {
   userData: any; // Save logged in user data
-
   usersRef: AngularFirestoreCollection<User>;
 
   constructor(
@@ -46,7 +45,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-       // this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
       });

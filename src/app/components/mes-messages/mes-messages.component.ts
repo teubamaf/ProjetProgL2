@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PusherService } from 'src/app/shared/services/pusher.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+
 
 interface Message {
   text: string;
@@ -13,29 +14,15 @@ interface Message {
 })
 export class MesMessagesComponent implements OnInit {
 
-  messages: Array<Message>;
-  userName: string;
-  messageText: string;
 
   constructor(
-    private pusherService: PusherService
+    public authService: AuthService
   ) {
-    this.messages = [];
+
    }
 
   ngOnInit(): void {
-    this.pusherService.messagesChannel.bind('client-new-message', (message) => {
-      this.messages.push(message);
-    });
-  }
 
-  sendMessage(user: string, text: string) {
-    const message: Message = {
-       user: user,
-       text: text,
-    }
-    this.pusherService.messagesChannel.trigger('client-new-message', message);
-    this.messages.push(message);
   }
 
 }
