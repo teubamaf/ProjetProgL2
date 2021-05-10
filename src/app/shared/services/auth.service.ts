@@ -5,8 +5,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import firebase from 'firebase';
 
 import { flatMap, map } from 'rxjs/operators';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +17,14 @@ import { flatMap, map } from 'rxjs/operators';
 export class AuthService {
   userData: any; // Save logged in user data
   usersRef: AngularFirestoreCollection<User>;
+  loginRef: any;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning,
+    private db: AngularFireDatabase
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -36,6 +40,7 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+    this.loginRef = db.list('users');
   }
 
   // Sign in with email/password
@@ -52,13 +57,14 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email: string, password: string): any {
+  SignUp(email: string, password: string, pseudo: string): any {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
+        this.UpdatePseudo(result.user.uid, pseudo);
       }).catch((error) => {
         window.alert(error.message);
       });
@@ -143,6 +149,17 @@ export class AuthService {
 
   ReadUser(uid: string): any {
     return this.afs.doc<User>(`users/${uid}`).valueChanges();
+  }
+
+  async UpdatePseudo(uid: string, pseudo: string): Promise<any> {
+    this.setLogin(uid, pseudo);
+    return this.afs.collection('users').doc(uid).update({ displayName: pseudo });
+  }
+
+  setLogin(uid: string, pseudo: string): void {
+    console.log('Set Login OK');
+    return this.loginRef.push({ nickname: pseudo });
+
   }
 
 }

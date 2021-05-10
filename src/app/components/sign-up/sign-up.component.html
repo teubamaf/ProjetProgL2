@@ -5,6 +5,11 @@
         <div class="block">
             <div class="authentification">
                 <h3>Inscription</h3>
+                <div class="pseudo">
+                    <p class="lead">
+                        <input type="pseudo" class="formControl" placeholder="Nom d'utilisateur" #userPseudo required>
+                    </p>
+                </div>
                 <div class="mail">
                     <p class="lead">
                         <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
@@ -18,7 +23,7 @@
                 </div>
 
                 <div class="button">
-                    <input type="button" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)" routerLink="/home">
+                    <input type="button" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value, userPseudo.value)" routerLink="/home">
                 </div>
             </div>
 
