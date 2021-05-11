@@ -98,20 +98,34 @@
                 <br />
                 <div *ngFor="let item of items | async">
                     <div  *ngIf="item.idGroupe == id">
-                        <div class="titre"><p>{{item.titre}}</p></div> 
-                        <div class="pseudo"><p>/Posted By Pseudo</p> </div>
-                        <div class="contenu"><p>{{item.contenu}}</p></div>
-                        <div class="date"><p>Date de création: {{item.date?.toDate() | date:'d/M/yyyy, HH:mm'}}</p></div>
-                        <div class="like">
-                        <p>Nombre de likes: {{item.nbLikes}}</p>
-                        <p>Nombre de disLikes: {{item.nbdislikes}}</p>
-                        </div>
-                        <div class="photo" *ngFor="let file of fileUploads">
-                            <div *ngIf="file.id == item.idDocument">
-                                <img src="{{file.url}}" width="400" height="400"/>
+                        <mat-card class="poste">
+                        <mat-card-header>
+                            <div *ngFor = "let itemUser of itemUsers | async ">
+                            <div class="row" *ngIf="authService.userData as user">
+                                <div *ngIf="itemUser.uid == user.uid">
+                                    <img class="photoprofil" src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
+                                </div>
                             </div>
                         </div>
-                        <hr>
+
+                            <mat-card-title><p>{{item.titre}}</mat-card-title> 
+                            <mat-card-subtitle>/Posted By Pseudo</mat-card-subtitle>
+                        </mat-card-header>
+                            <div class="photo" *ngFor="let file of fileUploads">
+                                <div *ngIf="file.id == item.idDocument">
+                                    <img src="{{file.url}}" width="400" height="400"/>
+                                </div>
+                            </div>
+                            <mat-card-content>
+                                <div class="contenu"><p>{{item.contenu}}</p></div>
+                            </mat-card-content>
+                            <div class="date"><p>{{item.date?.toDate() | date:'d/M/yyyy, HH:mm'}}</p></div>
+                            <div class="btn-toolbar">
+                                <button type="button" id="btnSubmit" class="btn btn-primary btn-lg">Like</button>
+                                <button type="button" id="btnCancel" class="btn btn-primary btn-lg">Share</button>
+                              </div>
+                    </mat-card>
+                    <hr>
                     </div>
                 </div>
             </div>
