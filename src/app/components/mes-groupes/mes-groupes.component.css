@@ -1,20 +1,17 @@
-.poste{
-    border: 2px solid;
-    border-radius: 30px !important;
-    border-color: black !important;
-    margin-bottom: 10px;
-}
-
+.poste {
+    max-width: 600px;
+  }
 .titre{
     margin-top: 10px;
     font-size: 25px;
-    float: left;
 }
 
-.pseudo{
-    clear:left;
+.date{
+    font-size: 12px;
+    font-style: italic;
 }
 
-.like{
-    align-items: left;
+button{
+    size: 15px;
+    margin: 13px;
 }
