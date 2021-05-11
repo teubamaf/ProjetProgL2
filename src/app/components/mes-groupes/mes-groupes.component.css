@@ -1,76 +1,20 @@
-img {
-    margin-left: 105px;
-    margin-top: -30px;
-    border-radius: 2px;
-    margin-bottom: 20px;
-    height: 100px;
+.poste{
+    border: 2px solid;
+    border-radius: 30px !important;
+    border-color: black !important;
+    margin-bottom: 10px;
 }
 
-.edit-form {
-    margin: 50px;
+.titre{
+    margin-top: 10px;
+    font-size: 25px;
+    float: left;
 }
 
-label {
-    font-size: 20px;
+.pseudo{
+    clear:left;
 }
 
-h4 {
-    margin-bottom: 50px;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-
-/* form starting stylings ------------------------------- */
-
-.group {
-    position: relative;
-    margin-bottom: 45px;
-}
-
-input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 300px;
-    border: none;
-    border-bottom: 1px solid #757575;
-}
-
-input:focus {
-    outline: none;
-}
-
-
-/* active state */
-
-input:focus~label,
-input:valid~label {
-    top: -20px;
-    font-size: 14px;
-    color: #5264AE;
-}
-
-
-/* BOTTOM BARS ================================= */
-
-.bar {
-    position: relative;
-    display: block;
-    width: 300px;
-}
-
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #5264AE;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+.like{
+    align-items: left;
 }
