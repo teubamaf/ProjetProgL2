@@ -35,6 +35,9 @@ import { AddroomComponent } from './components/addroom/addroom.component';
 import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
@@ -62,6 +65,8 @@ const routes: Routes = [
   { path: 'roomlist', component: RoomlistComponent },
   { path: 'addroom', component: AddroomComponent },
   { path: 'chatroom/:roomname', component: ChatroomComponent },
+  { path: 'create-conversation', component: CreateConversationComponent },
+  { path: 'conversation-list', component: ConversationListComponent },
 ];
 
 @NgModule({

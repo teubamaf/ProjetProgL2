@@ -1,0 +1,18 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <app-create-conversation></app-create-conversation>
+            <div *ngFor="let conversation of conversations">
+                <div *ngIf="this.uid == conversation.uid || this.uid == conversation.uidCrea">
+                    {{conversation.id}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
