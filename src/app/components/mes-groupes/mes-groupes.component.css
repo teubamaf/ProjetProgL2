@@ -1,20 +1,20 @@
-.poste {
+.poste{
     border: 2px solid;
     border-radius: 30px !important;
     border-color: black !important;
     margin-bottom: 10px;
 }
 
-.titre {
+.titre{
     margin-top: 10px;
     font-size: 25px;
     float: left;
 }
 
-.pseudo {
-    clear: left;
+.pseudo{
+    clear:left;
 }
 
-.like {
+.like{
     align-items: left;
 }

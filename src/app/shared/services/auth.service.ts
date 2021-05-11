@@ -41,7 +41,6 @@ export class AuthService {
       }
     });
     this.loginRef = db.list('users');
-    this.usersRef = afs.collection('users');
   }
 
   // Sign in with email/password
@@ -118,7 +117,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoUrl: 'https://i.ibb.co/RPBQX9z/1517547117016.jpg',
+      photoURL: user.photoURL,
       emailVerified: user.emailVerified
     };
     return userRef.set(userData, {
@@ -158,12 +157,9 @@ export class AuthService {
   }
 
   setLogin(uid: string, pseudo: string): void {
+    console.log('Set Login OK');
     return this.loginRef.push({ nickname: pseudo });
 
-  }
-
-  getAll(): AngularFirestoreCollection<User> {
-    return this.usersRef;
   }
 
 }
