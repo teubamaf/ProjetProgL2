@@ -70,6 +70,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DatePipe } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
+import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 
 
 const appRoutes: Routes = [
@@ -113,7 +115,9 @@ const appRoutes: Routes = [
     RoomlistComponent,
     AddroomComponent,
     ChatroomComponent,
-    LoginComponent
+    LoginComponent,
+    CreateConversationComponent,
+    ConversationListComponent
   ],
   imports: [
     BrowserModule,
@@ -141,7 +145,8 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatSortModule,
     MatSnackBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AngularFirestoreModule.enablePersistence()
   ],
   providers: [AuthService, DatePipe],
   bootstrap: [AppComponent],
