@@ -53,4 +53,8 @@ export class MesGroupesComponent implements OnInit {
     });
   }
 
+  saveCommentaire(commentaire: string): void {
+    
+  }
+
 }

@@ -73,6 +73,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { ChatsComponent } from './components/chats/chats.component';
+import { CommentaireComponent } from './components/commentaire/commentaire.component';
 
 
 const appRoutes: Routes = [
@@ -119,7 +120,8 @@ const appRoutes: Routes = [
     LoginComponent,
     CreateConversationComponent,
     ConversationListComponent,
-    ChatsComponent
+    ChatsComponent,
+    CommentaireComponent
   ],
   imports: [
     BrowserModule,
