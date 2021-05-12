@@ -10,7 +10,16 @@
             <app-create-conversation></app-create-conversation>
             <div *ngFor="let conversation of conversations">
                 <div *ngIf="this.uid == conversation.uid || this.uid == conversation.uidCrea">
-                    {{conversation.id}}
+                    <div *ngIf="this.uid == conversation.uid">
+                        <ul>
+                            <li><a [routerLink]="['/conversation', conversation.id]">Conversation avec {{ conversation.pseudoCrea }}</a> </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="this.uid == conversation.uidCrea">
+                        <ul>
+                            <li><a [routerLink]="['/conversation', conversation.id]">Conversation avec {{ conversation.pseudo }}</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

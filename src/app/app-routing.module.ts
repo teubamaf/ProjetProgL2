@@ -37,6 +37,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
+import { ChatsComponent } from './components/chats/chats.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'chatroom/:roomname', component: ChatroomComponent },
   { path: 'create-conversation', component: CreateConversationComponent },
   { path: 'conversation-list', component: ConversationListComponent },
+  { path: 'conversation/:id', component: ChatsComponent }
 ];
 
 @NgModule({
