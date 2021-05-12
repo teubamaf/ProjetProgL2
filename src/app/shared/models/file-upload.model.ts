@@ -5,7 +5,7 @@ export default class FileUpload {
     file: File;
     idGroupe: string;
     idAuteur: string;
-    date: Date;
+    date: string;
     score = 0;
     nbLikes = 0;
     nbDislikes = 0;

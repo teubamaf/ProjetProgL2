@@ -126,7 +126,7 @@
                                 </div>
                             </mat-card-content>
                             <div class="date">
-                                <p>{{item.date?.toDate() | date:'d/M/yyyy, HH:mm'}}</p>
+                                <p>{{item.date }}</p>
                             </div>
                             <div>
                                 <input type="text" placeholder="Ecrire votre commentaire ici" #commentaire>
@@ -137,8 +137,8 @@
                                 <button type="button" id="btnCancel" class="btn btn-primary btn-lg">Share</button>
                             </div>
                             <h3>Commentaires:</h3>
-                            <div *ngFor="let commentaire of commentaires">
-                                <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngFor="let itemUser of itemUsers | async">
+                                <div *ngFor="let commentaire of commentaires">
                                     <div *ngIf="commentaire.idCrea == itemUser.uid">
                                         <div *ngIf="item.id == commentaire.idPost">
                                             {{ commentaire.contenu }} de {{ itemUser.displayName }} // {{ commentaire.date }}

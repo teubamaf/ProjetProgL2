@@ -46,13 +46,14 @@ export class PostService {
     this.afs.collection('posts').doc(id).update({ id : id });
   }
 
-  updateIdDocument(key: string, date: Date): any {
+  updateIdDocument(key: string, date: string): any {
     this.afs.collection(`posts`, ref => ref.where('date', '==', date)).get().subscribe(snap => {
       snap.forEach(doc => {
         this.myArray.push(doc.data());
       });
       this.tab = Array.from(new Set(this.myArray));
       this.tab.forEach(docs => {
+        console.log(key);
         this.afs.collection('posts').doc(docs.id).update({ idDocument: key });
       });
     });

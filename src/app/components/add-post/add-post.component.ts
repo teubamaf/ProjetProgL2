@@ -9,6 +9,7 @@ import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { ActivatedRoute } from '@angular/router';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import FileUpload from 'src/app/shared/models/file-upload.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-post',
@@ -40,6 +41,7 @@ export class AddPostComponent implements OnInit {
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
     private uploadService: FileUploadService,
+    public datepipe: DatePipe
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
      }
@@ -51,7 +53,7 @@ export class AddPostComponent implements OnInit {
   }
 
   savePost(): void {
-    this.post.date = this.currentDate;
+    this.post.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     this.post.idCreateur = this.uid;
     this.post.idGroupe = this.id;
     this.titre = this.post.titre;
@@ -78,7 +80,8 @@ export class AddPostComponent implements OnInit {
       if (file) {
         this.currentFileUpload = new FileUpload(file);
         this.currentFileUpload.titre = this.titre;
-        this.currentFileUpload.date = this.currentDate;
+        this.currentFileUpload.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+        console.log(this.currentFileUpload.date);
         this.currentFileUpload.idAuteur = this.uid;
         this.currentFileUpload.idGroupe = this.id;
         this.uploadService.pushFileToStorage(this.currentFileUpload, this.id).subscribe(

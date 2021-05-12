@@ -49,12 +49,11 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
   }
 
   updateMembre(): void {
-    this.membreService.updateModo(this.currentMembre.id)
-    .then(() => {
+    console.log(this.currentMembre.id);
+    this.membreService.updateModo(this.currentMembre.id).then(() => {
       this.refreshList.emit();
-      this.message = 'Le membre a été promu avec succès ! ';
-    })
-    .catch(err => console.log(err));
+      this.message = 'Le membre a été promu avec succès !';
+    });
   }
 
 }

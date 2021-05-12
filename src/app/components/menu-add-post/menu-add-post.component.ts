@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import Groupe from 'src/app/shared/models/groupe.model';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-menu-add-post',
@@ -35,6 +36,7 @@ export class MenuAddPostComponent implements OnInit {
     firestore: AngularFirestore,
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
+    public datepipe: DatePipe
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
    }
@@ -49,7 +51,7 @@ export class MenuAddPostComponent implements OnInit {
   }
 
   savePost(): void {
-    this.post.date = this.currentDate;
+    this.post.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     this.post.idCreateur = this.uid;
     this.post.idGroupe = this.id;
     this.postService.create(this.post).then(() => {

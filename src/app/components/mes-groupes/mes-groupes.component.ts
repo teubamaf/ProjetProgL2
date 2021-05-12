@@ -58,6 +58,7 @@ export class MesGroupesComponent implements OnInit {
       )
     ).subscribe(fileUploads => {
       this.fileUploads = fileUploads;
+      console.log(this.fileUploads);
     });
     this.retrieveCommentaires();
   }

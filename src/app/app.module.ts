@@ -74,6 +74,8 @@ import { CreateConversationComponent } from './components/create-conversation/cr
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { ChatsComponent } from './components/chats/chats.component';
 import { CommentaireComponent } from './components/commentaire/commentaire.component';
+import { CreateGroupeChatComponent } from './components/create-groupe-chat/create-groupe-chat.component';
+import { GroupChatListComponent } from './components/group-chat-list/group-chat-list.component';
 
 
 const appRoutes: Routes = [
@@ -121,7 +123,9 @@ const appRoutes: Routes = [
     CreateConversationComponent,
     ConversationListComponent,
     ChatsComponent,
-    CommentaireComponent
+    CommentaireComponent,
+    CreateGroupeChatComponent,
+    GroupChatListComponent
   ],
   imports: [
     BrowserModule,
