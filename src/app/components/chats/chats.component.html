@@ -19,7 +19,7 @@
                 <div *ngFor="let itemUser of itemUsers | async">
                     <div *ngIf="message.idConversation == this.id">
                         <div *ngIf="itemUser.uid == message.uid">
-                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date?.toDate() | date:'d/MM/yyyy, HH:mm' }}
+                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date }}
                         </div>
                     </div>
                 </div>

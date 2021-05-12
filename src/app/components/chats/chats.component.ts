@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,6 +25,7 @@ export class ChatsComponent implements OnInit {
 
   uid = this.authService.userData.uid;
   currentDate = new Date();
+  date: string;
 
   messages: any;
   itemUsers: Observable<any[]>;
@@ -33,9 +35,11 @@ export class ChatsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public authService: AuthService,
-    public chatService: ChatService
+    public chatService: ChatService,
+    private datePipe: DatePipe
   ) {
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.date = this.datePipe.transform(this.currentDate, 'd/MM/yyyy, HH:mm');
    }
 
   ngOnInit(): void {
@@ -56,7 +60,7 @@ export class ChatsComponent implements OnInit {
     this.chat.uid = this.uid;
     this.chat.idConversation = this.id;
     this.chat.type = 'message';
-    this.chat.date = this.currentDate;
+    this.chat.date = this.date;
     this.chat.message = message;
     this.chatService.create(this.chat).then(() => {
       console.log('Message OK');
