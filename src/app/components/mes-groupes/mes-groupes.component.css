@@ -1,18 +1,20 @@
-.poste {
+.poste{
     max-width: 600px;
-}
-
-.titre {
+  }
+.titre{
     margin-top: 10px;
     font-size: 25px;
 }
 
-.date {
+.date{
     font-size: 12px;
     font-style: italic;
 }
 
-button {
-    size: 15px;
+.photoprofil{
+    float:left  ;
+}
+
+button{ 
     margin: 13px;
 }
