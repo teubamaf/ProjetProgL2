@@ -15,6 +15,7 @@ export class CommentaireService {
   idCommentaire: string;
   id: any;
   uid = this.authService.userData.uid;
+  commentairesDateRef: AngularFirestoreCollection<Commentaire>;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -23,10 +24,11 @@ export class CommentaireService {
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     this.commentairesRef = afs.collection(this.dbPath);
+    this.commentairesDateRef = afs.collection<Commentaire>('commentaires', ref => ref.orderBy('date', 'asc'));
    }
 
   getAll(): AngularFirestoreCollection<Commentaire> {
-    return this.commentairesRef;
+    return this.commentairesDateRef;
   }
 
   create(commentaire: Commentaire): any {

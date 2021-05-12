@@ -4,6 +4,7 @@ export default class Commentaire {
     idCrea: string;
     idGroupe: string;
     date: string;
+    contenu: string;
     nbDislike = 0;
     nbLikes = 0;
     nbVues = 0;

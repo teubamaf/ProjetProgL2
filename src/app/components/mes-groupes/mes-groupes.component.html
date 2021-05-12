@@ -101,19 +101,17 @@
                         <mat-card class="poste">
                             <mat-card-header>
                                 <div *ngFor="let itemUser of itemUsers | async ">
-                                    <div class="row" *ngIf="authService.userData as user">
-                                        <div class="photoprofil" *ngIf="itemUser.uid == user.uid">
-                                            <div mat-card-avatar>
-                                                <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
-                                            </div>
+                                    <div class="photoprofil" *ngIf="itemUser.uid == item.idCreateur">
+                                        <div mat-card-avatar>
+                                            <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
                                         </div>
                                     </div>
                                 </div>
                                 <mat-card-title>
                                     <p>{{item.titre}}</mat-card-title>
                                 <div *ngFor="let itemUser of itemUsers | async">
-                                    <div *ngIf="itemUser.idCreateur == itemUser.uid">
-                                        <mat-card-subtitle>Posted by pseudo</mat-card-subtitle>
+                                    <div *ngIf="item.idCreateur == itemUser.uid">
+                                        <mat-card-subtitle>Posted by {{ itemUser.displayName }}</mat-card-subtitle>
                                     </div>
                                 </div>
                             </mat-card-header>
@@ -132,11 +130,21 @@
                             </div>
                             <div>
                                 <input type="text" placeholder="Ecrire votre commentaire ici" #commentaire>
-                                <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value)">Submit</button>
+                                <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, item.id)">Submit</button>
                             </div>
                             <div class="btn-toolbar">
                                 <button type="button" id="btnSubmit" class="btn btn-primary btn-lg">Like</button>
                                 <button type="button" id="btnCancel" class="btn btn-primary btn-lg">Share</button>
+                            </div>
+                            <h3>Commentaires:</h3>
+                            <div *ngFor="let commentaire of commentaires">
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="commentaire.idCrea == itemUser.uid">
+                                        <div *ngIf="item.id == commentaire.idPost">
+                                            {{ commentaire.contenu }} de {{ itemUser.displayName }} // {{ commentaire.date }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </mat-card>
                         <hr>
