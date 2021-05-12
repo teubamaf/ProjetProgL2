@@ -26,7 +26,7 @@ export class ChatsComponent implements OnInit {
   chat: Chats = new Chats();
 
   uid = this.authService.userData.uid;
-  currentDate = new Date();
+  currentDate = Date.now();
   date: string;
 
   messages: any;
@@ -38,7 +38,7 @@ export class ChatsComponent implements OnInit {
     public firestore: AngularFirestore,
     public authService: AuthService,
     public chatService: ChatService,
-    private datePipe: DatePipe
+    public datePipe: DatePipe
   ) {
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.date = this.datePipe.transform(this.currentDate, 'd/MM/yyyy, HH:mm:ss');
@@ -58,11 +58,12 @@ export class ChatsComponent implements OnInit {
     this.retrieveChat();
   }
 
-  saveMessage(message: string): void {
+  saveMessage(message: string, date: string): void {
     this.chat.uid = this.uid;
     this.chat.idConversation = this.id;
     this.chat.type = 'message';
-    this.chat.date = this.date;
+    this.chat.date = this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+    console.log(date);
     this.chat.message = message;
     this.chatService.create(this.chat).then(() => {
       console.log('Message OK');
