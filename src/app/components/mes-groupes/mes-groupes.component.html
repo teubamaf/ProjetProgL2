@@ -102,14 +102,19 @@
                         <mat-card-header>
                             <div *ngFor = "let itemUser of itemUsers | async ">
                             <div class="row" *ngIf="authService.userData as user">
-                                <div *ngIf="itemUser.uid == user.uid">
-                                    <img class="photoprofil" src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
+                                <div class="photoprofil" *ngIf="itemUser.uid == user.uid">
+                                    <div mat-card-avatar>
+                                    <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                            <mat-card-title><p>{{item.titre}}</mat-card-title> 
-                            <mat-card-subtitle>/Posted By Pseudo</mat-card-subtitle>
+                            <mat-card-title><p>{{item.titre}}</mat-card-title>
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="itemUser.idCreateur == itemUser.uid">
+                                        <mat-card-subtitle>Posted by pseudo</mat-card-subtitle> 
+                                    </div>
+                                </div>
                         </mat-card-header>
                             <div class="photo" *ngFor="let file of fileUploads">
                                 <div *ngIf="file.id == item.idDocument">
