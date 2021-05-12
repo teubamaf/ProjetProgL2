@@ -41,7 +41,7 @@ export class ChatsComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.itemUsers = firestore.collection(`users`).valueChanges();
-    this.date = this.datePipe.transform(this.currentDate, 'd/MM/yyyy, HH:mm');
+    this.date = this.datePipe.transform(this.currentDate, 'd/MM/yyyy, HH:mm:ss');
    }
 
   ngOnInit(): void {
