@@ -20,6 +20,8 @@ export class ChatsComponent implements OnInit {
   myArray: any[] = [];
   tab: any[] = [];
   items: any[] = [];
+  tabDate: any[] = [];
+  tab2: any[] = [];
 
   chat: Chats = new Chats();
 

@@ -15,6 +15,7 @@ export class ChatService {
   idChat: string;
   id: any;
   uid = this.authService.userData.uid;
+  chatDateRef: AngularFirestoreCollection<Chats>;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -23,10 +24,11 @@ export class ChatService {
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     this.chatsRef = afs.collection(this.dbPath);
+    this.chatDateRef = afs.collection<Chats>('chats', ref => ref.orderBy('date', 'asc'));
    }
 
   getAll(): AngularFirestoreCollection<Chats> {
-    return this.chatsRef;
+    return this.chatDateRef;
   }
 
   create(chat: Chats): any {
