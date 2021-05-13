@@ -15,16 +15,22 @@ export class PostService {
   tab: any[] = [];
 
   postsRef: AngularFirestoreCollection<Post> = null;
+  postDateRef: AngularFirestoreCollection<Post>;
 
   constructor(
     private db: AngularFirestore,
     public afs: AngularFirestore
     ) {
     this.postsRef = db.collection(this.dbPath);
+    this.postDateRef = afs.collection<Post>('posts', ref => ref.orderBy('date', 'asc'));
    }
 
    getAll(): AngularFirestoreCollection<Post> {
     return this.postsRef;
+  }
+
+  getDate(): AngularFirestoreCollection<Post> {
+    return this.postDateRef;
   }
 
   create(post: Post): any {

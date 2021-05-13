@@ -1,0 +1,36 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <div *ngFor="let tabi of myArray">
+                <div *ngIf="this.uid == tabi.uidCrea">
+                    <h1>Conversation avec {{ tabi.pseudo }}</h1>
+                </div>
+                <div *ngIf="this.uid == tabi.uid">
+                    <h1>Conversation avec {{ tabi.pseudoCrea }}</h1>
+                </div>
+            </div>
+            <div *ngFor="let message of messages">
+                <div *ngFor="let itemUser of itemUsers | async">
+                    <div *ngIf="message.idConversation == this.id">
+                        <div *ngIf="itemUser.uid == message.uid">
+                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="sticky-footer">
+                <form class="formControl">
+                    <input type="text" id="message" placeholder="Ecrire votre message ici" #message>
+                    <input type="hidden" value="{{ this.currentDate | date:'dd/MM/yyyy, HH:mm:ss'}}" #date>
+                    <button class="succes" (click)="saveMessage(message.value, date.value)">Envoyer</button>
+                </form>
+            </footer>
+        </div>
+    </div>
+</div>

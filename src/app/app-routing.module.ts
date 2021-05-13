@@ -34,6 +34,7 @@ import { CreateConversationComponent } from './components/create-conversation/cr
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { ChatsComponent } from './components/chats/chats.component';
 import { CreateGroupeChatComponent } from './components/create-groupe-chat/create-groupe-chat.component';
+import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -62,7 +63,8 @@ const routes: Routes = [
   { path: 'conversation-list', component: ConversationListComponent },
   { path: 'conversation/:id', component: ChatsComponent },
   { path: 'mes-messages', component: MesMessagesComponent },
-  { path: 'create-groupe-conversation', component: CreateGroupeChatComponent }
+  { path: 'create-groupe-conversation', component: CreateGroupeChatComponent },
+  { path: 'conversation-groupe/:id', component: ChatsGroupeComponent }
 ];
 
 @NgModule({
