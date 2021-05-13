@@ -1,10 +1,13 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import Commentaire from 'src/app/shared/models/commentaire.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CommentaireService } from 'src/app/shared/services/commentaire.service';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 
 @Component({
@@ -20,6 +23,9 @@ export class MesGroupesComponent implements OnInit {
   itemMembres: Observable<any[]>;
   itemDocuments: any;
 
+  commentaire: Commentaire = new Commentaire();
+  commentaires: any;
+
   uid = this.authService.userData.uid;
 
   constructor(
@@ -28,7 +34,9 @@ export class MesGroupesComponent implements OnInit {
     public firestore: AngularFirestore,
     public authService: AuthService,
     private db: AngularFireDatabase,
-    public uploadService: FileUploadService
+    public uploadService: FileUploadService,
+    public commentaireService: CommentaireService,
+    public datepipe: DatePipe,
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
@@ -50,6 +58,32 @@ export class MesGroupesComponent implements OnInit {
       )
     ).subscribe(fileUploads => {
       this.fileUploads = fileUploads;
+      console.log(this.fileUploads);
+    });
+    this.retrieveCommentaires();
+  }
+
+  saveCommentaire(contenu: string, idPost: string): void {
+    this.commentaire.contenu = contenu;
+    this.commentaire.idPost = idPost;
+    this.commentaire.idCrea = this.uid;
+    this.commentaire.idGroupe = this.id;
+    this.commentaire.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+    this.commentaireService.create(this.commentaire).then(() => {
+      console.log('Commentaire créé avec succès');
+    });
+  }
+
+  retrieveCommentaires(): void {
+    this.commentaireService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.commentaires = data;
+      console.log(this.commentaires);
     });
   }
 

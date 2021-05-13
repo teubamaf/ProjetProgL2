@@ -6,10 +6,10 @@
             </div>
         </div>
         <p>Grade: {{currentMembre.grade }}</p>
+        <p>{{ message }} </p>
         <div *ngIf="currentMembre.grade == 'Membre'">
             <button class="btn btn-success" (click)="updateMembre()">Promouvoir le membre</button>
             <button class="btn btn-danger " (click)="deleteMembre() ">Supprimer le membre</button>
         </div>
-        <p>{{ message }}</p>
     </form>
 </div>

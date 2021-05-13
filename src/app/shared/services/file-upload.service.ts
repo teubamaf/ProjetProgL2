@@ -46,7 +46,6 @@ export class FileUploadService {
     this.db.list(id).push(fileUpload)
                     .then((docRef) => {
                       this.updateId(id, docRef.key);
-                      this.updateDate(id, docRef.key);
                       this.postService.updateIdDocument(docRef.key, fileUpload.date);
                     });
   }

@@ -49,7 +49,7 @@ export class ListMembresComponent implements OnInit {
   }
 
   retrieveMembre(): void {
-    this.membreService.getAll().snapshotChanges().pipe(
+    this.membreService.getMembreGroupe(this.id).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })

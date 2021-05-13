@@ -1,21 +1,21 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import Chats from '../models/chats.model';
+import Commentaire from '../models/commentaire.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class CommentaireService {
 
-  private dbPath = '/chats';
+  private dbPath = '/commentaires';
 
-  chatsRef: AngularFirestoreCollection<Chats>;
-  idChat: string;
+  commentairesRef: AngularFirestoreCollection<Commentaire>;
+  idCommentaire: string;
   id: any;
   uid = this.authService.userData.uid;
-  chatDateRef: AngularFirestoreCollection<Chats>;
+  commentairesDateRef: AngularFirestoreCollection<Commentaire>;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -23,27 +23,27 @@ export class ChatService {
     public authService: AuthService,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    this.chatsRef = afs.collection(this.dbPath);
-    this.chatDateRef = afs.collection<Chats>('chats', ref => ref.orderBy('date', 'asc'));
+    this.commentairesRef = afs.collection(this.dbPath);
+    this.commentairesDateRef = afs.collection<Commentaire>('commentaires', ref => ref.orderBy('date', 'desc'));
    }
 
-  getAll(): AngularFirestoreCollection<Chats> {
-    return this.chatDateRef;
+  getAll(): AngularFirestoreCollection<Commentaire> {
+    return this.commentairesDateRef;
   }
 
-  create(chat: Chats): any {
-    return this.chatsRef.add({ ...chat })
+  create(commentaire: Commentaire): any {
+    return this.commentairesRef.add({ ...commentaire })
                           .then((docRef) => {
                             this.updateId(docRef.id);
                           });
   }
 
   update(id: string, data: any): Promise<void> {
-    return this.chatsRef.doc(id).update(data);
+    return this.commentairesRef.doc(id).update(data);
   }
 
   delete(id: string): Promise<void> {
-    return this.chatsRef.doc(id).delete();
+    return this.commentairesRef.doc(id).delete();
   }
 
   updateId(id: string): any {

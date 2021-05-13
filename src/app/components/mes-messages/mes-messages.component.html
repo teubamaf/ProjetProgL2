@@ -1,0 +1,16 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <a routerLink="/create-conversation">Créer une conversation avec un utilisateur</a>
+            <a routerLink="/create-groupe-conversation">Créer une conversation de groupe</a>
+            <app-conversation-list></app-conversation-list>
+            <app-group-chat-list></app-group-chat-list>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import FileUpload from 'src/app/shared/models/file-upload.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-upload-form',
@@ -22,7 +23,8 @@ export class UploadFormComponent implements OnInit {
   constructor(
     private uploadService: FileUploadService,
     private activatedRoute: ActivatedRoute,
-    public authService: AuthService
+    public authService: AuthService,
+    public datepipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class UploadFormComponent implements OnInit {
 
       if (file) {
         this.currentFileUpload = new FileUpload(file);
-        this.currentFileUpload.date = this.currentDate;
+        this.currentFileUpload.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
         this.currentFileUpload.idAuteur = this.uid;
         this.currentFileUpload.idGroupe = this.id;
         this.uploadService.pushFileToStorage(this.currentFileUpload, this.id).subscribe(

@@ -19,7 +19,7 @@
                 <div *ngFor="let itemUser of itemUsers | async">
                     <div *ngIf="message.idConversation == this.id">
                         <div *ngIf="itemUser.uid == message.uid">
-                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date?.toDate() | date:'d/MM/yyyy, HH:mm' }}
+                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date }}
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,8 @@
             <footer class="sticky-footer">
                 <form class="formControl">
                     <input type="text" id="message" placeholder="Ecrire votre message ici" #message>
-                    <button class="succes" (click)="saveMessage(message.value)">Envoyer</button>
+                    <input type="hidden" value="{{ this.currentDate | date:'dd/MM/yyyy, HH:mm:ss'}}" #date>
+                    <button class="succes" (click)="saveMessage(message.value, date.value)">Envoyer</button>
                 </form>
             </footer>
         </div>

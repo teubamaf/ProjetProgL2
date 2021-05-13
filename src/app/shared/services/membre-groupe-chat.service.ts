@@ -1,21 +1,20 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import Chats from '../models/chats.model';
+import MembreGroupeChat from '../models/membre-groupe-chat.model';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class MembreGroupeChatService {
 
-  private dbPath = '/chats';
+  private dbPath = '/membre-groupe-chats';
 
-  chatsRef: AngularFirestoreCollection<Chats>;
-  idChat: string;
+  membreGroupeChatsRef: AngularFirestoreCollection<MembreGroupeChat>;
+  idMembreGroupeChat: string;
   id: any;
   uid = this.authService.userData.uid;
-  chatDateRef: AngularFirestoreCollection<Chats>;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -23,31 +22,30 @@ export class ChatService {
     public authService: AuthService,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    this.chatsRef = afs.collection(this.dbPath);
-    this.chatDateRef = afs.collection<Chats>('chats', ref => ref.orderBy('date', 'asc'));
+    this.membreGroupeChatsRef = afs.collection(this.dbPath);
    }
 
-  getAll(): AngularFirestoreCollection<Chats> {
-    return this.chatDateRef;
+  getAll(): AngularFirestoreCollection<MembreGroupeChat> {
+    return this.membreGroupeChatsRef;
   }
 
-  create(chat: Chats): any {
-    return this.chatsRef.add({ ...chat })
+  create(membreGroupeChat: MembreGroupeChat): any {
+    return this.membreGroupeChatsRef.add({ ...membreGroupeChat })
                           .then((docRef) => {
                             this.updateId(docRef.id);
                           });
   }
 
   update(id: string, data: any): Promise<void> {
-    return this.chatsRef.doc(id).update(data);
+    return this.membreGroupeChatsRef.doc(id).update(data);
   }
 
   delete(id: string): Promise<void> {
-    return this.chatsRef.doc(id).delete();
+    return this.membreGroupeChatsRef.doc(id).delete();
   }
 
   updateId(id: string): any {
-    this.afs.collection('chats').doc(id).update({ id: id });
+    this.afs.collection('membre-groupe-chats').doc(id).update({ id: id });
   }
 
 }

@@ -1,6 +1,6 @@
 export default class Chats {
     id: string;
-    date: Date;
+    date: string;
     message: string;
     idConversation: string;
     type: string;

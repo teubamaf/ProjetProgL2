@@ -20,6 +20,10 @@ export class MembreService {
     return this.membresRef;
   }
 
+  getMembreGroupe(idGroupe: string): AngularFirestoreCollection<Membre> {
+    return this.afs.collection<Membre>('membres', ref => ref.where('idGroupe', '==', idGroupe));
+  }
+
   create(membre: Membre): any {
     return this.membresRef.add({ ...membre })
                         .then((docRef) => {
@@ -45,7 +49,7 @@ export class MembreService {
   }
 
   updateModo(id: string): any {
-    this.afs.collection('membres').doc(id).update({ grade : 'Modérateur' });
+    return this.afs.collection('membres').doc(id).update({ grade : 'Modérateur' });
   }
 
 }

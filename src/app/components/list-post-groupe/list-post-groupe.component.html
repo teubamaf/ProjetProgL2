@@ -34,7 +34,7 @@
                                     <td>{{ itemUser.displayName }}</td>
                                 </div>
                             </div>
-                            <td><button class="btn btn-danger">Supprimer le post</button></td>
+                            <td><button class="btn btn-danger" (click)="DeletePost(item.id)">Supprimer le post</button></td>
                         </tr>
                     </div>
                 </tbody>

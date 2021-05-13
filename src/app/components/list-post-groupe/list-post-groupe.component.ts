@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-list-post-groupe',
@@ -21,7 +22,8 @@ export class ListPostGroupeComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public firestore: AngularFirestore
+    public firestore: AngularFirestore,
+    public postService: PostService
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
@@ -45,6 +47,10 @@ export class ListPostGroupeComponent implements OnInit {
         });
       });
     });
+  }
+
+  DeletePost(idPost: string): any {
+    this.postService.delete(idPost);
   }
 
 }
