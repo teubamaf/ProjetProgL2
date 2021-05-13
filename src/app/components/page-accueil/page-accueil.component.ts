@@ -1,3 +1,4 @@
+import { CdkNoDataRow } from '@angular/cdk/table';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -7,6 +8,9 @@ import Commentaire from 'src/app/shared/models/commentaire.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CommentaireService } from 'src/app/shared/services/commentaire.service';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
+import { PostService } from 'src/app/shared/services/post.service';
+import { convertToObject } from 'typescript';
 
 @Component({
   selector: 'app-page-accueil',
@@ -23,18 +27,23 @@ export class PageAccueilComponent implements OnInit {
   itemPosts: any[] = [];
   uid = this.authService.userData.uid;
   itemGroupes: any[] = [];
+  tmp: any[] = [];
 
   commentaire: Commentaire = new Commentaire();
   commentaires: any;
+  posts: any;
+  groupes: any;
 
-  fileUploads?: any[];
+  fileUploads: any[] = [];
 
   constructor(
     public firestore: AngularFirestore,
     public authService: AuthService,
     public commentaireService: CommentaireService,
     public datepipe: DatePipe,
-    public uploadService: FileUploadService
+    public uploadService: FileUploadService,
+    public postService: PostService,
+    public groupeService: GroupeService
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
@@ -50,25 +59,35 @@ export class PageAccueilComponent implements OnInit {
         const groupes = this.firestore.collection(`groupes`, ref => ref.where('id', '==', docs.idGroupe)).get().subscribe(snaps => {
           snaps.forEach(docGroupe => {
             this.itemGroupes.push(docGroupe.data());
-            this.uploadService.getFiles(1000, docGroupe.id).snapshotChanges().pipe(
-              map(changes =>
-                // store the key
-                changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-              )
-            ).subscribe(fileUploads => {
-              this.fileUploads = fileUploads;
-              console.log(this.fileUploads);
+            this.tmp = Array.from(new Set(this.myArray));
+            this.tmp.forEach(doc => {
             });
           });
         });
       });
     });
-    this.firestore.collection(`posts`).get().subscribe(snap => {
-      snap.forEach(doc => {
-        this.itemPosts.push(doc.data());
+    this.retrieveCommentaires();
+    this.retrievePosts();
+    this.groupeService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.groupes = data;
+      this.groupes.forEach(doc => {
+        console.log(doc.id);
+        this.uploadService.getFiles(1000, doc.id).snapshotChanges().pipe(
+          map(changes =>
+            // store the key
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          )
+          ).subscribe(fileUploads => {
+          this.fileUploads = fileUploads;
+        });
       });
     });
-    this.retrieveCommentaires();
   }
 
   saveCommentaire(contenu: string, idPost: string, idGroupe: string): void {
@@ -91,6 +110,30 @@ export class PageAccueilComponent implements OnInit {
       )
     ).subscribe(data => {
       this.commentaires = data;
+    });
+  }
+
+  retrievePosts(): void {
+    this.postService.getDate().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.posts = data;
+    });
+  }
+
+  retrieveGroupes(): void {
+    this.groupeService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.groupes = data;
     });
   }
 

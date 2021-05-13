@@ -14,40 +14,41 @@
                     <p class="titrePage">Liste des dernières publications</p>
                 </div>
                 <div *ngFor="let itemGroupe of itemGroupes">
-                    <div *ngFor="let itemPost of itemPosts">
+                    <div *ngFor="let post of posts">
                         <div *ngFor="let itemUser of itemUsers | async">
-                            <div *ngIf="itemPost.idCreateur == itemUser.uid">
-                                <div *ngIf="itemPost.idGroupe == itemGroupe.id">
+                            <div *ngIf="post.idCreateur == itemUser.uid">
+                                <div *ngIf="post.idGroupe == itemGroupe.id">
                                     <p class="nomGrp"><strong>{{itemGroupe.nom}}</strong></p>
                                     <mat-card class="poste">
                                         <mat-card-header>
                                             <mat-card-title>
-                                                <p class="titre">Titre :{{itemPost.titre}}</p>
+                                                <p class="titre">Titre :{{post.titre}}</p>
                                             </mat-card-title>
                                             <mat-card-subtitle>
                                                 <p>Créateur: {{itemUser.displayName}} </p>
                                             </mat-card-subtitle>
                                         </mat-card-header>
                                         <div class="photo" *ngFor="let file of fileUploads">
-                                            <div *ngIf="file.id == itemPost.idDocument">
+                                            {{file.id}} {{post.idDocument}}
+                                            <div *ngIf="file.key == post.idDocument">
                                                 <img src="{{file.url}}" width="400" height="400" />
                                             </div>
                                         </div>
                                         <mat-card-content>
-                                            <p>Contenu: {{itemPost.contenu}}</p>
+                                            <p>Contenu: {{post.contenu}}</p>
                                         </mat-card-content>
-                                        <p>Date de création: {{itemPost.date}}</p>
-                                        <p>Nombre de likes: {{itemPost.nbLikes}}</p>
-                                        <p>Nombre de Dislikes: {{itemPost.nbDislikes}}</p>
+                                        <p>Date de création: {{post.date}}</p>
+                                        <p>Nombre de likes: {{post.nbLikes}}</p>
+                                        <p>Nombre de Dislikes: {{post.nbDislikes}}</p>
                                         <div>
                                             <input type="text" placeholder="Ecrire votre commentaire ici" #commentaire>
-                                            <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, itemPost.id, itemGroupe.id)">Submit</button>
+                                            <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, post.id, itemGroupe.id)">Submit</button>
                                         </div>
                                         <h3>Commentaires:</h3>
                                         <div *ngFor="let itemUser of itemUsers | async">
                                             <div *ngFor="let commentaire of commentaires">
                                                 <div *ngIf="commentaire.idCrea == itemUser.uid">
-                                                    <div *ngIf="itemPost.id == commentaire.idPost">
+                                                    <div *ngIf="post.id == commentaire.idPost">
                                                         {{ itemUser.displayName }}: {{ commentaire.contenu }} // {{ commentaire.date }}
                                                     </div>
                                                 </div>

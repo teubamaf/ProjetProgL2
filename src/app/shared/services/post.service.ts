@@ -22,11 +22,15 @@ export class PostService {
     public afs: AngularFirestore
     ) {
     this.postsRef = db.collection(this.dbPath);
-    this.postDateRef = afs.collection<Post>('posts', ref => ref.orderBy('date', 'asc'));
+    this.postDateRef = afs.collection<Post>('posts', ref => ref.orderBy('date', 'desc'));
    }
 
    getAll(): AngularFirestoreCollection<Post> {
     return this.postsRef;
+  }
+
+  getPost(id: string): AngularFirestoreCollection<Post> {
+    return this.afs.collection('posts', ref => ref.where('idGroupe', '==', id).orderBy('date', 'desc'));
   }
 
   getDate(): AngularFirestoreCollection<Post> {

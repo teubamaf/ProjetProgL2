@@ -96,41 +96,41 @@
                     </div>
                 </div>
                 <br />
-                <div *ngFor="let item of items | async">
-                    <div *ngIf="item.idGroupe == id">
+                <div *ngFor="let post of posts">
+                    <div *ngIf="post.idGroupe == id">
                         <mat-card class="poste">
                             <mat-card-header>
                                 <div *ngFor="let itemUser of itemUsers | async ">
-                                    <div class="photoprofil" *ngIf="itemUser.uid == item.idCreateur">
+                                    <div class="photoprofil" *ngIf="itemUser.uid == post.idCreateur">
                                         <div mat-card-avatar>
                                             <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
                                         </div>
                                     </div>
                                 </div>
                                 <mat-card-title>
-                                    <p>{{item.titre}}</mat-card-title>
+                                    <p>{{post.titre}}</mat-card-title>
                                 <div *ngFor="let itemUser of itemUsers | async">
-                                    <div *ngIf="item.idCreateur == itemUser.uid">
+                                    <div *ngIf="post.idCreateur == itemUser.uid">
                                         <mat-card-subtitle>Posted by {{ itemUser.displayName }}</mat-card-subtitle>
                                     </div>
                                 </div>
                             </mat-card-header>
                             <div class="photo" *ngFor="let file of fileUploads">
-                                <div *ngIf="file.id == item.idDocument">
+                                <div *ngIf="file.id == post.idDocument">
                                     <img src="{{file.url}}" width="400" height="400" />
                                 </div>
                             </div>
                             <mat-card-content>
                                 <div class="contenu">
-                                    <p>{{item.contenu}}</p>
+                                    <p>{{post.contenu}}</p>
                                 </div>
                             </mat-card-content>
                             <div class="date">
-                                <p>{{item.date }}</p>
+                                <p>{{post.date }}</p>
                             </div>
                             <div>
                                 <input type="text" placeholder="Ecrire votre commentaire ici" #commentaire>
-                                <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, item.id)">Submit</button>
+                                <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, post.id)">Submit</button>
                             </div>
                             <div class="btn-toolbar">
                                 <button type="button" id="btnSubmit" class="btn btn-primary btn-lg">Like</button>
@@ -140,7 +140,7 @@
                             <div *ngFor="let itemUser of itemUsers | async">
                                 <div *ngFor="let commentaire of commentaires">
                                     <div *ngIf="commentaire.idCrea == itemUser.uid">
-                                        <div *ngIf="item.id == commentaire.idPost">
+                                        <div *ngIf="post.id == commentaire.idPost">
                                             {{ commentaire.contenu }} de {{ itemUser.displayName }} // {{ commentaire.date }}
                                         </div>
                                     </div>

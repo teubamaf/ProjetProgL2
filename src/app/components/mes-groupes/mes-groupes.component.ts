@@ -9,6 +9,7 @@ import Commentaire from 'src/app/shared/models/commentaire.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CommentaireService } from 'src/app/shared/services/commentaire.service';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
+import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
   selector: 'app-mes-groupes',
@@ -25,6 +26,7 @@ export class MesGroupesComponent implements OnInit {
 
   commentaire: Commentaire = new Commentaire();
   commentaires: any;
+  posts: any;
 
   uid = this.authService.userData.uid;
 
@@ -37,6 +39,7 @@ export class MesGroupesComponent implements OnInit {
     public uploadService: FileUploadService,
     public commentaireService: CommentaireService,
     public datepipe: DatePipe,
+    public postService: PostService
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
@@ -61,6 +64,7 @@ export class MesGroupesComponent implements OnInit {
       console.log(this.fileUploads);
     });
     this.retrieveCommentaires();
+    this.retrievePost();
   }
 
   saveCommentaire(contenu: string, idPost: string): void {
@@ -83,7 +87,18 @@ export class MesGroupesComponent implements OnInit {
       )
     ).subscribe(data => {
       this.commentaires = data;
-      console.log(this.commentaires);
+    });
+  }
+
+  retrievePost(): void {
+    this.postService.getPost(this.id).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.posts = data;
     });
   }
 

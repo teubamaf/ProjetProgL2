@@ -1,9 +1,18 @@
 <h2>Mes conversations de groupe</h2>
-<div *ngFor="let itemGroupe of itemGroupes">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" [routerLink]="['/conversation-groupe', itemGroupe.id]">
-            {{ itemGroupe.nom }}
-            <button type="button" class="btn btn-danger">Supprimer la conversation</button>
-        </li>
-    </ul>
+{{ this.message }}
+<div *ngFor="let itemMembre of itemMembres | async">
+    <div *ngIf="itemMembre.uid == this.uid">
+        <div *ngFor="let itemGroupeMembre of itemGroupeMembres | async">
+            <div *ngIf="itemGroupeMembre.id == itemMembre.idConversation">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" [routerLink]="['/conversation-groupe', itemGroupeMembre.id]">
+                        {{ itemGroupeMembre.nom }}
+                    </li>
+                    <div *ngIf="itemGroupeMembre.uidCreateur == this.uid">
+                        <button type="button" class="btn btn-danger" (click)="supprimer(itemGroupeMembre.id)">Supprimer</button>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
