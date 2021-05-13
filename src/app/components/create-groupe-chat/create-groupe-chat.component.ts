@@ -14,6 +14,14 @@ export class CreateGroupeChatComponent implements OnInit {
 
   message: string;
 
+  selectedOption: string;
+  printedOption: string;
+
+  options = [
+    { name: 'Public', value: 1 },
+    { name: 'Privé', value: 2 }
+  ];
+
   constructor(
     public groupeChatService: GroupeChatService,
     public router: Router
@@ -23,6 +31,8 @@ export class CreateGroupeChatComponent implements OnInit {
   }
 
   saveGroupeChat(nom: string): any {
+    this.printedOption = this.selectedOption;
+    this.groupeChat.type = this.printedOption;
     this.groupeChat.nom = nom;
     this.groupeChatService.create(this.groupeChat).then(() => {
       console.log('La conversation a été créée avec succès');

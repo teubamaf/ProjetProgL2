@@ -1,0 +1,26 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <h2>Rejoindre une conversation de groupe :</h2>
+            <div class="list row">
+                <div class="col-md-12">
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let groupe of groupes; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(groupe, i)">
+                            {{ groupe.nom }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <div *ngIf="currentGroupe">
+                        <app-chat-group-details (refreshList)="refreshList()" [groupe]="currentGroupe"></app-chat-group-details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

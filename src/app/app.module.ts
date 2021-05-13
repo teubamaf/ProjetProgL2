@@ -78,6 +78,8 @@ import { CreateGroupeChatComponent } from './components/create-groupe-chat/creat
 import { GroupChatListComponent } from './components/group-chat-list/group-chat-list.component';
 import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
 import { InviteUserChatComponent } from './components/invite-user-chat/invite-user-chat.component';
+import { GroupeChatListComponent } from './components/groupe-chat-list/groupe-chat-list.component';
+import { ChatGroupDetailsComponent } from './components/chat-group-details/chat-group-details.component';
 
 
 const appRoutes: Routes = [
@@ -129,7 +131,9 @@ const appRoutes: Routes = [
     CreateGroupeChatComponent,
     GroupChatListComponent,
     ChatsGroupeComponent,
-    InviteUserChatComponent
+    InviteUserChatComponent,
+    GroupeChatListComponent,
+    ChatGroupDetailsComponent
   ],
   imports: [
     BrowserModule,

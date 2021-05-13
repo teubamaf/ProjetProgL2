@@ -33,7 +33,6 @@ export class ConversationListComponent implements OnInit {
       )
     ).subscribe(data => {
       this.conversations = data;
-      console.log(this.conversations);
     });
   }
 }

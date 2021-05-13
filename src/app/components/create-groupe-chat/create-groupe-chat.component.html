@@ -11,6 +11,12 @@
             <form>
                 <label>Entrer le nom de la conversation: </label>
                 <input type="text" placeholder="Chat entre amis!" #nom>
+                <label>Selectionner la visibilité du groupe</label>
+                <select class="form-control" [(ngModel)]="selectedOption" name="first">
+                    <option *ngFor="let o of options">
+                      {{o.name}}
+                    </option>
+                  </select>
                 <button type="button" class="btn btn-success" (click)="saveGroupeChat(nom.value)">Créer</button> {{ this. message }}
             </form>
             <button type="button" class="btn btn-primary" routerLink="/mes-messages">Retour</button>

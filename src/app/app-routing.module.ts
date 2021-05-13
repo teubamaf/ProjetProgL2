@@ -36,6 +36,7 @@ import { ChatsComponent } from './components/chats/chats.component';
 import { CreateGroupeChatComponent } from './components/create-groupe-chat/create-groupe-chat.component';
 import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
 import { InviteUserChatComponent } from './components/invite-user-chat/invite-user-chat.component';
+import { GroupeChatListComponent } from './components/groupe-chat-list/groupe-chat-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -66,7 +67,8 @@ const routes: Routes = [
   { path: 'mes-messages', component: MesMessagesComponent },
   { path: 'create-groupe-conversation', component: CreateGroupeChatComponent },
   { path: 'conversation-groupe/:id', component: ChatsGroupeComponent },
-  { path: 'conversation-groupe/:id/invite-user', component: InviteUserChatComponent }
+  { path: 'conversation-groupe/:id/invite-user', component: InviteUserChatComponent },
+  { path: 'join-group-chat', component: GroupeChatListComponent }
 ];
 
 @NgModule({
