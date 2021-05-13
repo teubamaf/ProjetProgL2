@@ -2,13 +2,17 @@
 <div *ngFor="let conversation of conversations">
     <div *ngIf="this.uid == conversation.uid || this.uid == conversation.uidCrea">
         <div *ngIf="this.uid == conversation.uid">
-            <ul>
-                <li><a [routerLink]="['/conversation', conversation.id]">Conversation avec {{ conversation.pseudoCrea }}</a> </li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" [routerLink]="['/conversation', conversation.id]">
+                    Conversation avec {{ conversation.pseudoCrea }}
+                </li>
             </ul>
         </div>
         <div *ngIf="this.uid == conversation.uidCrea">
-            <ul>
-                <li><a [routerLink]="['/conversation', conversation.id]">Conversation avec {{ conversation.pseudo }}</a></li>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" [routerLink]="['/conversation', conversation.id]">
+                    Conversation avec {{ conversation.pseudo }}
+                </li>
             </ul>
         </div>
     </div>

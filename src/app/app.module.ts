@@ -77,6 +77,7 @@ import { CommentaireComponent } from './components/commentaire/commentaire.compo
 import { CreateGroupeChatComponent } from './components/create-groupe-chat/create-groupe-chat.component';
 import { GroupChatListComponent } from './components/group-chat-list/group-chat-list.component';
 import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
+import { InviteUserChatComponent } from './components/invite-user-chat/invite-user-chat.component';
 
 
 const appRoutes: Routes = [
@@ -127,7 +128,8 @@ const appRoutes: Routes = [
     CommentaireComponent,
     CreateGroupeChatComponent,
     GroupChatListComponent,
-    ChatsGroupeComponent
+    ChatsGroupeComponent,
+    InviteUserChatComponent
   ],
   imports: [
     BrowserModule,

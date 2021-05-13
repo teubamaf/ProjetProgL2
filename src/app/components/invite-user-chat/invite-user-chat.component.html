@@ -1,0 +1,27 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <div *ngFor="let tabe of tab">
+                <h1>Inviter un utilisateur à rejoindre la conversion de groupe <strong> {{ tabe.nom }}</strong></h1>
+            </div>
+            <div>
+                <h2>Liste des utilisateurs non présents dans la conversation</h2>
+            </div>
+            <ul class="list-group list-group-flush">
+                <div *ngFor="let membre of membres">
+                    <li class="list-group-item">
+                        {{ membre.displayName }}
+                        <button class="btn btn-light" (click)="addConversation(membre.uid)">Inviter</button>
+                    </li>
+                </div>
+            </ul>
+            {{ this.message }}
+        </div>
+    </div>
+</div>

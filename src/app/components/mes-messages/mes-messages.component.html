@@ -7,8 +7,9 @@
 
         <app-left-menu></app-left-menu>
         <div class="container">
-            <a routerLink="/create-conversation">Créer une conversation avec un utilisateur</a>
-            <a routerLink="/create-groupe-conversation">Créer une conversation de groupe</a>
+            <h1>Mes messages privés</h1>
+            <button type="button" class="btn btn-primary" routerLink="/create-conversation">Créer une conversation avec un utilisateur</button>
+            <button type="button" class="btn btn-primary" routerLink="/create-groupe-conversation">Créer une conversation de groupe</button>
             <app-conversation-list></app-conversation-list>
             <app-group-chat-list></app-group-chat-list>
         </div>

@@ -11,8 +11,9 @@
             <form>
                 <label>Entrer le nom de la conversation: </label>
                 <input type="text" placeholder="Chat entre amis!" #nom>
-                <button type="button" class="btn btn-success" (click)="saveGroupeChat(nom.value)">Créer</button>
+                <button type="button" class="btn btn-success" (click)="saveGroupeChat(nom.value)">Créer</button> {{ this. message }}
             </form>
+            <button type="button" class="btn btn-primary" routerLink="/mes-messages">Retour</button>
         </div>
     </div>
 </div>

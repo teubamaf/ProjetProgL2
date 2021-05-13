@@ -8,18 +8,25 @@
         <app-left-menu></app-left-menu>
         <div class="container">
             <div *ngFor="let tabi of myArray">
-                <div *ngIf="this.uid == tabi.uidCrea">
-                    <h1>Conversation avec {{ tabi.pseudo }}</h1>
-                </div>
-                <div *ngIf="this.uid == tabi.uid">
-                    <h1>Conversation avec {{ tabi.pseudoCrea }}</h1>
-                </div>
+                <h2>Conversation de groupe {{tabi.nom}}</h2>
             </div>
-            <div *ngFor="let message of messages">
-                <div *ngFor="let itemUser of itemUsers | async">
-                    <div *ngIf="message.idConversation == this.id">
-                        <div *ngIf="itemUser.uid == message.uid">
-                            {{ message.message }} de {{ itemUser.displayName }} à {{ message.date }}
+            <div class="users-pane">
+                <mat-card class="users-card" *ngFor="let itemMembre of itemMembres">
+                    <div *ngFor="let itemUser of itemUsers | async">
+                        <div *ngIf="itemUser.uid == itemMembre.uid">
+                            <span class="username"><img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> {{ itemUser.displayName }}</span>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <a [routerLink]="['\invite-user']" class="btn btn-light">Inviter un utilisateur</a>
+            <div class="chat-content">
+                <div *ngFor="let message of messages">
+                    <div *ngFor="let itemUser of itemUsers | async">
+                        <div *ngIf="message.idConversation == this.id">
+                            <div *ngIf="itemUser.uid == message.uid">
+                                {{ message.message }} de {{ itemUser.displayName }} à {{ message.date }}
+                            </div>
                         </div>
                     </div>
                 </div>

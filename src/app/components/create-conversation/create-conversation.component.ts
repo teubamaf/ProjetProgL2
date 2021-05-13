@@ -1,26 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { FormsModule } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { Observable, combineLatest } from 'rxjs';
-import { ThrowStmt } from '@angular/compiler';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { convertCompilerOptionsFromJson } from 'typescript';
 import Conversation from 'src/app/shared/models/conversation.model';
 import { ConversationService } from 'src/app/shared/services/conversation.service';
-
-export const snapshotToArray = (snapshot: any) => {
-  const returnArr = [];
-
-  snapshot.forEach((childSnapshot: any) => {
-      const item = childSnapshot.val();
-      item.key = childSnapshot.key;
-      returnArr.push(item);
-  });
-
-  return returnArr;
-};
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-conversation',
@@ -32,19 +17,26 @@ export class CreateConversationComponent implements OnInit {
   users: any;
   myArray: any[] = [];
   tab: any[] = [];
+
   uidConv: string;
   pseudoConv: string;
   pseudo: string;
+  message: string;
 
   conversation: Conversation = new Conversation();
 
   uid = this.authService.userData.uid;
 
+  itemUsers: Observable<any[]>;
+
   constructor(
     public firestore: AngularFirestore,
     public authService: AuthService,
-    public conversationService: ConversationService
-  ) { }
+    public conversationService: ConversationService,
+    private router: Router,
+  ) {
+    this.itemUsers = firestore.collection(`users`).valueChanges();
+   }
 
   ngOnInit(): void {
   }
@@ -79,15 +71,30 @@ export class CreateConversationComponent implements OnInit {
     });
   }
 
+  getPseudoCrea(pseudo: string, uid: string): void {
+    this.firestore.collection(`users`, ref => ref.where('uid', '==', this.uid)).get().subscribe(snap => {
+      snap.forEach(docs => {
+        this.myArray.push(docs.data());
+        console.log(this.myArray);
+      });
+      this.tab = Array.from(new Set(this.myArray));
+      this.tab.forEach(doc => {
+        this.pseudo = doc.displayName;
+      });
+      this.saveConversation(uid, pseudo, this.pseudo);
+    });
+  }
+
   saveConversation(uidRecherche: string, pseudoRecherche: string, pseudoCrea: string): void {
     this.conversation.uidCrea = this.uid;
     this.conversation.uid = uidRecherche;
     this.conversation.pseudo = pseudoRecherche;
     this.conversation.pseudoCrea = pseudoCrea;
     this.conversationService.create(this.conversation).then(() => {
-      console.log('Created new item successfully!');
+      console.log('La conversation a été créée avec succès');
+      this.message = 'La conversation a été créée avec succès';
     });
+    this.router.navigate(['/mes-messages']);
   }
-
 
 }

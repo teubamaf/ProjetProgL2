@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import GroupeChat from 'src/app/shared/models/groupe-chat.model';
 import { GroupeChatService } from 'src/app/shared/services/groupe-chat.service';
 
@@ -11,8 +12,11 @@ export class CreateGroupeChatComponent implements OnInit {
 
   groupeChat: GroupeChat = new GroupeChat();
 
+  message: string;
+
   constructor(
-    public groupeChatService: GroupeChatService
+    public groupeChatService: GroupeChatService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -21,8 +25,10 @@ export class CreateGroupeChatComponent implements OnInit {
   saveGroupeChat(nom: string): any {
     this.groupeChat.nom = nom;
     this.groupeChatService.create(this.groupeChat).then(() => {
-      console.log('Created new item successfully!');
+      console.log('La conversation a été créée avec succès');
+      this.message = 'La conversation a été créée avec succès';
     });
+    this.router.navigate(['/mes-messages']);
   }
 
 }

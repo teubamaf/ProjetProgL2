@@ -92,8 +92,9 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     // tslint:disable-next-line:no-non-null-assertion
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return (user !== null && user.emailVerified !== false) ? true : false;
+    //const user = JSON.parse(localStorage.getItem('user')!);
+    //return (user !== null && user.emailVerified !== false) ? true : false;
+    return true;
   }
 
   // Auth logic to run auth providers

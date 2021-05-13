@@ -1,4 +1,9 @@
 <h2>Mes conversations de groupe</h2>
 <div *ngFor="let itemGroupe of itemGroupes">
-    <a [routerLink]="['/conversation-groupe', itemGroupe.id]">{{ itemGroupe.nom }}</a>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" [routerLink]="['/conversation-groupe', itemGroupe.id]">
+            {{ itemGroupe.nom }}
+            <button type="button" class="btn btn-danger">Supprimer la conversation</button>
+        </li>
+    </ul>
 </div>

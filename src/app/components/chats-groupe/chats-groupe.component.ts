@@ -22,6 +22,7 @@ export class ChatsGroupeComponent implements OnInit {
   items: any[] = [];
   tabDate: any[] = [];
   tab2: any[] = [];
+  itemMembres: any[] = [];
 
   chat: Chats = new Chats();
 
@@ -48,12 +49,20 @@ export class ChatsGroupeComponent implements OnInit {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.id);
-    this.firestore.collection(`conversations`, ref => ref.where('id', '==', this.id)).get().subscribe(snap => {
+    this.firestore.collection(`groupe-chats`, ref => ref.where('id', '==', this.id)).get().subscribe(snap => {
       snap.forEach(doc => {
         this.myArray.push(doc.data());
         console.log(this.myArray);
       });
       this.tab = Array.from(new Set(this.myArray));
+      this.tab.forEach(docs => {
+        this.firestore.collection(`membre-groupe-chats`, ref => ref.where('idConversation', '==', docs.id)).get().subscribe(snaps => {
+          snaps.forEach(docGroupe => {
+            this.itemMembres.push(docGroupe.data());
+            console.log(this.itemMembres);
+          });
+        });
+      });
     });
     this.retrieveChat();
   }
