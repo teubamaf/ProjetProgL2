@@ -34,7 +34,7 @@
                 <form class="send">
                     <input type="text" id="message" placeholder="Ecrire votre message ici" #message>
                     <input type="hidden" value="{{ this.currentDate | date:'dd/MM/yyyy, HH:mm:ss'}}" #date>
-                    <button class="succes" (click)="saveMessage(message.value, date.value)" type="button">Send</button>
+                    <button class="succes" (click)="saveMessage(message.value, date.value); resetForm()" type="button">Send</button>
                 </form>
             </div>
             </footer>

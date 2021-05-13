@@ -69,7 +69,9 @@ export class ChatsComponent implements OnInit {
       console.log('Message OK');
     });
   }
-
+  resetForm(){
+    this.messages.reset();
+  }
   retrieveChat(): void {
     this.chatService.getAll().snapshotChanges().pipe(
       map(changes =>
