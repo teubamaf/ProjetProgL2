@@ -63,15 +63,14 @@ export class ChatsComponent implements OnInit {
     this.chat.idConversation = this.id;
     this.chat.type = 'message';
     this.chat.date = this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    console.log(date);
     this.chat.message = message;
-    this.chatService.create(this.chat).then(() => {
-      console.log('Message OK');
-    });
+    this.chatService.create(this.chat);
   }
+
   resetForm(){
     this.messages.reset();
   }
+  
   retrieveChat(): void {
     this.chatService.getAll().snapshotChanges().pipe(
       map(changes =>
@@ -81,7 +80,6 @@ export class ChatsComponent implements OnInit {
       )
     ).subscribe(data => {
       this.messages = data;
-      console.log(this.messages);
     });
   }
 

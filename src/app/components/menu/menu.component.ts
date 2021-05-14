@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 
@@ -15,12 +16,17 @@ export class MenuComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    firestore: AngularFirestore
+    firestore: AngularFirestore,
+    public router: Router
   ) {
     this.items = firestore.collection(`users`).valueChanges();
   }
 
   ngOnInit(): void {
+  }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche', value]);
   }
 
 }

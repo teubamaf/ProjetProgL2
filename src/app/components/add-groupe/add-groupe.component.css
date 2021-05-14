@@ -1,73 +1,41 @@
-input {
-    width: 500px;
+input,
+select {
+    border: 2px solid;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 0.25rem;
+    min-width: 125px;
+    padding: 0.5rem;
+    transition: border-color 0.5s ease-out;
 }
 
-h2 {
-    font-size: 28px;
-    margin-top: 20px;
-    margin-left: 50px;
-    margin-bottom: 20px;
+input:optional,
+select:optional {
+    border-color: gray;
 }
 
-form {
-    font-size: 20px;
-    margin-bottom: 50px;
+input:required:valid,
+select:required:valid {
+    border-color: green;
 }
 
-.container {
-    margin-left: 30px;
+input:invalid,
+select:invalid {
+    border-color: red;
 }
 
-
-/* form starting stylings ------------------------------- */
-
-.group {
-    position: relative;
-    margin-bottom: 45px;
+input:required:focus:valid,
+select:required:focus:valid {
+    background: url("https://s3.gifyu.com/images/icons8-coche.gif") no-repeat 95% 50% white;
+    background-size: 25px;
 }
 
-input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 300px;
-    border: none;
-    border-bottom: 1px solid #757575;
-    margin-bottom: 20px;
+input:focus:invalid,
+select:focus:invalid {
+    background: url("https://s3.gifyu.com/images/icons8-effacer-48.png") no-repeat 95% 50% white;
+    background-size: 25px;
 }
 
-input:focus {
-    outline: none;
-}
-
-
-/* active state */
-
-input:focus~label,
-input:valid~label {
-    top: -20px;
-    font-size: 14px;
-    color: #5264AE;
-}
-
-
-/* BOTTOM BARS ================================= */
-
-.bar {
-    position: relative;
-    display: block;
-    width: 300px;
-}
-
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #5264AE;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+i {
+    color: red;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -31,7 +31,8 @@ export class ListMembresComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     private membreService: MembreService,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemPosts = firestore.collection(`post`).valueChanges();
@@ -68,6 +69,10 @@ export class ListMembresComponent implements OnInit {
   setActiveMembre(membre: any, index: any): void {
     this.currentMembre = membre;
     this.currentIndex = index;
+  }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche-membre', value]);
   }
 
 }

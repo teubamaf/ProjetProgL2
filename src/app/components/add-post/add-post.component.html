@@ -103,9 +103,9 @@
                             <label for="contenu">Contenu <i>* </i></label>
                             <textarea class="form-control" id="contenu" placeholder="Ecrire votre message ici.." [(ngModel)]="post.contenu" name="contenu" required></textarea>
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" (change)="selectFile($event)">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="form-group">
+                            <label for="file">Ajouter une image à votre publication</label>
+                            <input type="file" class="form-control-file" id="customFile" (change)="selectFile($event)">
                         </div>
                         <div *ngIf="currentDocument" class="progress mt-2">
                             <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">

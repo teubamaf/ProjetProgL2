@@ -98,6 +98,10 @@
                         <h2>Les publications du groupe <strong>{{itemGroupe.nom}}</strong></h2>
                     </div>
                 </div>
+                <form class="form-inline my-2 my-lg-0" id="milieu">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Search" #recherche>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+                </form>
                 <br />
                 <div *ngFor="let post of posts">
                     <div *ngIf="post.idGroupe == id">
@@ -106,8 +110,7 @@
                                 <ng-container *ngFor="let itemUser of itemUsers | async">
                                     <div *ngIf="itemUser.uid == post.idCreateur">
                                         <div class="gauche" mat-card-avatar>
-                                            <img src={{itemUser.photoUrl}} class="rounded-circle" width="50"
-                                                height="50">
+                                            <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
                                         </div>
                                         <div class="droite">
                                             <mat-card-title>
@@ -123,7 +126,7 @@
                             </mat-card-header>
                             <div class="photo" *ngFor="let file of itemDocuments | async">
                                 <div *ngIf="file.id == post.idDocument">
-                                    <img src="{{file.url}}" width="400" height="400" />
+                                    <img src="{{file.url}}" height="400px" />
                                 </div>
                             </div>
                             <mat-card-content>
@@ -136,8 +139,7 @@
                             </div>
                             <div>
                                 <input type="text" placeholder="Ecrire votre commentaire ici" #commentaire>
-                                <button type="button" class="btn btn-success"
-                                    (click)="saveCommentaire(commentaire.value, post.id)">Submit</button>
+                                <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, post.id)">Submit</button>
                             </div>
                             <div class="btn-toolbar">
                                 <button type="button" id="btnSubmit" class="btn btn-primary btn-sm">Like</button>

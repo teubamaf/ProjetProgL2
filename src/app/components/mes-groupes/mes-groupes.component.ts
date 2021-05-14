@@ -103,4 +103,8 @@ export class MesGroupesComponent implements OnInit {
     });
   }
 
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche-post', value]);
+  }
+
 }

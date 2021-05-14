@@ -18,8 +18,8 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" id="milieu">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Ecrire votre recherche ici..." aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre ou une communautée" aria-label="Search" #recherche>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
                 </form>
                 <div class="btn-group">
                     <div *ngFor="let item of items | async">

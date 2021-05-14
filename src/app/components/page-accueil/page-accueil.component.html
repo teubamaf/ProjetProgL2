@@ -30,7 +30,7 @@
                                         </mat-card-header>
                                         <div class="photo" *ngFor="let file of itemDocuments | async">
                                             <div *ngIf="file.id == post.idDocument">
-                                                <img src="{{file.url}}" width="400" height="400" />
+                                                <img src="{{file.url}}" height="400px" />
                                             </div>
                                         </div>
                                         <mat-card-content>

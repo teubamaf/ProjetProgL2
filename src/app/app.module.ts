@@ -54,9 +54,6 @@ import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-grou
 import { UploadFormComponent } from './components/upload-form/upload-form.component';
 import { UploadListComponent } from './components/upload-list/upload-list.component';
 import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
-import { RoomlistComponent } from './components/roomlist/roomlist.component';
-import { AddroomComponent } from './components/addroom/addroom.component';
-import { ChatroomComponent } from './components/chatroom/chatroom.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -69,7 +66,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DatePipe } from '@angular/common';
-import { LoginComponent } from './components/login/login.component';
+
 import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { ChatsComponent } from './components/chats/chats.component';
@@ -80,6 +77,9 @@ import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.com
 import { InviteUserChatComponent } from './components/invite-user-chat/invite-user-chat.component';
 import { GroupeChatListComponent } from './components/groupe-chat-list/groupe-chat-list.component';
 import { ChatGroupDetailsComponent } from './components/chat-group-details/chat-group-details.component';
+import { RechercheMenuComponent } from './components/recherche-menu/recherche-menu.component';
+import { RechercheGroupeComponent } from './components/recherche-groupe/recherche-groupe.component';
+import { RechercheMembreComponent } from './components/recherche-membre/recherche-membre.component';
 
 
 const appRoutes: Routes = [
@@ -120,10 +120,6 @@ const appRoutes: Routes = [
     UploadFormComponent,
     UploadListComponent,
     UploadDetailsComponent,
-    RoomlistComponent,
-    AddroomComponent,
-    ChatroomComponent,
-    LoginComponent,
     CreateConversationComponent,
     ConversationListComponent,
     CommentaireComponent,
@@ -133,7 +129,10 @@ const appRoutes: Routes = [
     InviteUserChatComponent,
     GroupeChatListComponent,
     ChatGroupDetailsComponent,
-    ChatsComponent
+    ChatsComponent,
+    RechercheMenuComponent,
+    RechercheGroupeComponent,
+    RechercheMembreComponent
   ],
   imports: [
     BrowserModule,

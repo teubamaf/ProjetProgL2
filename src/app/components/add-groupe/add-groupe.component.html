@@ -12,21 +12,22 @@
                 <h2>Créer une communauté</h2>
                 <form class="form-group">
                     <div class="mb-3">
-                        <label for="name">Nom du groupe :</label>
+                        <label for="name">Nom du groupe <i>*</i></label>
                         <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="groupe.nom" placeholder="Ex: Entre amoureux des chats" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="type">Type du groupe :</label>
+                        <label for="type">Type du groupe <i>*</i></label>
                         <input type="email" [(ngModel)]="groupe.type" id="type" name="type" class="form-control" placeholder="Ex: Animaux" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="photoUrl">Image du groupe :</label>
-                        <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
+                        <label for="photoUrl">Image du groupe <i>*</i></label>
+                        <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="Ex: https://mon-image.com" required>
                     </div>
 
-                    <select class="form-control" [(ngModel)]="selectedOption" name="first">
+                    <label for="visibility">Choisir la visibilité du groupe <i>*</i></label>
+                    <select class="form-control" [(ngModel)]="selectedOption" name="first" required>
                         <option *ngFor="let o of options">
                           {{o.name}}
                         </option>

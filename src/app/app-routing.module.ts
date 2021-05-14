@@ -37,6 +37,8 @@ import { CreateGroupeChatComponent } from './components/create-groupe-chat/creat
 import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
 import { InviteUserChatComponent } from './components/invite-user-chat/invite-user-chat.component';
 import { GroupeChatListComponent } from './components/groupe-chat-list/groupe-chat-list.component';
+import { RechercheMenuComponent } from './components/recherche-menu/recherche-menu.component';
+import { RechercheGroupeComponent } from './components/recherche-groupe/recherche-groupe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -68,7 +70,10 @@ const routes: Routes = [
   { path: 'create-groupe-conversation', component: CreateGroupeChatComponent },
   { path: 'conversation-groupe/:id', component: ChatsGroupeComponent },
   { path: 'conversation-groupe/:id/invite-user', component: InviteUserChatComponent },
-  { path: 'join-group-chat', component: GroupeChatListComponent }
+  { path: 'join-group-chat', component: GroupeChatListComponent },
+  { path: 'recherche/:value', component: RechercheMenuComponent },
+  { path: 'recherche-post/:value', component: RechercheGroupeComponent },
+  { path: 'recherche-membre/:value', component: RechercheMenuComponent }
 ];
 
 @NgModule({
