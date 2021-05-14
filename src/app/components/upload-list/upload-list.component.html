@@ -7,14 +7,20 @@
 
         <app-left-menu></app-left-menu>
         <div class="container">
-
-            <div class="card">
-                <div class="card-header">Liste des documents du groupe</div>
-                <ul class="list-group list-group-flush" *ngFor="let file of fileUploads">
-                    <li class="list-group-item">
-                        <app-upload-details [fileUpload]='file'></app-upload-details>
-                    </li>
-                </ul>
+            <div class="card-header">Liste des documents du groupe</div>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let itemDocument of itemDocuments | async; let i = index" [class.active]="i == currentIndex" (click)="setActiveDocument(itemDocument, i)">
+                    <div *ngIf="itemDocument.idGroupe == this.id">
+                        {{ itemDocument.nom }}
+                    </div>
+                </li>
+            </ul>
+            <div class="details">
+                <div class="col-md-12 ">
+                    <div *ngIf="currentDocument">
+                        <app-upload-details (refreshList)="refreshList() " [document]="currentDocument"></app-upload-details>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

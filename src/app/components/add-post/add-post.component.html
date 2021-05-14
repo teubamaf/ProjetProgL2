@@ -25,7 +25,7 @@
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
 
-                    <div *ngIf="currentFileUpload" class="progress mt-2">
+                    <div *ngIf="currentDocument" class="progress mt-2">
                         <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
                             {{ percentage }}%
                         </div>

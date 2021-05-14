@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import FileUpload from 'src/app/shared/models/file-upload.model';
 import { DatePipe } from '@angular/common';
+import Document from 'src/app/shared/models/document.model';
+import { FileService } from 'src/app/shared/services/file.service';
 
 @Component({
   selector: 'app-add-post',
@@ -29,7 +31,7 @@ export class AddPostComponent implements OnInit {
   message = '';
   currentDate = new Date();
   selectedFiles?: FileList;
-  currentFileUpload?: FileUpload;
+  currentDocument: Document;
   percentage = 0;
   public id: string;
   titre: string;
@@ -41,7 +43,8 @@ export class AddPostComponent implements OnInit {
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
     private uploadService: FileUploadService,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    public fileService: FileService
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
      }
@@ -78,13 +81,12 @@ export class AddPostComponent implements OnInit {
       this.selectedFiles = undefined;
 
       if (file) {
-        this.currentFileUpload = new FileUpload(file);
-        this.currentFileUpload.titre = this.titre;
-        this.currentFileUpload.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-        console.log(this.currentFileUpload.date);
-        this.currentFileUpload.idAuteur = this.uid;
-        this.currentFileUpload.idGroupe = this.id;
-        this.uploadService.pushFileToStorage(this.currentFileUpload, this.id).subscribe(
+        this.currentDocument = new Document(file);
+        this.currentDocument.titre = this.titre;
+        this.currentDocument.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+        this.currentDocument.idAuteur = this.uid;
+        this.currentDocument.idGroupe = this.id;
+        this.fileService.pushFileToStorage(this.currentDocument).subscribe(
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
           },

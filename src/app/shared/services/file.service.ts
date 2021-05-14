@@ -17,6 +17,7 @@ export class FileService {
   filesRef: AngularFirestoreCollection<Document>;
   idPost: any;
   currentDate = new Date();
+  documentX: Document;
 
   constructor(
     private db: AngularFireDatabase,
@@ -37,6 +38,7 @@ export class FileService {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           document.url = downloadURL;
           document.nom = document.file.name;
+          document.file = null;
           this.saveFileData(document);
         });
       })
@@ -45,9 +47,10 @@ export class FileService {
     return uploadTask.percentageChanges();
   }
 
-  private saveFileData(document: Document): Promise<void> {
+   saveFileData(document: Document): Promise<void> {
     return this.filesRef.add({ ...document })
     .then((docRef) => {
+      console.log('trololo');
       this.updateId(docRef.id);
       this.postService.updateIdDocument(docRef.id, document.date);
     });
@@ -84,5 +87,5 @@ export class FileService {
   updateDate(id: string): any {
     this.afs.collection('uploads').doc(id).update({ date: this.currentDate });
   }
-
+ 
 }

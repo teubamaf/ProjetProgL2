@@ -28,9 +28,8 @@
                                                 <p>Créateur: {{itemUser.displayName}} </p>
                                             </mat-card-subtitle>
                                         </mat-card-header>
-                                        <div class="photo" *ngFor="let file of fileUploads">
-                                            {{file.id}} {{post.idDocument}}
-                                            <div *ngIf="file.key == post.idDocument">
+                                        <div class="photo" *ngFor="let file of itemDocuments | async">
+                                            <div *ngIf="file.id == post.idDocument">
                                                 <img src="{{file.url}}" width="400" height="400" />
                                             </div>
                                         </div>

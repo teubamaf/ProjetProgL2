@@ -22,7 +22,7 @@ export class MesGroupesComponent implements OnInit {
   itemGroupes: Observable<any[]>;
   itemUsers: Observable<any[]>;
   itemMembres: Observable<any[]>;
-  itemDocuments: any;
+  itemDocuments: Observable<any[]>;
 
   commentaire: Commentaire = new Commentaire();
   commentaires: any;
@@ -45,6 +45,7 @@ export class MesGroupesComponent implements OnInit {
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.itemMembres = firestore.collection(`membres`).valueChanges();
+    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
   }
 
   public id: string;

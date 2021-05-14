@@ -21,6 +21,7 @@ export class PageAccueilComponent implements OnInit {
 
   items: Observable<any[]>;
   itemUsers: Observable<any[]>;
+  itemDocuments: Observable<any[]>;
 
   myArray: any[] = [];
   tab: any[] = [];
@@ -47,6 +48,7 @@ export class PageAccueilComponent implements OnInit {
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
   }
 
   ngOnInit(): void {
@@ -59,35 +61,12 @@ export class PageAccueilComponent implements OnInit {
         const groupes = this.firestore.collection(`groupes`, ref => ref.where('id', '==', docs.idGroupe)).get().subscribe(snaps => {
           snaps.forEach(docGroupe => {
             this.itemGroupes.push(docGroupe.data());
-            this.tmp = Array.from(new Set(this.myArray));
-            this.tmp.forEach(doc => {
-            });
           });
         });
       });
     });
     this.retrieveCommentaires();
     this.retrievePosts();
-    this.groupeService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.groupes = data;
-      this.groupes.forEach(doc => {
-        console.log(doc.id);
-        this.uploadService.getFiles(1000, doc.id).snapshotChanges().pipe(
-          map(changes =>
-            // store the key
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          )
-          ).subscribe(fileUploads => {
-          this.fileUploads = fileUploads;
-        });
-      });
-    });
   }
 
   saveCommentaire(contenu: string, idPost: string, idGroupe: string): void {
@@ -122,18 +101,6 @@ export class PageAccueilComponent implements OnInit {
       )
     ).subscribe(data => {
       this.posts = data;
-    });
-  }
-
-  retrieveGroupes(): void {
-    this.groupeService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.groupes = data;
     });
   }
 

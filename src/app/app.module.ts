@@ -126,14 +126,14 @@ const appRoutes: Routes = [
     LoginComponent,
     CreateConversationComponent,
     ConversationListComponent,
-    ChatsComponent,
     CommentaireComponent,
     CreateGroupeChatComponent,
     GroupChatListComponent,
     ChatsGroupeComponent,
     InviteUserChatComponent,
     GroupeChatListComponent,
-    ChatGroupDetailsComponent
+    ChatGroupDetailsComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,

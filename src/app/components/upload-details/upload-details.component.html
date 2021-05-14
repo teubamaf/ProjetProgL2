@@ -1,4 +1,6 @@
-<a href="{{ fileUpload.url }}">{{ fileUpload.name }}</a>
-<button (click)="deleteFileUpload(fileUpload)" class="btn btn-danger btn-sm" style="float: right">
+<div *ngIf="currentDocument" class="edit-form">
+    <a href="{{ document.url }}">{{ document.nom }}</a>
+    <button (click)="deleteFileUpload(document.id, document)" class="btn btn-danger btn-sm" style="float: right">
   Delete
 </button>
+</div>
