@@ -7,6 +7,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { snapshotChanges } from '@angular/fire/database';
 import Membre from 'src/app/shared/models/membre.model';
 import { MembreService } from 'src/app/shared/services/membre.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,14 +27,16 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
   membre: Membre = new Membre();
   membreCollection: AngularFirestoreCollection<Membre>;
   myArray: any[] = [];
-  estMembre = false;
+  estMembre = true;
 
   constructor(
     public groupeService: GroupeService,
     public authService: AuthService,
     public membreService: MembreService,
     public firestore: AngularFirestore,
+    public router: Router
     ) {
+      this.items = firestore.collection(`membres`).valueChanges();
       }
 
 
@@ -44,15 +47,20 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.message = '';
     this.currentGroupe = { ...this.groupe };
+    this.est_Membre(this.currentGroupe.id, this.uid);
+    this.estMembre = (this.est_Membre(this.currentGroupe.id, this.uid));
   }
 
-  est_Membre(idGroupe: string, uid: string): any {
-    const membres = this.firestore.collection(`membres`, ref => ref.where('idGroupe', '==', idGroupe)).get().subscribe(snap => {
+  est_Membre(idGroupe: string, uid: string): boolean {
+    this.firestore.collection(`membres`, ref => ref.where('idGroupe', '==', idGroupe)).get().subscribe(snap => {
       snap.forEach(doc => {
         this.myArray.push(doc.data());
         this.myArray.forEach(doc => {
           if (doc.uid === this.uid) {
             this.estMembre = true;
+          }
+          else {
+            this.estMembre = false;
           }
         });
       });
@@ -66,6 +74,7 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
       this.membre.uid = this.uid;
       this.membreService.create(this.membre).then(() => {
         this.message = 'Vous avez rejoint le groupe avec succès !';
+        this.router.navigate(['/home']);
       });
     } else {
       this.message = 'Vous êtes déjà membre de ce groupe...';

@@ -26,6 +26,12 @@
                         <input type="text" [(ngModel)]="groupe.photoUrl" class="form-control" id="photoUrl" name="photoUrl" placeholder="https://mon-image.com" required>
                     </div>
 
+                    <select class="form-control" [(ngModel)]="selectedOption" name="first">
+                        <option *ngFor="let o of options">
+                          {{o.name}}
+                        </option>
+                      </select>
+
                     <button (click)="saveGroupe()" class="btn btn-outline-success">Créer mon groupe</button>
                 </form>
 

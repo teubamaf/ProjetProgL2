@@ -1,17 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PostService } from 'src/app/shared/services/post.service';
-import Post from 'src/app/shared/models/post.model';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import Groupe from 'src/app/shared/models/groupe.model';
-import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { ActivatedRoute } from '@angular/router';
-import { FileUploadService } from 'src/app/shared/services/file-upload.service';
-import FileUpload from 'src/app/shared/models/file-upload.model';
 import { DatePipe } from '@angular/common';
-import Document from 'src/app/shared/models/document.model';
+
+import { AngularFirestore } from '@angular/fire/firestore';
+
+import { PostService } from 'src/app/shared/services/post.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { FileService } from 'src/app/shared/services/file.service';
+
+import Post from 'src/app/shared/models/post.model';
+import Groupe from 'src/app/shared/models/groupe.model';
+import Document from 'src/app/shared/models/document.model';
 
 @Component({
   selector: 'app-add-post',
@@ -21,20 +22,25 @@ import { FileService } from 'src/app/shared/services/file.service';
 export class AddPostComponent implements OnInit {
 
   items: Observable<any[]>;
+
   post: Post = new Post();
+  currentGroupe: Groupe = new Groupe();
+  currentDocument: Document;
+
   submitted = false;
-  uid = this.authService.userData.uid;
   datePost = new Date();
+  currentDate = new Date();
+  id: string;
+  titre: string;
+
+  uid = this.authService.userData.uid;
+
   @Input()
   idGroupe = '';
-  currentGroupe: Groupe = new Groupe();
   message = '';
-  currentDate = new Date();
+
   selectedFiles?: FileList;
-  currentDocument: Document;
   percentage = 0;
-  public id: string;
-  titre: string;
 
   constructor(
     private postService: PostService,
@@ -42,7 +48,6 @@ export class AddPostComponent implements OnInit {
     firestore: AngularFirestore,
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
-    private uploadService: FileUploadService,
     public datepipe: DatePipe,
     public fileService: FileService
     ) {
@@ -52,7 +57,6 @@ export class AddPostComponent implements OnInit {
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
   }
 
   savePost(): void {
@@ -61,7 +65,7 @@ export class AddPostComponent implements OnInit {
     this.post.idGroupe = this.id;
     this.titre = this.post.titre;
     this.postService.create(this.post).then(() => {
-      console.log('Created new item successfully!');
+      console.log('La publication a été créée avec succès');
     });
     this.message = 'La publication a été créée avec succès';
   }
@@ -97,6 +101,6 @@ export class AddPostComponent implements OnInit {
         console.log('Fichier uploadé');
       }
     }
-
   }
+
 }

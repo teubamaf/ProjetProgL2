@@ -27,6 +27,14 @@ export class AddGroupeComponent implements OnInit {
 
   items: Observable<any[]>;
 
+  selectedOption: string;
+  printedOption: string;
+
+  options = [
+    { name: 'Public', value: 1 },
+    { name: 'Privé', value: 2 }
+  ];
+
   constructor(
     public groupeService: GroupeService,
     public authService: AuthService,
@@ -42,6 +50,8 @@ export class AddGroupeComponent implements OnInit {
   }
 
   saveGroupe(): void {
+    this.printedOption = this.selectedOption;
+    this.groupe.type = this.printedOption;
     this.groupe.idCreateur = this.uid;
     this.groupeService.create(this.groupe).then(() => {
       console.log('Created new item successfully!');
