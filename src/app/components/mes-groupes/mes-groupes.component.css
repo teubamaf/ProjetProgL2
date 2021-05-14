@@ -11,10 +11,35 @@
     font-style: italic;
 }
 
-.photoprofil{
-    float:left  ;
-}
 
 button{ 
     margin: 13px;
+}
+
+.commstitre{
+    font-size: 13px;
+}
+
+.commsdate{
+    font-size: 10px;
+    font-style: italic;
+}
+
+.coms{
+    margin-top: 8px;
+}
+
+.comms{
+    font-size: 11px;
+}
+
+.gauche{
+    float: left;
+    margin-left: -30px;
+}
+
+.droite{
+    display: inline-block;
+    margin: 11px 1px 1px 13px;
+    text-align: center;
 }
