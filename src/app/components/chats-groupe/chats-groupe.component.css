@@ -2,3 +2,31 @@
     width: 26px;
     height: 26px;
 }
+
+
+.users-card{
+    max-width: 20%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+
+.chat-content{
+    border-radius: 5px;
+    border: solid 0.5px #424549;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.date{
+    display: inline-block;
+    font-size: 10px;
+    font-style: italic;
+    margin-left: 10px;
+}
+
+.formControl{
+    max-width: 100%;
+}
