@@ -7,38 +7,124 @@
 
         <app-left-menu></app-left-menu>
         <div class="container">
-            <h2>Liste des publications du groupe</h2>
-            <nav class="navbar navbar-light bg-light">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Rechercher">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-                </form>
-            </nav>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Contenu</th>
-                        <th scope="col">Auteur</th>
-                        <th scope="col">Supprimer</th>
-                    </tr>
-                </thead>
-                <tbody class="body-table">
-                    <div *ngFor="let item of myArray">
-                        <tr>
-                            <th scope="row"></th>
-                            <td>{{item.titre}}</td>
-                            <td>{{item.contenu}}</td>
-                            <div *ngFor="let itemUser of itemUsers | async">
-                                <div *ngIf="item.idCreateur == itemUser.uid">
-                                    <td>{{ itemUser.displayName }}</td>
+            <div class="page-container">
+                <div *ngFor="let itemGroupe of items | async">
+                    <div *ngIf="itemGroupe.id == id">
+                        <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                    </div>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/groupe', this.id]">Les publications du
+                        groupe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\add-post']">Ecrire une publication</a>
+                    </li>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-membre-groupe']">Liste des membres</a>
+                                    </li>
                                 </div>
                             </div>
-                            <td><button class="btn btn-danger" (click)="DeletePost(item.id)">Supprimer le post</button></td>
-                        </tr>
+                        </div>
                     </div>
-                </tbody>
-            </table>
-        </div>"
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page">Gérer les
+                                        publications</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-doc-groupe']">Gérer les documents</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                <div *ngFor="let itemMembre of itemMembres | async">
+                    <div *ngIf="itemMembre.idGroupe == id">
+                        <div *ngIf="itemMembre.uid == this.uid">
+                            <div *ngIf="itemMembre.grade != 'Membre'">
+                                <li class="nav-item">
+                                    <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            -->
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\statistiques-groupe']">Les statistiques de
+                                        mon groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Administrateur'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\quit']">Quitter le groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <h2>Liste des publications du groupe</h2>
+                <nav class="navbar navbar-light bg-light">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Rechercher">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                    </form>
+                </nav>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Contenu</th>
+                            <th scope="col">Auteur</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-table">
+                        <div *ngFor="let item of myArray">
+                            <tr>
+                                <th scope="row"></th>
+                                <td>{{item.titre}}</td>
+                                <td>{{item.contenu}}</td>
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="item.idCreateur == itemUser.uid">
+                                        <td>{{ itemUser.displayName }}</td>
+                                    </div>
+                                </div>
+                                <td><button class="btn btn-danger" (click)="DeletePost(item.id)">Supprimer le post</button></td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
+            </div>"
+        </div>
     </div>
 </div>

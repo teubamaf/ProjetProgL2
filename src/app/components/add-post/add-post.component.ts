@@ -22,6 +22,10 @@ import Document from 'src/app/shared/models/document.model';
 export class AddPostComponent implements OnInit {
 
   items: Observable<any[]>;
+  itemPosts: Observable<any[]>;
+  itemUsers: Observable<any[]>;
+  itemMembres: Observable<any[]>;
+  itemDocuments: Observable<any[]>;
 
   post: Post = new Post();
   currentGroupe: Groupe = new Groupe();
@@ -52,6 +56,10 @@ export class AddPostComponent implements OnInit {
     public fileService: FileService
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
+      this.itemPosts = firestore.collection(`post`).valueChanges();
+      this.itemUsers = firestore.collection(`users`).valueChanges();
+      this.itemMembres = firestore.collection(`membres`).valueChanges();
+      this.itemDocuments = firestore.collection(`uploads`).valueChanges();
      }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
@@ -17,17 +18,24 @@ export class ListPostGroupeComponent implements OnInit {
   tabUsers: any[] = [];
 
   items: Observable<any[]>;
-  itemGroupes: Observable<any[]>;
+  itemPosts: Observable<any[]>;
   itemUsers: Observable<any[]>;
+  itemMembres: Observable<any[]>;
+  itemDocuments: Observable<any[]>;
+
+  uid = this.authService.userData.uid;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
-    public postService: PostService
+    public postService: PostService,
+    public authService: AuthService
   ) {
-    this.items = firestore.collection(`posts`).valueChanges();
-    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.items = firestore.collection(`groupes`).valueChanges();
+    this.itemPosts = firestore.collection(`post`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.itemMembres = firestore.collection(`membres`).valueChanges();
+    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
    }
 
   ngOnInit(): void {

@@ -17,6 +17,10 @@ export class UploadListComponent implements OnInit {
   fileUploads?: any[];
   public id: string;
 
+  items: Observable<any[]>;
+  itemPosts: Observable<any[]>;
+  itemUsers: Observable<any[]>;
+  itemMembres: Observable<any[]>;
   itemDocuments: Observable<any[]>;
 
   documents: any;
@@ -24,12 +28,18 @@ export class UploadListComponent implements OnInit {
   currentIndex = -1;
   nom = '';
 
+  uid = this.authService.userData.uid;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public fileService: FileService,
     public authService: AuthService
     ) {
+      this.items = firestore.collection(`groupes`).valueChanges();
+      this.itemPosts = firestore.collection(`post`).valueChanges();
+      this.itemUsers = firestore.collection(`users`).valueChanges();
+      this.itemMembres = firestore.collection(`membres`).valueChanges();
       this.itemDocuments = firestore.collection(`uploads`).valueChanges();
      }
 

@@ -23,7 +23,6 @@ export class ConversationListComponent implements OnInit {
     this.retrieveConversation();
   }
 
-
   retrieveConversation(): void {
     this.conversationService.getAll().snapshotChanges().pipe(
       map(changes =>

@@ -4,21 +4,105 @@
 <!-- Sidebar navigation -->
 <div class="container-fluid">
     <div class="row">
-
         <app-left-menu></app-left-menu>
         <div class="container">
-            <div class="card-header">Liste des documents du groupe</div>
-            <ul class="list-group">
-                <li class="list-group-item" *ngFor="let itemDocument of itemDocuments | async; let i = index" [class.active]="i == currentIndex" (click)="setActiveDocument(itemDocument, i)">
-                    <div *ngIf="itemDocument.idGroupe == this.id">
-                        {{ itemDocument.nom }}
+            <div class="page-container">
+                <div *ngFor="let itemGroupe of items | async">
+                    <div *ngIf="itemGroupe.id == id">
+                        <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
                     </div>
-                </li>
-            </ul>
-            <div class="details">
-                <div class="col-md-12 ">
-                    <div *ngIf="currentDocument">
-                        <app-upload-details (refreshList)="refreshList() " [document]="currentDocument"></app-upload-details>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/groupe', this.id]">Les publications du
+                        groupe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\add-post']">Ecrire une publication</a>
+                    </li>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-membre-groupe']">Liste des membres</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-post-groupe']">Gérer les publications</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page">Gérer les documents</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 
+                <div *ngFor="let itemMembre of itemMembres | async">
+                    <div *ngIf="itemMembre.idGroupe == id">
+                        <div *ngIf="itemMembre.uid == this.uid">
+                            <div *ngIf="itemMembre.grade != 'Membre'">
+                                <li class="nav-item">
+                                    <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            -->
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Membre'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\statistiques-groupe']">Les statistiques de
+                                        mon groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let itemMembre of itemMembres | async">
+                        <div *ngIf="itemMembre.idGroupe == id">
+                            <div *ngIf="itemMembre.uid == this.uid">
+                                <div *ngIf="itemMembre.grade != 'Administrateur'">
+                                    <li class="nav-item">
+                                        <a class="nav-link" [routerLink]="['/groupe', this.id, '\quit']">Quitter le groupe</a>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+                <div class="card-header">Liste des documents du groupe</div>
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let itemDocument of itemDocuments | async; let i = index" [class.active]="i == currentIndex" (click)="setActiveDocument(itemDocument, i)">
+                        <div *ngIf="itemDocument.idGroupe == this.id">
+                            {{ itemDocument.nom }}
+                        </div>
+                    </li>
+                </ul>
+                <div class="details">
+                    <div class="col-md-12 ">
+                        <div *ngIf="currentDocument">
+                            <app-upload-details (refreshList)="refreshList() " [document]="currentDocument"></app-upload-details>
+                        </div>
                     </div>
                 </div>
             </div>

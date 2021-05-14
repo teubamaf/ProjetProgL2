@@ -17,12 +17,15 @@ export class ListMembresComponent implements OnInit {
   myArray: any[] = [];
   tab: any[] = [];
   items: Observable<any[]>;
-  itemGroupes: Observable<any[]>;
+  itemPosts: Observable<any[]>;
   itemUsers: Observable<any[]>;
+  itemMembres: Observable<any[]>;
+  itemDocuments: Observable<any[]>;
   membres: any;
   currentMembre = null;
   currentIndex = -1;
   nom = '';
+  uid = this.authService.userData.uid;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,9 +33,11 @@ export class ListMembresComponent implements OnInit {
     private membreService: MembreService,
     public authService: AuthService
   ) {
-    this.items = firestore.collection(`posts`).valueChanges();
-    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.items = firestore.collection(`groupes`).valueChanges();
+    this.itemPosts = firestore.collection(`post`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.itemMembres = firestore.collection(`membres`).valueChanges();
+    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
    }
 
   ngOnInit(): void {
