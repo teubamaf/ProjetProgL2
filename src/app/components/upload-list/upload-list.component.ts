@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -34,7 +34,8 @@ export class UploadListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public fileService: FileService,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
       this.itemPosts = firestore.collection(`post`).valueChanges();
@@ -71,5 +72,10 @@ export class UploadListComponent implements OnInit {
     this.currentDocument = document;
     this.currentIndex = index;
   }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche-document', value]);
+  }
+
 }
 

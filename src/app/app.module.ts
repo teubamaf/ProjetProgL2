@@ -80,6 +80,8 @@ import { ChatGroupDetailsComponent } from './components/chat-group-details/chat-
 import { RechercheMenuComponent } from './components/recherche-menu/recherche-menu.component';
 import { RechercheGroupeComponent } from './components/recherche-groupe/recherche-groupe.component';
 import { RechercheMembreComponent } from './components/recherche-membre/recherche-membre.component';
+import { RecherchePostComponent } from './components/recherche-post/recherche-post.component';
+import { RechercheDocumentComponent } from './components/recherche-document/recherche-document.component';
 
 
 const appRoutes: Routes = [
@@ -132,7 +134,9 @@ const appRoutes: Routes = [
     ChatsComponent,
     RechercheMenuComponent,
     RechercheGroupeComponent,
-    RechercheMembreComponent
+    RechercheMembreComponent,
+    RecherchePostComponent,
+    RechercheDocumentComponent
   ],
   imports: [
     BrowserModule,

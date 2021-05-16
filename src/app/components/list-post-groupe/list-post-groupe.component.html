@@ -94,9 +94,9 @@
                 </ul>
                 <h2>Liste des publications du groupe</h2>
                 <nav class="navbar navbar-light bg-light">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Rechercher">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                    <form class="form-inline my-2 my-lg-0" id="milieu">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Search" #recherche>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
                     </form>
                 </nav>
                 <table class="table table-hover">

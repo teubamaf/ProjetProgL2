@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PostService } from 'src/app/shared/services/post.service';
@@ -29,7 +29,8 @@ export class ListPostGroupeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public postService: PostService,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemPosts = firestore.collection(`post`).valueChanges();
@@ -59,6 +60,10 @@ export class ListPostGroupeComponent implements OnInit {
 
   DeletePost(idPost: string): any {
     this.postService.delete(idPost);
+  }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche-publications', value]);
   }
 
 }

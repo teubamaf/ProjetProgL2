@@ -1,0 +1,29 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <h2>Les résultats de ma recherche : {{ this.value }}</h2>
+            <h3>Publications: </h3>
+            <div *ngFor="let item of items | async">
+                <div *ngIf="item.contenu == this.value || item.titre == this.value">
+                    {{ item.titre }}
+                    <div class="photo" *ngFor="let file of itemDocuments | async">
+                        <div *ngIf="file.id == item.idDocument">
+                            <img src="{{file.url}}" width="30%" />
+                        </div>
+                    </div>
+                    {{ item.contenu }} {{ item.date }}
+                    <div *ngFor="let itemUser of itemUsers | async">
+                        <div *ngIf="item.idCreateur == itemUser.uid">
+                            {{ itemUser.displayName }} <img src="{{itemUser.photoUrl}}" width="30%" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

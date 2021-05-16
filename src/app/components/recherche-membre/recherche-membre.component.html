@@ -7,7 +7,13 @@
         <app-left-menu></app-left-menu>
         <div class="container">
             <h2>Les résultats de ma recherche : {{ this.value }}</h2>
-            <h3>Publication: </h3>
+            <h3>Utilisateurs: </h3>
+            <div *ngFor="let itemUser of itemUsers | async">
+                <div *ngIf="itemUser.displayName == this.value">
+                    {{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
+                    <a>Voir le profil</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
