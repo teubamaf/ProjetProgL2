@@ -15,8 +15,13 @@ export class GroupeService {
   private dbPath = '/groupes';
 
   groupesRef: AngularFirestoreCollection<Groupe>;
+  rechercheNomRef: AngularFirestoreCollection<Groupe>;
+  rechercheTypeRef: AngularFirestoreCollection<Groupe>;
+
   idGroupe: string;
+  value: string;
   id: any;
+
   uid = this.authService.userData.uid;
   membre: Membre = new Membre();
 
@@ -32,6 +37,16 @@ export class GroupeService {
 
   getAll(): AngularFirestoreCollection<Groupe> {
     return this.groupesRef;
+  }
+
+  getRechercheNom(value: string): AngularFirestoreCollection<Groupe> {
+    this.rechercheNomRef = this.afs.collection<Groupe>('groupes', ref => ref.where('nom', '==', value));
+    return this.rechercheNomRef;
+  }
+
+  getRechercheType(value: string): AngularFirestoreCollection<Groupe> {
+    this.rechercheTypeRef = this.afs.collection<Groupe>('groupes', ref => ref.where('type', '==', value));
+    return this.rechercheTypeRef;
   }
 
   create(groupe: Groupe): any {
