@@ -114,7 +114,8 @@
                                         </div>
                                         <div class="droite">
                                             <mat-card-title>
-                                                <p>{{post.titre}}</p>
+                                                <p>{{post.titre}} {{post.nbLikes}}</p>
+                                                <p>{{post.nbLikes}}-{{post.nbDislikes}}</p>
                                             </mat-card-title>
                                             <div *ngIf="post.idCreateur == itemUser.uid">
                                                 <mat-card-subtitle>Posted by {{ itemUser.displayName }}
@@ -142,7 +143,8 @@
                                 <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, post.id)">Submit</button>
                             </div>
                             <div class="btn-toolbar">
-                                <button type="button" id="btnSubmit" class="btn btn-primary btn-sm">Like</button>
+                                <button  type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="likeButtonClick(post.nbLikes, post.id)">Like</button>
+                                <button  type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="dislikeButtonClick(post.nbLikes, post.id)" style="background-color: red;border-color: red;">Dislike</button>
                                 <button type="button" id="btnCancel" class="btn btn-primary btn-sm">Share</button>
                             </div>
                             <h3>Commentaires:</h3>
