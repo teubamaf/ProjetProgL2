@@ -46,13 +46,10 @@ export class RechercheGroupeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
-    this.value = this.activatedRoute.snapshot.paramMap.get('value');
-    console.log(this.value);
   }
 
   initialiseInvites(): void {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.value = this.activatedRoute.snapshot.paramMap.get('value');
     // Set default values and re-fetch any data you need.
     this.retrievePostContenu();

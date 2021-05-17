@@ -15,6 +15,7 @@ export class FileService {
 
   private basePath = '/uploads';
   filesRef: AngularFirestoreCollection<Document>;
+  fileNomRef: AngularFirestoreCollection<Document>
   idPost: any;
   currentDate = new Date();
   documentX: Document;
@@ -58,6 +59,11 @@ export class FileService {
 
   getAll(): AngularFirestoreCollection<Document> {
     return this.filesRef;
+  }
+
+  getFileName(value: string, id: string): AngularFirestoreCollection<Document> {
+    this.fileNomRef = this.afs.collection<Document>('uploads', ref => ref.where('titre', '==', value).where('idGroupe', '==', id));
+    return this.fileNomRef;
   }
 
   delete(id: string, file: Document): Promise<void> {

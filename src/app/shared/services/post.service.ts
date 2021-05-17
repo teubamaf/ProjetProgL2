@@ -38,12 +38,11 @@ export class PostService {
   }
 
   getRechercheContenu(value: string, idGroupe: string): AngularFirestoreCollection<Post> {
-    this.rechercheContenuRef = this.afs.collection<Post>('posts', ref => ref.where('contenu', '==', value));
-    return this.rechercheContenuRef;
+    return this.afs.collection<Post>('posts', ref => ref.where('contenu', '==', value).where('idGroupe', '==', idGroupe));
   }
 
   getRechercheTitre(value: string, idGroupe: string): AngularFirestoreCollection<Post> {
-    this.rechercheTitreRef = this.afs.collection<Post>('posts', ref => ref.where('titre', '==', value));
+    this.rechercheTitreRef = this.afs.collection<Post>('posts', ref => ref.where('titre', '==', value).where('idGroupe', '==', idGroupe));
     return this.rechercheTitreRef;
   }
 

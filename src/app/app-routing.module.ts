@@ -77,8 +77,8 @@ const routes: Routes = [
   { path: 'recherche/:value', component: RechercheMenuComponent },
   { path: 'groupe/:id/recherche-post/:value', component: RechercheGroupeComponent },
   { path: 'groupe/:id/recherche-membre/:value', component: RechercheMembreComponent },
-  { path: 'recherche-publications/:value', component: RecherchePostComponent },
-  { path: 'recherche-document/:value', component: RechercheDocumentComponent, 
+  { path: 'groupe/:id/recherche-publications/:value', component: RecherchePostComponent },
+  { path: 'groupe/:id/recherche-document/:value', component: RechercheDocumentComponent, 
   runGuardsAndResolvers: 'always' }
 ];
 

@@ -74,7 +74,7 @@ export class UploadListComponent implements OnInit {
   }
 
   rechercher(value: string): any {
-    this.router.navigate(['/recherche-document', value]);
+    this.router.navigate(['/groupe', this.id, 'recherche-document', value]);
   }
 
 }

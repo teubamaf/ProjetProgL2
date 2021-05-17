@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Commentaire from 'src/app/shared/models/commentaire.model';
@@ -16,7 +16,7 @@ import { PostService } from 'src/app/shared/services/post.service';
   templateUrl: './mes-groupes.component.html',
   styleUrls: ['./mes-groupes.component.css']
 })
-export class MesGroupesComponent implements OnInit {
+export class MesGroupesComponent implements OnInit, OnDestroy {
 
   items: Observable<any[]>;
   itemGroupes: Observable<any[]>;
@@ -25,8 +25,10 @@ export class MesGroupesComponent implements OnInit {
   itemDocuments: Observable<any[]>;
 
   commentaire: Commentaire = new Commentaire();
+
   commentaires: any;
   posts: any;
+  navigationSubscription: any;
 
   uid = this.authService.userData.uid;
 
@@ -46,12 +48,23 @@ export class MesGroupesComponent implements OnInit {
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.itemMembres = firestore.collection(`membres`).valueChanges();
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
+    // subscribe to the router events. Store the subscription so we can
+    // unsubscribe later.
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+        }
+      });
   }
 
   public id: string;
   fileUploads?: any[];
 
   ngOnInit(): void {
+  }
+
+  initialiseInvites(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     console.log(this.id);
@@ -66,6 +79,12 @@ export class MesGroupesComponent implements OnInit {
     });
     this.retrieveCommentaires();
     this.retrievePost();
+  }
+
+  ngOnDestroy(): void{
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   saveCommentaire(contenu: string, idPost: string): void {

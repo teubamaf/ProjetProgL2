@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
@@ -12,7 +14,7 @@ import { PostService } from 'src/app/shared/services/post.service';
 })
 export class ListPostGroupeComponent implements OnInit {
 
-  public id: string;
+  id: string;
   myArray: any[] = [];
   tab: any[] = [];
   tabUsers: any[] = [];
@@ -63,7 +65,7 @@ export class ListPostGroupeComponent implements OnInit {
   }
 
   rechercher(value: string): any {
-    this.router.navigate(['/recherche-publications', value]);
+    this.router.navigate(['/groupe', this.id, 'recherche-publications', value]);
   }
 
 }

@@ -1,6 +1,5 @@
 <!-- Top navigation -->
 <app-menu></app-menu>
-
 <!-- Sidebar navigation -->
 <div class="container-fluid">
     <div class="row">
@@ -12,36 +11,32 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
             </form>
             <div *ngFor="let postTitre of postTitres">
-                <div *ngIf="postTitre.idGroupe == this.id">
-                    <h3>Publication: </h3>
-                    {{ postTitre.titre }}
-                    <div class="photo" *ngFor="let file of itemDocuments | async">
-                        <div *ngIf="file.id == postTitre.idDocument">
-                            <img src="{{file.url}}" width="30%" />
-                        </div>
+                <h3>Publication: </h3>
+                {{ postTitre.titre }}
+                <div class="photo" *ngFor="let file of itemDocuments | async">
+                    <div *ngIf="file.id == postTitre.idDocument">
+                        <img src="{{file.url}}" width="30%" />
                     </div>
-                    {{ postTitre.contenu }} {{ postTitre.date }}
-                    <div *ngFor="let itemUser of itemUsers | async">
-                        <div *ngIf="postTitre.idCreateur == itemUser.uid">
-                            {{ itemUser.displayName }} <img src="{{itemUser.photoUrl}}" width="30%" />
-                        </div>
+                </div>
+                {{ postTitre.contenu }} {{ postTitre.date }}
+                <div *ngFor="let itemUser of itemUsers | async">
+                    <div *ngIf="postTitre.idCreateur == itemUser.uid">
+                        {{ itemUser.displayName }} <img src="{{itemUser.photoUrl}}" width="30%" />
                     </div>
                 </div>
             </div>
             <div *ngFor="let postContenu of postContenus">
-                <div *ngIf="postContenu.idGroupe == this.id">
-                    <h3>Publication: </h3>
-                    {{ postContenu.titre }}
-                    <div class="photo" *ngFor="let file of itemDocuments | async">
-                        <div *ngIf="file.id == postContenu.idDocument">
-                            <img src="{{file.url}}" width="30%" />
-                        </div>
+                <h3>Publication: </h3>
+                {{ postContenu.titre }}
+                <div class="photo" *ngFor="let file of itemDocuments | async">
+                    <div *ngIf="file.id == postContenu.idDocument">
+                        <img src="{{file.url}}" width="30%" />
                     </div>
-                    {{ postContenu.contenu }} {{ postContenu.date }}
-                    <div *ngFor="let itemUser of itemUsers | async">
-                        <div *ngIf="postContenu.idCreateur == itemUser.uid">
-                            {{ itemUser.displayName }} <img src="{{itemUser.photoUrl}}" width="30%" />
-                        </div>
+                </div>
+                {{ postContenu.contenu }} {{ postContenu.date }}
+                <div *ngFor="let itemUser of itemUsers | async">
+                    <div *ngIf="postContenu.idCreateur == itemUser.uid">
+                        {{ itemUser.displayName }} <img src="{{itemUser.photoUrl}}" width="30%" />
                     </div>
                 </div>
             </div>
