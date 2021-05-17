@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Commentaire from 'src/app/shared/models/commentaire.model';
@@ -107,4 +107,27 @@ export class MesGroupesComponent implements OnInit {
     this.router.navigate(['/recherche-post', value]);
   }
 
+  likeButtonClick(nb: number, id: string) {
+    const nouveau_Likes = nb+1;
+    const data = {
+      nbLikes : nouveau_Likes
+    };
+    this.postService.update(id, data);
+  }
+
+  dislikeButtonClick(nb: number, id: string) {
+    const nouveau_dislikes = nb-1;
+    const data = {
+      nbDislikes : nouveau_dislikes
+    };
+    this.postService.update(id, data);
+  }
+
+  getnbLikes(id: string){
+    const nombreLikeDislike = this.posts.nbDislikes-this.posts.nbLikes;
+    const data = {
+      nbLikesDislike : nombreLikeDislike
+    };
+    this.postService.update(id, data);
+  }
 }
