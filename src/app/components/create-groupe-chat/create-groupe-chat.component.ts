@@ -4,12 +4,16 @@ import GroupeChat from 'src/app/shared/models/groupe-chat.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { GroupeChatService } from 'src/app/shared/services/groupe-chat.service';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-create-groupe-chat',
   templateUrl: './create-groupe-chat.component.html',
   styleUrls: ['./create-groupe-chat.component.css']
 })
 export class CreateGroupeChatComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   groupeChat: GroupeChat = new GroupeChat();
 
@@ -28,8 +32,9 @@ export class CreateGroupeChatComponent implements OnInit {
   constructor(
     public groupeChatService: GroupeChatService,
     public router: Router,
-    public authService:  AuthService
-  ) { }
+    public authService:  AuthService,
+    notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
   }
@@ -41,7 +46,7 @@ export class CreateGroupeChatComponent implements OnInit {
     this.groupeChat.uidCreateur = this.uid;
     this.groupeChatService.create(this.groupeChat).then(() => {
       console.log('La conversation a été créée avec succès');
-      this.message = 'La conversation a été créée avec succès';
+      this.notifier.notify('success', 'La conversation a été créée avec succès');
     });
     this.router.navigate(['/mes-messages']);
   }

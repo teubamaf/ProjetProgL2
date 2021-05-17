@@ -83,6 +83,8 @@ import { RechercheMembreComponent } from './components/recherche-membre/recherch
 import { RecherchePostComponent } from './components/recherche-post/recherche-post.component';
 import { RechercheDocumentComponent } from './components/recherche-document/recherche-document.component';
 
+import { NotifierModule } from 'angular-notifier';
+
 
 const appRoutes: Routes = [
   { path: 'left-menu', component: LeftMenuComponent },
@@ -165,7 +167,10 @@ const appRoutes: Routes = [
     MatSortModule,
     MatSnackBarModule,
     MatSidenavModule,
-    AngularFirestoreModule.enablePersistence()
+    AngularFirestoreModule.enablePersistence(),
+    NotifierModule.withConfig({
+      // Custom options in here
+    }),
   ],
   providers: [AuthService, DatePipe],
   bootstrap: [AppComponent],

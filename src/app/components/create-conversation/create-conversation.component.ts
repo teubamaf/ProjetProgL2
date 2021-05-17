@@ -7,12 +7,17 @@ import Conversation from 'src/app/shared/models/conversation.model';
 import { ConversationService } from 'src/app/shared/services/conversation.service';
 import { Router } from '@angular/router';
 
+import { NotifierService } from 'angular-notifier';
+
+
 @Component({
   selector: 'app-create-conversation',
   templateUrl: './create-conversation.component.html',
   styleUrls: ['./create-conversation.component.css']
 })
 export class CreateConversationComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   users: any;
   myArray: any[] = [];
@@ -34,8 +39,10 @@ export class CreateConversationComponent implements OnInit {
     public authService: AuthService,
     public conversationService: ConversationService,
     private router: Router,
+    notifierService: NotifierService
   ) {
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.notifier = notifierService;
    }
 
   ngOnInit(): void {
@@ -92,7 +99,7 @@ export class CreateConversationComponent implements OnInit {
     this.conversation.pseudoCrea = pseudoCrea;
     this.conversationService.create(this.conversation).then(() => {
       console.log('La conversation a été créée avec succès');
-      this.message = 'La conversation a été créée avec succès';
+      this.notifier.notify('success', 'La conversation a été créée avec succès');
     });
     this.router.navigate(['/mes-messages']);
   }

@@ -9,12 +9,16 @@ import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-menu-add-post',
   templateUrl: './menu-add-post.component.html',
   styleUrls: ['./menu-add-post.component.css']
 })
 export class MenuAddPostComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   items: Observable<any[]>;
   post: Post = new Post();
@@ -36,9 +40,11 @@ export class MenuAddPostComponent implements OnInit {
     firestore: AngularFirestore,
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    notifierService: NotifierService,
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
+    this.notifier = notifierService;
    }
 
   ngOnInit(): void {
@@ -57,7 +63,7 @@ export class MenuAddPostComponent implements OnInit {
     this.postService.create(this.post).then(() => {
       console.log('Created new item successfully!');
     });
-    this.message = 'La publication a été créée avec succès';
+    this.notifier.notify('success', 'La publication a été créée avec succès');
   }
 
   newPost(): void {

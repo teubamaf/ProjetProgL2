@@ -14,12 +14,16 @@ import Post from 'src/app/shared/models/post.model';
 import Groupe from 'src/app/shared/models/groupe.model';
 import Document from 'src/app/shared/models/document.model';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   items: Observable<any[]>;
   itemPosts: Observable<any[]>;
@@ -53,13 +57,17 @@ export class AddPostComponent implements OnInit {
     public groupeService: GroupeService,
     private activatedRoute: ActivatedRoute,
     public datepipe: DatePipe,
-    public fileService: FileService
+    public fileService: FileService,
+
+    notifierService: NotifierService
+
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
       this.itemPosts = firestore.collection(`post`).valueChanges();
       this.itemUsers = firestore.collection(`users`).valueChanges();
       this.itemMembres = firestore.collection(`membres`).valueChanges();
       this.itemDocuments = firestore.collection(`uploads`).valueChanges();
+      this.notifier = notifierService;
      }
 
   ngOnInit(): void {
@@ -75,7 +83,7 @@ export class AddPostComponent implements OnInit {
     this.postService.create(this.post).then(() => {
       console.log('La publication a été créée avec succès');
     });
-    this.message = 'La publication a été créée avec succès';
+    this.notifier.notify('success', 'La publication a été créée avec succès');
   }
 
   newPost(): void {

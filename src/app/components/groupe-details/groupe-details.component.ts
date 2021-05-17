@@ -2,12 +2,16 @@ import { Component, OnInit, OnChanges, Output, EventEmitter, Input } from '@angu
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 import Groupe from 'src/app/shared/models/groupe.model';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-groupe-details',
   templateUrl: './groupe-details.component.html',
   styleUrls: ['./groupe-details.component.css']
 })
 export class GroupeDetailsComponent implements OnInit, OnChanges {
+
+  private readonly notifier: NotifierService;
 
   @Input()
   groupe: Groupe = new Groupe();
@@ -16,8 +20,9 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
   message = '';
 
   constructor(
-    public groupeService: GroupeService
-  ) { }
+    public groupeService: GroupeService,
+    notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
     this.message = '';
@@ -35,7 +40,7 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
     };
 
     this.groupeService.update(this.currentGroupe.id, data)
-      .then(() => this.message = 'Le groupe a été modifié avec succès !')
+      .then(() => this.notifier.notify('success', 'Le groupe a été modifié avec succès !'))
       .catch(err => console.log(err));
   }
 
@@ -43,7 +48,7 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
     this.groupeService.delete(this.currentGroupe.id)
       .then(() => {
         this.refreshList.emit();
-        this.message = 'Le groupe a été supprimé avec succès !';
+        this.notifier.notify('success', 'Le groupe a été supprimé avec succès !')
       })
       .catch(err => console.log(err));
   }

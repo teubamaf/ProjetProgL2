@@ -4,12 +4,16 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { GroupeChatService } from 'src/app/shared/services/groupe-chat.service';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-group-chat-list',
   templateUrl: './group-chat-list.component.html',
   styleUrls: ['./group-chat-list.component.css']
 })
 export class GroupChatListComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   myArray: any[] = [];
   tab: any[] = [];
@@ -25,10 +29,12 @@ export class GroupChatListComponent implements OnInit {
   constructor(
     public firestore: AngularFirestore,
     public authService: AuthService,
-    public groupeChatService: GroupeChatService
+    public groupeChatService: GroupeChatService,
+    notifierService: NotifierService
   ) {
     this.itemMembres = firestore.collection(`membre-groupe-chats`).valueChanges();
     this.itemGroupeMembres = firestore.collection(`groupe-chats`).valueChanges();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -49,7 +55,7 @@ export class GroupChatListComponent implements OnInit {
 
   supprimer(idGroupeChat: string): void {
     this.groupeChatService.delete(idGroupeChat);
-    this.message = 'La conversation a été supprimée avec succès !'
+    this.notifier.notify('success', 'La conversation a été supprimée avec succès !');
   }
 
 }

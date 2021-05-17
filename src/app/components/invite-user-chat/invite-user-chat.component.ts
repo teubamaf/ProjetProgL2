@@ -8,12 +8,16 @@ import MembreGroupeChat from 'src/app/shared/models/membre-groupe-chat.model';
 import { MembreGroupeChatService } from 'src/app/shared/services/membre-groupe-chat.service';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-invite-user-chat',
   templateUrl: './invite-user-chat.component.html',
   styleUrls: ['./invite-user-chat.component.css']
 })
 export class InviteUserChatComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   id: string;
   myArray: any[] = [];
@@ -34,9 +38,11 @@ export class InviteUserChatComponent implements OnInit {
     public router: Router,
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
-    public membreGroupeChatService: MembreGroupeChatService
+    public membreGroupeChatService: MembreGroupeChatService,
+    notifierService: NotifierService
   ) { 
     this.items = firestore.collection(`users`).valueChanges();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -72,7 +78,7 @@ export class InviteUserChatComponent implements OnInit {
     this.membreGroupeChat.idConversation = this.id;
     this.membreGroupeChatService.create(this.membreGroupeChat).then(() => {
       console.log('Created new item successfully!');
-      this.message = "L'utilisateur a été ajouté avec succès";
+      this.notifier.notify('success', "L'utilisateur a été ajouté avec succès");
     });
   }
 

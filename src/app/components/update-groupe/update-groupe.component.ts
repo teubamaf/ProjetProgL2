@@ -4,12 +4,16 @@ import { ActivatedRoute } from '@angular/router';
 import Groupe from 'src/app/shared/models/groupe.model';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-update-groupe',
   templateUrl: './update-groupe.component.html',
   styleUrls: ['./update-groupe.component.css']
 })
 export class UpdateGroupeComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   public id: string;
   @Input()
@@ -24,8 +28,9 @@ export class UpdateGroupeComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     public groupeService: GroupeService,
-    public firestore: AngularFirestore
-  ) { }
+    public firestore: AngularFirestore,
+    notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
@@ -53,7 +58,7 @@ export class UpdateGroupeComponent implements OnInit {
     };
 
     this.groupeService.update(this.id, data)
-      .then(() => this.message = 'Le groupe a été modifié avec succès !')
+      .then(() => this.notifier.notify('success', 'Le groupe a été modifié avec succès !'))
       .catch(err => console.log(err));
   }
 
@@ -61,7 +66,7 @@ export class UpdateGroupeComponent implements OnInit {
     this.groupeService.delete(this.id)
       .then(() => {
         this.refreshList.emit();
-        this.message = 'Le groupe a été supprimé avec succès !';
+        this.notifier.notify('success', 'Le groupe a été supprimé avec succès !');
       })
       .catch(err => console.log(err));
   }

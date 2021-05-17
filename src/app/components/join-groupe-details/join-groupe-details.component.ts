@@ -9,6 +9,8 @@ import Membre from 'src/app/shared/models/membre.model';
 import { MembreService } from 'src/app/shared/services/membre.service';
 import { Router } from '@angular/router';
 
+import { NotifierService } from 'angular-notifier';
+
 
 @Component({
   selector: 'app-join-groupe-details',
@@ -16,6 +18,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./join-groupe-details.component.css']
 })
 export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
+
+  private readonly notifier: NotifierService;
 
   uid = this.authService.userData.uid;
   @Input()
@@ -34,9 +38,11 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
     public authService: AuthService,
     public membreService: MembreService,
     public firestore: AngularFirestore,
-    public router: Router
+    public router: Router,
+    notifierService: NotifierService
     ) {
       this.items = firestore.collection(`membres`).valueChanges();
+      this.notifier = notifierService;
       }
 
 
@@ -73,11 +79,11 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
       this.membre.idGroupe = this.currentGroupe.id;
       this.membre.uid = this.uid;
       this.membreService.create(this.membre).then(() => {
-        this.message = 'Vous avez rejoint le groupe avec succès !';
+        this.notifier.notify('success', 'Vous avez rejoint le groupe avec succès !');
         this.router.navigate(['/home']);
       });
     } else {
-      this.message = 'Vous êtes déjà membre de ce groupe...';
+      this.notifier.notify('error', 'Vous êtes déjà membre de ce groupe...');
     }
   }
 }

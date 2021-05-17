@@ -4,12 +4,16 @@ import { Observable } from 'rxjs';
 import Membre from 'src/app/shared/models/membre.model';
 import { MembreService } from 'src/app/shared/services/membre.service';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-list-membres-details',
   templateUrl: './list-membres-details.component.html',
   styleUrls: ['./list-membres-details.component.css']
 })
 export class ListMembresDetailsComponent implements OnInit, OnChanges {
+
+  private readonly notifier: NotifierService;
 
   @Input()
   membre: Membre = new Membre();
@@ -24,10 +28,12 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
   constructor(
     public membreService: MembreService,
     public firestore: AngularFirestore,
+    notifierService: NotifierService,
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -43,7 +49,7 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
     this.membreService.delete(this.currentMembre.id)
       .then(() => {
         this.refreshList.emit();
-        this.message = 'Le membre a été supprimé du groupe avec succès !';
+        this.notifier.notify('success', 'Le membre a été supprimé du groupe avec succès !');
       })
       .catch(err => console.log(err));
   }
@@ -52,7 +58,7 @@ export class ListMembresDetailsComponent implements OnInit, OnChanges {
     console.log(this.currentMembre.id);
     this.membreService.updateModo(this.currentMembre.id).then(() => {
       this.refreshList.emit();
-      this.message = 'Le membre a été promu avec succès !';
+      this.notifier.notify('success', 'Le membre a été promu avec succès !');
     });
   }
 

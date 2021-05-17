@@ -9,12 +9,16 @@ import Membre from 'src/app/shared/models/membre.model';
 import { MembreGroupeChatService } from 'src/app/shared/services/membre-groupe-chat.service';
 import MembreGroupeChat from 'src/app/shared/models/membre-groupe-chat.model';
 
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-chat-group-details',
   templateUrl: './chat-group-details.component.html',
   styleUrls: ['./chat-group-details.component.css']
 })
 export class ChatGroupDetailsComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   uid = this.authService.userData.uid;
   @Input()
@@ -33,7 +37,8 @@ export class ChatGroupDetailsComponent implements OnInit {
     public authService: AuthService,
     public membreGroupeChatService: MembreGroupeChatService,
     public firestore: AngularFirestore,
-  ) { }
+    notifierService: NotifierService
+  ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
     this.message = '';
@@ -63,10 +68,10 @@ export class ChatGroupDetailsComponent implements OnInit {
       this.membreGroupeChat.idConversation = this.currentGroupe.id;
       this.membreGroupeChat.uid = this.uid;
       this.membreGroupeChatService.create(this.membreGroupeChat).then(() => {
-        this.message = 'Vous avez rejoint le groupe avec succès !';
+        this.notifier.notify('success', 'Vous avez rejoint le groupe avec succès !');
       });
     } else {
-      this.message = 'Vous êtes déjà membre de ce groupe...';
+      this.notifier.notify('error', 'Vous êtes déjà membre de ce groupe...!');
     }
   }
 }
