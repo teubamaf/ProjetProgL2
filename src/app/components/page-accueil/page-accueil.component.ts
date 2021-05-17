@@ -1,5 +1,5 @@
 import { CdkNoDataRow } from '@angular/cdk/table';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -12,12 +12,18 @@ import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { PostService } from 'src/app/shared/services/post.service';
 import { convertToObject } from 'typescript';
 
+
+import { ChatService } from 'src/app/shared/services/chat.service';
+import { NotifierService } from 'angular-notifier';
+
 @Component({
   selector: 'app-page-accueil',
   templateUrl: './page-accueil.component.html',
   styleUrls: ['./page-accueil.component.css']
 })
 export class PageAccueilComponent implements OnInit {
+
+  private readonly notifier: NotifierService;
 
   items: Observable<any[]>;
   itemUsers: Observable<any[]>;
@@ -34,6 +40,7 @@ export class PageAccueilComponent implements OnInit {
   commentaires: any;
   posts: any;
   groupes: any;
+  messages: any;
 
   fileUploads: any[] = [];
 
@@ -44,11 +51,14 @@ export class PageAccueilComponent implements OnInit {
     public datepipe: DatePipe,
     public uploadService: FileUploadService,
     public postService: PostService,
-    public groupeService: GroupeService
+    public groupeService: GroupeService,
+    public chatService: ChatService,
+    notifierService: NotifierService,
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
+    this.notifier = notifierService;
   }
 
   ngOnInit(): void {
@@ -67,6 +77,7 @@ export class PageAccueilComponent implements OnInit {
     });
     this.retrieveCommentaires();
     this.retrievePosts();
+    this.retrieveChats();
   }
 
   saveCommentaire(contenu: string, idPost: string, idGroupe: string): void {
@@ -101,6 +112,19 @@ export class PageAccueilComponent implements OnInit {
       )
     ).subscribe(data => {
       this.posts = data;
+    });
+  }
+
+  retrieveChats(): void{
+    this.chatService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.messages = data;
+      this.notifier.notify('info', 'Nouveau message privé !!');
     });
   }
 
