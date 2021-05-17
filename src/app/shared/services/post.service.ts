@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { PromiseType } from 'protractor/built/plugins';
 import Post from '../models/post.model';
-import { FileUploadService } from './file-upload.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +14,8 @@ export class PostService {
 
   postsRef: AngularFirestoreCollection<Post> = null;
   postDateRef: AngularFirestoreCollection<Post>;
+  rechercheContenuRef: AngularFirestoreCollection<Post>;
+  rechercheTitreRef: AngularFirestoreCollection<Post>;
 
   constructor(
     private db: AngularFirestore,
@@ -35,6 +35,16 @@ export class PostService {
 
   getDate(): AngularFirestoreCollection<Post> {
     return this.postDateRef;
+  }
+
+  getRechercheContenu(value: string, idGroupe: string): AngularFirestoreCollection<Post> {
+    this.rechercheContenuRef = this.afs.collection<Post>('posts', ref => ref.where('contenu', '==', value));
+    return this.rechercheContenuRef;
+  }
+
+  getRechercheTitre(value: string, idGroupe: string): AngularFirestoreCollection<Post> {
+    this.rechercheTitreRef = this.afs.collection<Post>('posts', ref => ref.where('titre', '==', value));
+    return this.rechercheTitreRef;
   }
 
   create(post: Post): any {

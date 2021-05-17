@@ -17,6 +17,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class AuthService {
   userData: any; // Save logged in user data
   usersRef: AngularFirestoreCollection<User>;
+  recherchePseudoRef: AngularFirestoreCollection<User>;
+
   loginRef: any;
 
   constructor(
@@ -160,11 +162,15 @@ export class AuthService {
 
   setLogin(uid: string, pseudo: string): void {
     return this.loginRef.push({ nickname: pseudo });
-
   }
 
   getAll(): AngularFirestoreCollection<User> {
     return this.usersRef;
+  }
+
+  getRecherchePseudo(value: string): AngularFirestoreCollection<User> {
+    this.recherchePseudoRef = this.afs.collection<User>('users', ref => ref.where('displayName', '==', value));
+    return this.recherchePseudoRef;
   }
 
 }

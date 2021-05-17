@@ -75,14 +75,15 @@ const routes: Routes = [
   { path: 'conversation-groupe/:id/invite-user', component: InviteUserChatComponent },
   { path: 'join-group-chat', component: GroupeChatListComponent },
   { path: 'recherche/:value', component: RechercheMenuComponent },
-  { path: 'recherche-post/:value', component: RechercheGroupeComponent },
-  { path: 'recherche-membre/:value', component: RechercheMembreComponent },
+  { path: 'groupe/:id/recherche-post/:value', component: RechercheGroupeComponent },
+  { path: 'groupe/:id/recherche-membre/:value', component: RechercheMembreComponent },
   { path: 'recherche-publications/:value', component: RecherchePostComponent },
-  { path: 'recherche-document/:value', component: RechercheDocumentComponent }
+  { path: 'recherche-document/:value', component: RechercheDocumentComponent, 
+  runGuardsAndResolvers: 'always' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

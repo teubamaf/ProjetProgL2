@@ -72,7 +72,7 @@ export class ListMembresComponent implements OnInit {
   }
 
   rechercher(value: string): any {
-    this.router.navigate(['/recherche-membre', value]);
+    this.router.navigate(['/groupe', this.id, 'recherche-membre', value]);
   }
 
 }

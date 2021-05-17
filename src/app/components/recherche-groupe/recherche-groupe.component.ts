@@ -1,12 +1,12 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CommentaireService } from 'src/app/shared/services/commentaire.service';
-import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
@@ -14,40 +14,83 @@ import { PostService } from 'src/app/shared/services/post.service';
   templateUrl: './recherche-groupe.component.html',
   styleUrls: ['./recherche-groupe.component.css']
 })
-export class RechercheGroupeComponent implements OnInit {
+export class RechercheGroupeComponent implements OnInit, OnDestroy {
 
   value: string;
+  id: string;
 
-  items: Observable<any[]>;
-  itemGroupes: Observable<any[]>;
   itemUsers: Observable<any[]>;
-  itemMembres: Observable<any[]>;
   itemDocuments: Observable<any[]>;
-  itemCommentaires: Observable<any[]>;
+
+  navigationSubscription: any;
+  postContenus: any;
+  postTitres: any;
 
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public authService: AuthService,
-    private db: AngularFireDatabase,
-    public uploadService: FileUploadService,
-    public commentaireService: CommentaireService,
-    public datepipe: DatePipe,
     public postService: PostService
   ) {
-    this.items = firestore.collection(`posts`).valueChanges();
-    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
-    this.itemMembres = firestore.collection(`membres`).valueChanges();
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
-    this.itemCommentaires = firestore.collection(`commentaires`).valueChanges();
-   }
+    // subscribe to the router events. Store the subscription so we can
+    // unsubscribe later.
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    // If it is a NavigationEnd event re-initalise the component
+    if (e instanceof NavigationEnd) {
+      this.initialiseInvites();
+      }
+    });
+  }
 
   ngOnInit(): void {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.value = this.activatedRoute.snapshot.paramMap.get('value');
     console.log(this.value);
+  }
+
+  initialiseInvites(): void {
+    this.value = this.activatedRoute.snapshot.paramMap.get('value');
+    // Set default values and re-fetch any data you need.
+    this.retrievePostContenu();
+    this.retrievePostTitre();
+  }
+
+  ngOnDestroy(): void{
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  retrievePostContenu(): void {
+    this.postService.getRechercheContenu(this.value, this.id).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.postContenus = data;
+    });
+  }
+
+  retrievePostTitre(): void {
+    this.postService.getRechercheTitre(this.value, this.id).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.postTitres = data;
+    });
+  }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/groupe', this.id, 'recherche-post', value]);
   }
 
 }

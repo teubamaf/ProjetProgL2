@@ -24,6 +24,10 @@ export class MembreService {
     return this.afs.collection<Membre>('membres', ref => ref.where('idGroupe', '==', idGroupe));
   }
 
+  getGroupe(idGroupe: string, value: string): AngularFirestoreCollection<Membre> {
+    return this.afs.collection<Membre>('membres', ref => ref.where('idGroupe', '==', idGroupe).where('uid', '==', value));
+  }
+
   create(membre: Membre): any {
     return this.membresRef.add({ ...membre })
                         .then((docRef) => {

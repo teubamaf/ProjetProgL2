@@ -7,6 +7,10 @@
         <app-left-menu></app-left-menu>
         <div class="container">
             <h2>Les résultats de ma recherche : {{ this.value }}</h2>
+            <form class="form-inline my-2 my-lg-0" id="milieu">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre ou une communautée" aria-label="Search" #recherche>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+            </form>
             <h3>Publications: </h3>
             <div *ngFor="let item of items | async">
                 <div *ngIf="item.contenu == this.value || item.titre == this.value">

@@ -104,7 +104,7 @@ export class MesGroupesComponent implements OnInit {
   }
 
   rechercher(value: string): any {
-    this.router.navigate(['/recherche-post', value]);
+    this.router.navigate(['/groupe', this.id, 'recherche-post', value]);
   }
 
 }

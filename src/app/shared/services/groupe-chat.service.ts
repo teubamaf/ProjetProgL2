@@ -14,6 +14,7 @@ export class GroupeChatService {
   private dbPath = '/groupe-chats';
 
   groupeChatsRef: AngularFirestoreCollection<GroupeChat>;
+
   idGroupeChat: string;
   id: any;
   uid = this.authService.userData.uid;

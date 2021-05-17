@@ -7,12 +7,21 @@
         <app-left-menu></app-left-menu>
         <div class="container">
             <h2>Les résultats de ma recherche : {{ this.value }}</h2>
-            <h3>Utilisateurs: </h3>
-            <div *ngFor="let itemUser of itemUsers | async">
-                <div *ngIf="itemUser.displayName == this.value">
-                    {{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
-                    <a>Voir le profil</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre" aria-label="Search" #recherche>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+            </form>
+            <div *ngFor="let membreGroupe of membreGroupes">
+                <div *ngFor="let itemUser of itemUsers | async">
+                    <div *ngIf="this.value == itemUser.displayName">
+                        <h3>Utilisateurs: </h3>
+                        {{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
+                        <a>Voir le profil</a>
+                    </div>
                 </div>
+            </div>
+            <div *ngIf="users.length == 0">
+                <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
             </div>
         </div>
     </div>

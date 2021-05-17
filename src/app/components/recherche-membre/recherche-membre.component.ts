@@ -1,53 +1,95 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CommentaireService } from 'src/app/shared/services/commentaire.service';
-import { FileUploadService } from 'src/app/shared/services/file-upload.service';
-import { PostService } from 'src/app/shared/services/post.service';
+import { MembreService } from 'src/app/shared/services/membre.service';
 
 @Component({
   selector: 'app-recherche-membre',
   templateUrl: './recherche-membre.component.html',
   styleUrls: ['./recherche-membre.component.css']
 })
-export class RechercheMembreComponent implements OnInit {
+export class RechercheMembreComponent implements OnInit, OnDestroy {
 
   value: string;
+  id: string;
 
-  items: Observable<any[]>;
-  itemGroupes: Observable<any[]>;
   itemUsers: Observable<any[]>;
-  itemMembres: Observable<any[]>;
   itemDocuments: Observable<any[]>;
-  itemCommentaires: Observable<any[]>;
+
+  navigationSubscription: any;
+  membreGroupes: any;
+  users: any;
+
+  uid: any[] = [];
+  tab: any[] = [];
 
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
     public authService: AuthService,
-    private db: AngularFireDatabase,
-    public uploadService: FileUploadService,
-    public commentaireService: CommentaireService,
-    public datepipe: DatePipe,
-    public postService: PostService
+    public membreService: MembreService
   ) {
-    this.items = firestore.collection(`posts`).valueChanges();
-    this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    // subscribe to the router events. Store the subscription so we can
+    // unsubscribe later.
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    // If it is a NavigationEnd event re-initalise the component
+    if (e instanceof NavigationEnd) {
+      this.initialiseInvites();
+      }
+    });
     this.itemUsers = firestore.collection(`users`).valueChanges();
-    this.itemMembres = firestore.collection(`membres`).valueChanges();
-    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
-    this.itemCommentaires = firestore.collection(`commentaires`).valueChanges();
   }
 
   ngOnInit(): void {
+  }
+
+  initialiseInvites(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.value = this.activatedRoute.snapshot.paramMap.get('value');
-    console.log(this.value);
+    // Set default values and re-fetch any data you need.
+    this.retrieveGroupeMembre();
+  }
+
+  ngOnDestroy(): void{
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  retrieveGroupeMembre(): void {
+    this.authService.getRecherchePseudo(this.value).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.users = data;
+      this.uid.push(this.users[0].uid);
+      if (this.users.length !== 0) {
+        this.membreService.getGroupe(this.id, this.uid[0]).snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c =>
+              ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+            )
+          )
+        ).subscribe(doc => {
+          this.membreGroupes = doc;
+        });
+      }
+    });
+  }
+
+  rechercher(value: string): any {
+    this.router.navigate(['/groupe', this.id, 'recherche-membre', value]);
   }
 
 }
