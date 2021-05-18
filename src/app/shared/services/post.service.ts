@@ -25,7 +25,7 @@ export class PostService {
     this.postDateRef = afs.collection<Post>('posts', ref => ref.orderBy('date', 'desc'));
    }
 
-   getAll(): AngularFirestoreCollection<Post> {
+  getAll(): AngularFirestoreCollection<Post> {
     return this.postsRef;
   }
 
@@ -44,6 +44,10 @@ export class PostService {
   getRechercheTitre(value: string, idGroupe: string): AngularFirestoreCollection<Post> {
     this.rechercheTitreRef = this.afs.collection<Post>('posts', ref => ref.where('titre', '==', value).where('idGroupe', '==', idGroupe));
     return this.rechercheTitreRef;
+  }
+
+  getPostUser(uid: string): AngularFirestoreCollection<Post> {
+    return this.afs.collection<Post>('posts', ref => ref.where('idCreateur', '==', uid));
   }
 
   create(post: Post): any {

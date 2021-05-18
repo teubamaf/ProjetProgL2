@@ -173,5 +173,8 @@ export class AuthService {
     return this.recherchePseudoRef;
   }
 
-}
+  getUser(uid: string): AngularFirestoreCollection<User> {
+    return this.afs.collection<User>('users', ref => ref.where('uid', '==', uid));
+  }
 
+}

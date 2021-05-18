@@ -31,10 +31,13 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a [routerLink]="['/profil', this.uid]" title="Voir mon profil">Voir mon profil</a>
+                                    </li>
+                                    <li>
                                         <a href="#" routerLink="/dashboard" title="Profil">Gérer mon profil</a>
                                     </li>
                                     <li>
-                                        <a href="#" title="Select this card">Liste d'amis</a>
+                                        <a routerLink="/list-amis" title="Liste d'amis">Liste d'amis</a>
                                     </li>
                                     <li>
                                         <a href="#" title="Deconnexion" (click)="authService.SignOut()">Déconnexion</a>

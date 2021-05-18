@@ -1,0 +1,17 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <h2>Mon profil</h2>
+            <div *ngFor="let user of users">
+                {{user.displayName}}
+                <img [src]="user.photoUrl" />
+            </div>
+            <h2>Mes publications récentes</h2>
+        </div>
+    </div>
+</div>

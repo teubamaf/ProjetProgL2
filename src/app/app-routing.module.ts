@@ -42,6 +42,8 @@ import { RechercheGroupeComponent } from './components/recherche-groupe/recherch
 import { RecherchePostComponent } from './components/recherche-post/recherche-post.component';
 import { RechercheMembreComponent } from './components/recherche-membre/recherche-membre.component';
 import { RechercheDocumentComponent } from './components/recherche-document/recherche-document.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { ListAmisComponent } from './components/list-amis/list-amis.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -78,8 +80,10 @@ const routes: Routes = [
   { path: 'groupe/:id/recherche-post/:value', component: RechercheGroupeComponent },
   { path: 'groupe/:id/recherche-membre/:value', component: RechercheMembreComponent },
   { path: 'groupe/:id/recherche-publications/:value', component: RecherchePostComponent },
-  { path: 'groupe/:id/recherche-document/:value', component: RechercheDocumentComponent, 
-  runGuardsAndResolvers: 'always' }
+  { path: 'groupe/:id/recherche-document/:value', component: RechercheDocumentComponent,
+  runGuardsAndResolvers: 'always' },
+  { path: 'profil/:uid', component: ProfilComponent },
+  { path: 'list-amis', component: ListAmisComponent }
 ];
 
 @NgModule({
