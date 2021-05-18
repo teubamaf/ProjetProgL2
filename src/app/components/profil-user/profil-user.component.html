@@ -6,11 +6,15 @@
     <div class="row">
         <app-left-menu></app-left-menu>
         <div class="container">
-            <h2>Mon profil</h2>
+            <h2>Le profil de </h2>
             <div *ngFor="let user of users">
                 {{user.displayName}}
                 <img [src]="user.photoUrl" />
-                <h2>Mes publications : </h2>
+                <form>
+                    <button type="button" class="btn btn-light" (click)="ajoutAmis()">Ajouter en amis</button>
+                    <button type="button" class="btn btn-light">S'abonner</button>
+                </form>
+                <h2>Les publications : </h2>
                 <div *ngFor="let postUser of postUsers">
                     <div *ngFor="let itemGroupe of itemGroupes | async">
                         <div *ngIf="itemGroupe.id == postUser.idGroupe">
@@ -26,7 +30,7 @@
                     </div>
                     {{ postUser.contenu }} {{ postUser.date }}
                 </div>
-                <h2>Mes groupes: </h2>
+                <h2>Les groupes: </h2>
                 <div *ngFor="let membre of membres">
                     <div *ngFor="let itemGroupe of itemGroupes | async">
                         <div *ngIf="itemGroupe.id == membre.idGroupe">

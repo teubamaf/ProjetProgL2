@@ -1,1 +1,39 @@
-<p>list-amis works!</p>
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+        <app-left-menu></app-left-menu>
+        <div class="container">
+            <h2>Ma liste d'amis</h2>
+            <div *ngFor="let userAmi of userAmis">
+                <div *ngIf="userAmi.uid1 == this.uid">
+                    <ul>
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="itemUser.uid == userAmi.uid2">
+                                <li>{{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /></li>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div *ngFor="let ami of amis">
+                <div *ngIf="ami.uid2 == this.uid">
+                    <ul>
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="itemUser.uid == ami.uid1">
+                                <li>{{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> </li>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div *ngIf="userAmis.length == 0">
+                <div *ngIf="amis.length == 0">
+                    Il semblerait que vous n'ayez pas d'amis....
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

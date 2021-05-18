@@ -86,6 +86,7 @@ import { RechercheDocumentComponent } from './components/recherche-document/rech
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ListAmisComponent } from './components/list-amis/list-amis.component';
+import { ProfilUserComponent } from './components/profil-user/profil-user.component';
 
 
 const appRoutes: Routes = [
@@ -183,7 +184,8 @@ const customNotifierOptions: NotifierOptions = {
     RecherchePostComponent,
     RechercheDocumentComponent,
     ProfilComponent,
-    ListAmisComponent
+    ListAmisComponent,
+    ProfilUserComponent
   ],
   imports: [
     BrowserModule,

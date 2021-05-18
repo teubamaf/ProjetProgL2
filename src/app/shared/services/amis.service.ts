@@ -29,6 +29,14 @@ export class AmisService {
     return this.amisRef;
   }
 
+  getById(uid: string): AngularFirestoreCollection<Amis> {
+    return this.afs.collection<Amis>('amis', ref => ref.where('uid1', '==', uid));
+  }
+
+  getByUid(uid: string): AngularFirestoreCollection<Amis> {
+    return this.afs.collection<Amis>('amis', ref => ref.where('uid2', '==', uid));
+  }
+
   create(amis: Amis): any {
     return this.amisRef.add({ ...amis })
                           .then((docRef) => {

@@ -3,16 +3,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import Amis from 'src/app/shared/models/amis.model';
+import { AmisService } from 'src/app/shared/services/amis.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MembreService } from 'src/app/shared/services/membre.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css']
+  selector: 'app-profil-user',
+  templateUrl: './profil-user.component.html',
+  styleUrls: ['./profil-user.component.css']
 })
-export class ProfilComponent implements OnInit {
+export class ProfilUserComponent implements OnInit {
 
   id: string;
 
@@ -23,12 +25,17 @@ export class ProfilComponent implements OnInit {
   itemDocuments: Observable<any[]>;
   itemGroupes: Observable<any[]>;
 
+  amis: Amis = new Amis();
+
+  uid = this.authService.userData.uid;
+
   constructor(
     public activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public postService: PostService,
     public firestore: AngularFirestore,
-    public membreService: MembreService
+    public membreService: MembreService,
+    public amisService: AmisService
   ) {
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
@@ -76,6 +83,14 @@ export class ProfilComponent implements OnInit {
       )
     ).subscribe(data => {
       this.membres = data;
+    });
+  }
+
+  ajoutAmis(): void {
+    this.amis.uid1 = this.uid;
+    this.amis.uid2 = this.id;
+    this.amisService.create(this.amis).then(() => {
+      console.log('Created new item successfully!');
     });
   }
 

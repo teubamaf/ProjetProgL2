@@ -44,6 +44,7 @@ import { RechercheMembreComponent } from './components/recherche-membre/recherch
 import { RechercheDocumentComponent } from './components/recherche-document/recherche-document.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ListAmisComponent } from './components/list-amis/list-amis.component';
+import { ProfilUserComponent } from './components/profil-user/profil-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
@@ -83,7 +84,8 @@ const routes: Routes = [
   { path: 'groupe/:id/recherche-document/:value', component: RechercheDocumentComponent,
   runGuardsAndResolvers: 'always' },
   { path: 'profil/:uid', component: ProfilComponent },
-  { path: 'list-amis', component: ListAmisComponent }
+  { path: 'list-amis', component: ListAmisComponent },
+  { path: 'profil-user/:uid', component: ProfilUserComponent }
 ];
 
 @NgModule({
