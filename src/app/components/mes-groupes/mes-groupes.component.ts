@@ -137,15 +137,7 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
   dislikeButtonClick(nb: number, id: string) {
     const nouveau_dislikes = nb-1;
     const data = {
-      nbDislikes : nouveau_dislikes
-    };
-    this.postService.update(id, data);
-  }
-
-  getnbLikes(id: string){
-    const nombreLikeDislike = this.posts.nbDislikes-this.posts.nbLikes;
-    const data = {
-      nbLikesDislike : nombreLikeDislike
+      nbLikes : nouveau_dislikes
     };
     this.postService.update(id, data);
   }
