@@ -109,19 +109,21 @@
                             <mat-card-header>
                                 <ng-container *ngFor="let itemUser of itemUsers | async">
                                     <div *ngIf="itemUser.uid == post.idCreateur">
+                                        
                                         <div class="gauche" mat-card-avatar>
                                             <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
                                         </div>
                                         <div class="droite">
                                             <mat-card-title>
-                                                <p>{{post.titre}} {{post.nbLikes}}</p>
-                                                <p>{{post.nbLikes}}-{{post.nbDislikes}}</p>
+                                                <p>{{post.titre}}</p>
+                                                <div class="likes" [ngStyle]="{'background-color':post.nbLikes < 0 ? 'red' : 'green' }">{{post.nbLikes}}</div>
                                             </mat-card-title>
                                             <div *ngIf="post.idCreateur == itemUser.uid">
                                                 <mat-card-subtitle>Posted by {{ itemUser.displayName }}
                                                 </mat-card-subtitle>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </ng-container>
                             </mat-card-header>
