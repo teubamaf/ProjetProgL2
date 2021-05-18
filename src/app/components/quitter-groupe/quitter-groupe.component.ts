@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { MembreService } from 'src/app/shared/services/membre.service';
 
 import { NotifierService } from 'angular-notifier';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 
 @Component({
   selector: 'app-quitter-groupe',
@@ -31,7 +32,8 @@ export class QuitterGroupeComponent implements OnInit {
     public firestore: AngularFirestore,
     public authService: AuthService,
     public membreService: MembreService,
-    notifierService: NotifierService
+    notifierService: NotifierService,
+    public groupeService: GroupeService
   ) {
     this.items = firestore.collection(`posts`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
@@ -46,13 +48,19 @@ export class QuitterGroupeComponent implements OnInit {
         console.log(this.id);
   }
 
-  quitter(idMembre): void {
+  quitter(idMembre: string, nbMembres: number): void {
+    const quitter = nbMembres -1;
+    const data = {
+      nbMembres: quitter
+    };
+    this.groupeService.update(this.id, data);
     this.membreService.delete(idMembre)
                       .then(() => {
                         console.log('Vous avez quitté le groupe');
                         this.notifier.notify('warning', 'Vous avez quitté le groupe');
                       })
                       .catch(err => console.log(err));
+    this.router.navigate(['/home']);
   }
 
 }

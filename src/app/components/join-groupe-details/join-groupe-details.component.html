@@ -1,9 +1,9 @@
 <div *ngIf="currentGroupe" class="edit-form">
     <h4>Rejoindre le groupe {{currentGroupe.nom}}</h4>
-    <div *ngIf="this.estMembre == true">
+    <div *ngIf="membreGroupes.length != 0">
         Vous êtes déjà membre de ce groupe...
     </div>
-    <div *ngIf="this.estMembre == false">
+    <div *ngIf="membreGroupes.length == 0">
         <div *ngIf="currentGroupe.visibility == 'Privé'">
             Ce groupe est privé, vous ne pouvez pas le rejoindre.
         </div>

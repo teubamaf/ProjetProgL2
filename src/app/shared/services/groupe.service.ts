@@ -39,6 +39,10 @@ export class GroupeService {
     return this.groupesRef;
   }
 
+  getById(id: string): AngularFirestoreCollection<Groupe> {
+    return this.afs.collection<Groupe>('groupes', ref => ref.where('id', '==', id));
+  }
+
   getRechercheNom(value: string): AngularFirestoreCollection<Groupe> {
     this.rechercheNomRef = this.afs.collection<Groupe>('groupes', ref => ref.where('nom', '==', value));
     return this.rechercheNomRef;

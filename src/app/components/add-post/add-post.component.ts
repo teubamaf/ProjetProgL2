@@ -15,6 +15,7 @@ import Groupe from 'src/app/shared/models/groupe.model';
 import Document from 'src/app/shared/models/document.model';
 
 import { NotifierService } from 'angular-notifier';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-add-post',
@@ -50,6 +51,10 @@ export class AddPostComponent implements OnInit {
   selectedFiles?: FileList;
   percentage = 0;
 
+  groupes: any;
+  tab: any[] = [];
+
+
   constructor(
     private postService: PostService,
     public authService: AuthService,
@@ -58,7 +63,6 @@ export class AddPostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public datepipe: DatePipe,
     public fileService: FileService,
-
     notifierService: NotifierService
 
     ) {
@@ -75,7 +79,12 @@ export class AddPostComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
-  savePost(): void {
+  savePost(nbPost: number): void {
+    const nouveau = nbPost + 1;
+    const data = {
+      nbPosts: nouveau
+    };
+    this.groupeService.update(this.id, data);
     this.post.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     this.post.idCreateur = this.uid;
     this.post.idGroupe = this.id;

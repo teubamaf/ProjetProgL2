@@ -13,7 +13,7 @@
                     <div *ngFor="let itemMembre of itemMembres | async">
                         <div *ngIf="itemMembre.idGroupe == id">
                             <div *ngIf="itemMembre.uid == this.uid">
-                                <button type="button" class="btn btn-danger" (click)="quitter(itemMembre.id)">Quitter le groupe</button>
+                                <button type="button" class="btn btn-danger" (click)="quitter(itemMembre.id, itemGroupe.nbMembres)">Quitter le groupe</button>
                             </div>
                         </div>
                     </div>

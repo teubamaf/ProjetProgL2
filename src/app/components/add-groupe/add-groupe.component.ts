@@ -50,6 +50,8 @@ export class AddGroupeComponent implements OnInit {
   }
 
   saveGroupe(): void {
+    this.groupe.nbMembres = 1;
+    this.groupe.nbPosts = 0;
     this.printedOption = this.selectedOption;
     this.groupe.type = this.printedOption;
     this.groupe.idCreateur = this.uid;

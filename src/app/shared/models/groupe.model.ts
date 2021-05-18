@@ -5,4 +5,6 @@ export default class Groupe {
     photoUrl: string;
     idCreateur: string;
     visibility: string;
+    nbMembres: number;
+    nbPosts: number;
 }

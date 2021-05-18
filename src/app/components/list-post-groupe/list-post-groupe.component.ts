@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { GroupeService } from 'src/app/shared/services/groupe.service';
 import { PostService } from 'src/app/shared/services/post.service';
 
 @Component({
@@ -32,7 +33,8 @@ export class ListPostGroupeComponent implements OnInit {
     public firestore: AngularFirestore,
     public postService: PostService,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    public groupeService: GroupeService
   ) {
     this.items = firestore.collection(`groupes`).valueChanges();
     this.itemPosts = firestore.collection(`post`).valueChanges();
@@ -60,7 +62,12 @@ export class ListPostGroupeComponent implements OnInit {
     });
   }
 
-  DeletePost(idPost: string): any {
+  DeletePost(idPost: string, nbPost: number): any {
+    const nouveau = nbPost - 1;
+    const data = {
+      nbPosts: nouveau
+    };
+    this.groupeService.update(this.id, data);
     this.postService.delete(idPost);
   }
 

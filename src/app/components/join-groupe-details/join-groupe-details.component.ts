@@ -10,6 +10,8 @@ import { MembreService } from 'src/app/shared/services/membre.service';
 import { Router } from '@angular/router';
 
 import { NotifierService } from 'angular-notifier';
+import { map } from 'rxjs/operators';
+import { ImportsNotUsedAsValues } from 'typescript';
 
 
 @Component({
@@ -32,6 +34,7 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
   membreCollection: AngularFirestoreCollection<Membre>;
   myArray: any[] = [];
   estMembre = true;
+  membreGroupes: any;
 
   constructor(
     public groupeService: GroupeService,
@@ -53,38 +56,35 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.message = '';
     this.currentGroupe = { ...this.groupe };
+    console.log(this.currentGroupe.nbMembres);
     this.est_Membre(this.currentGroupe.id, this.uid);
-    this.estMembre = (this.est_Membre(this.currentGroupe.id, this.uid));
   }
 
-  est_Membre(idGroupe: string, uid: string): boolean {
-    this.firestore.collection(`membres`, ref => ref.where('idGroupe', '==', idGroupe)).get().subscribe(snap => {
-      snap.forEach(doc => {
-        this.myArray.push(doc.data());
-        this.myArray.forEach(doc => {
-          if (doc.uid === this.uid) {
-            this.estMembre = true;
-          }
-          else {
-            this.estMembre = false;
-          }
-        });
-      });
+  est_Membre(idGroupe: string, uid: string): void {
+    this.membreService.getGroupe(idGroupe, uid).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(doc => {
+      this.membreGroupes = doc;
+      console.log(this.membreGroupes);
     });
-    return this.estMembre;
-    }
+  }
 
   saveMembre(): void {
-    if (this.est_Membre(this.currentGroupe.id, this.uid) === false) {
-      this.membre.idGroupe = this.currentGroupe.id;
-      this.membre.uid = this.uid;
-      this.membreService.create(this.membre).then(() => {
-        this.notifier.notify('success', 'Vous avez rejoint le groupe avec succès !');
-        this.router.navigate(['/home']);
-      });
-    } else {
-      this.notifier.notify('error', 'Vous êtes déjà membre de ce groupe...');
-    }
+    const nouveau = this.currentGroupe.nbMembres + 1;
+    const data = {
+      nbMembres: nouveau
+    };
+    this.groupeService.update(this.currentGroupe.id, data);
+    this.membre.idGroupe = this.currentGroupe.id;
+    this.membre.uid = this.uid;
+    this.membreService.create(this.membre).then(() => {
+      this.notifier.notify('success', 'Vous avez rejoint le groupe avec succès !');
+      this.router.navigate(['/home']);
+    });
   }
 }
 
