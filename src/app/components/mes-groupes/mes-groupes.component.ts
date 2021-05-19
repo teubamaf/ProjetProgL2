@@ -23,6 +23,8 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
   itemUsers: Observable<any[]>;
   itemMembres: Observable<any[]>;
   itemDocuments: Observable<any[]>;
+  likeimg: String;
+  dislikeimg: string;
 
   commentaire: Commentaire = new Commentaire();
 
@@ -47,7 +49,9 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.itemMembres = firestore.collection(`membres`).valueChanges();
-    this.itemDocuments = firestore.collection(`uploads`).valueChanges();
+    this.itemDocuments = firestore.collection(`uploads`).valueChanges()
+    this.likeimg="https://img.icons8.com/officel/80/000000/filled-like.png";
+    this.dislikeimg="https://img.icons8.com/officel/80/000000/dislike.png";
     // subscribe to the router events. Store the subscription so we can
     // unsubscribe later.
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -60,6 +64,8 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
 
   public id: string;
   fileUploads?: any[];
+  
+  
 
   ngOnInit(): void {
   }

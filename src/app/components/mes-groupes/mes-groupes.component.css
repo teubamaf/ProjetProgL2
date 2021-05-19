@@ -47,6 +47,12 @@ button {
 .likes {
     margin-left: 10px;
     border-radius: 10px;
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
+}
+
+img {
+    background-size: cover;
+    max-width: 500px;
+    max-height: 500px;
 }
