@@ -77,7 +77,7 @@ export class PageAccueilComponent implements OnInit {
     });
     this.retrieveCommentaires();
     this.retrievePosts();
-    this.retrieveChats();
+
   }
 
   saveCommentaire(contenu: string, idPost: string, idGroupe: string): void {
@@ -114,18 +114,4 @@ export class PageAccueilComponent implements OnInit {
       this.posts = data;
     });
   }
-
-  retrieveChats(): void{
-    this.chatService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(data => {
-      this.messages = data;
-      this.notifier.notify('info', 'Nouveau message privé !!');
-    });
-  }
-
 }
