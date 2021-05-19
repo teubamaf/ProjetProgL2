@@ -1,17 +1,17 @@
-.poste{
+.poste {
     max-width: 600px;
     margin-top: 15px;
     margin-left: 50px;
     margin-bottom: 20px;
     box-shadow: 0 0 2px, 10px 5px 5px #424549;
-  }
+}
 
-.titre{
+.titre {
     margin-top: 20px;
     font-size: 25px;
 }
 
-.nomGrp{
+.nomGrp {
     text-align: center;
     margin-left: 45px;
     margin-top: 20px;
@@ -19,7 +19,7 @@
     font-size: 25px;
 }
 
-.titrePage{
+.titrePage {
     text-align: center;
     margin-left: 150px;
     margin-top: 30px;
@@ -27,15 +27,29 @@
     font-size: 40px;
 }
 
-.date{
+.date {
     font-size: 12px;
     font-style: italic;
 }
 
-.photoprofil{
-    float:left  ;
+.photoprofil {
+    float: left;
 }
 
-button{ 
+button {
     margin: 13px;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
 }

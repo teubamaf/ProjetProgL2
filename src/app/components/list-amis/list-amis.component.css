@@ -1,0 +1,15 @@
+.sidebar {
+    margin-top: 20px;
+    height: 100%;
+    padding: 20px;
+    margin-left: 1000px;
+    vertical-align: middle;
+    align-items: right;
+}
+
+.page-container {
+    display: flex;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    vertical-align: middle;
+}

@@ -64,8 +64,6 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
 
   public id: string;
   fileUploads?: any[];
-  
-  
 
   ngOnInit(): void {
   }

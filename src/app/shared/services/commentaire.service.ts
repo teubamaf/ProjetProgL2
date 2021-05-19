@@ -31,6 +31,10 @@ export class CommentaireService {
     return this.commentairesDateRef;
   }
 
+  getGroupe(idGroupe: string): AngularFirestoreCollection<Commentaire> {
+    return this.afs.collection<Commentaire>('commentaires', ref => ref.where('idGroupe', '==', idGroupe));
+  }
+
   create(commentaire: Commentaire): any {
     return this.commentairesRef.add({ ...commentaire })
                           .then((docRef) => {

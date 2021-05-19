@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { map } from 'rxjs/operators';
 import { ImportsNotUsedAsValues } from 'typescript';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -42,11 +43,12 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
     public membreService: MembreService,
     public firestore: AngularFirestore,
     public router: Router,
-    notifierService: NotifierService
+    notifierService: NotifierService,
+    public datepipe: DatePipe
     ) {
       this.items = firestore.collection(`membres`).valueChanges();
       this.notifier = notifierService;
-      }
+    }
 
 
   ngOnInit(): void {
@@ -56,7 +58,6 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.message = '';
     this.currentGroupe = { ...this.groupe };
-    console.log(this.currentGroupe.nbMembres);
     this.est_Membre(this.currentGroupe.id, this.uid);
   }
 
@@ -69,7 +70,6 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
       )
     ).subscribe(doc => {
       this.membreGroupes = doc;
-      console.log(this.membreGroupes);
     });
   }
 
@@ -79,6 +79,7 @@ export class JoinGroupeDetailsComponent implements OnInit, OnChanges {
       nbMembres: nouveau
     };
     this.groupeService.update(this.currentGroupe.id, data);
+    this.membre.dateInscription = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     this.membre.idGroupe = this.currentGroupe.id;
     this.membre.uid = this.uid;
     this.membreService.create(this.membre).then(() => {

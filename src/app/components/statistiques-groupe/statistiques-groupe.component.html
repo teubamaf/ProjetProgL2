@@ -4,10 +4,8 @@
 <!-- Sidebar navigation -->
 <div class="container-fluid">
     <div class="row">
-
         <app-left-menu></app-left-menu>
         <div class="container">
-            <h2>Les statistiques de mon groupe</h2>
             <div class="page-container">
                 <div *ngFor="let itemGroupe of items | async">
                     <div *ngIf="itemGroupe.id == id">
@@ -55,19 +53,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 
-                <div *ngFor="let itemMembre of itemMembres | async">
-                    <div *ngIf="itemMembre.idGroupe == id">
-                        <div *ngIf="itemMembre.uid == this.uid">
-                            <div *ngIf="itemMembre.grade != 'Membre'">
-                                <li class="nav-item">
-                                    <a class="nav-link" [routerLink]="['\groupe-update']">Modifier mon groupe</a>
-                                </li>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            -->
                     <div *ngFor="let itemMembre of itemMembres | async">
                         <div *ngIf="itemMembre.idGroupe == id">
                             <div *ngIf="itemMembre.uid == this.uid">
@@ -92,6 +77,21 @@
                         </div>
                     </div>
                 </ul>
+                <div *ngFor="let item of items | async">
+                    <div *ngIf="item.id == this.id">
+                        <h2>Les statistiques du groupe <strong>{{ item.nom }}</strong></h2>
+                        <p>Nombre de commentaires: {{ this.cpt }}</p>
+                        <p>Nombre de posts: {{ item.nbPosts }} </p>
+                        <p>Nombre de likes: {{ this.cptPost }}</p>
+                        <p>Nombre de membres: {{ item.nbMembres }}</p>
+                        <p>Nombre de nouveau membre ce mois-ci: {{ this.cpt5/2 }}</p>
+                        <p>Nombre de nouveau post ce mois-ci: {{ this.cp5 }}</p>
+                        <p>Membre le plus actif: Nelchel</p>
+                        <p>Nombre de mention j'aime moyen (par post): {{ this.cptPost/item.nbPosts }}</p>
+                        <p>Score moyen par post: {{ this.cptPt/item.nbPosts }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>

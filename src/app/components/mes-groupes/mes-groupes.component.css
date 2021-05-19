@@ -51,8 +51,29 @@ button {
     width: 35px;
 }
 
-img {
+.photo {
+    margin-left: 30px;
     background-size: cover;
     max-width: 500px;
     max-height: 500px;
+}
+
+input {
+    height: 35px;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    width: 1000px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
 }

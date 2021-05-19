@@ -3,4 +3,5 @@ export default class Membre {
     uid: string;
     idGroupe: string;
     grade: string;
+    dateInscription: string;
 }

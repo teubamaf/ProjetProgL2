@@ -20,6 +20,10 @@ export class MembreService {
     return this.membresRef;
   }
 
+  getMembreDate(idGroupe: string): AngularFirestoreCollection<Membre> {
+    return this.afs.collection<Membre>('membres', ref => ref.where('idGroupe', '==', idGroupe).orderBy('dateInscription', 'desc'));
+  }
+
   getMembreGroupe(idGroupe: string): AngularFirestoreCollection<Membre> {
     return this.afs.collection<Membre>('membres', ref => ref.where('idGroupe', '==', idGroupe));
   }
