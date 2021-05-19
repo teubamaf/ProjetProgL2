@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AbonnementService } from 'src/app/shared/services/abonnement.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { MembreService } from 'src/app/shared/services/membre.service';
 import { PostService } from 'src/app/shared/services/post.service';
@@ -19,19 +20,24 @@ export class ProfilComponent implements OnInit {
   users: any;
   postUsers: any;
   membres: any;
+  abonnements: any;
+  abonne: any;
 
   itemDocuments: Observable<any[]>;
   itemGroupes: Observable<any[]>;
+  itemUsers: Observable<any[]>;
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public postService: PostService,
     public firestore: AngularFirestore,
-    public membreService: MembreService
+    public membreService: MembreService,
+    public abonnementService: AbonnementService
   ) {
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
+    this.itemUsers = firestore.collection(`users`).valueChanges();
   }
 
   ngOnInit(): void {
@@ -40,6 +46,8 @@ export class ProfilComponent implements OnInit {
     this.retrieveUser();
     this.retrievePostUser();
     this.retrieveMembre();
+    this.retrieveAbonnement();
+    this.retrieveAbonne();
   }
 
   retrieveUser(): void {
@@ -76,6 +84,31 @@ export class ProfilComponent implements OnInit {
       )
     ).subscribe(data => {
       this.membres = data;
+    });
+  }
+
+  retrieveAbonnement(): void {
+    this.abonnementService.getById(this.id).snapshotChanges().pipe(
+      map(changes => 
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.abonnements = data;
+    });
+  }
+
+  retrieveAbonne(): void {
+    this.abonnementService.getByUid(this.id).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.abonne = data;
+      console.log(this.abonne);
     });
   }
 

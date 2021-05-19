@@ -109,7 +109,7 @@
                             <mat-card-header>
                                 <ng-container *ngFor="let itemUser of itemUsers | async">
                                     <div *ngIf="itemUser.uid == post.idCreateur">
-                                        
+
                                         <div class="gauche" mat-card-avatar>
                                             <img src={{itemUser.photoUrl}} class="rounded-circle" width="50" height="50">
                                         </div>
@@ -123,13 +123,13 @@
                                                 </mat-card-subtitle>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </ng-container>
                             </mat-card-header>
                             <div class="photo" *ngFor="let file of itemDocuments | async">
                                 <div *ngIf="file.id == post.idDocument">
-                                    <img src="{{file.url}}" height="400px" />
+                                    <img src="{{file.url}}" />
                                 </div>
                             </div>
                             <mat-card-content>
@@ -145,8 +145,8 @@
                                 <button type="button" class="btn btn-success" (click)="saveCommentaire(commentaire.value, post.id)">Submit</button>
                             </div>
                             <div class="btn-toolbar">
-                                <button  type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="likeButtonClick(post.nbLikes, post.id)">Like</button>
-                                <button  type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="dislikeButtonClick(post.nbLikes, post.id)" style="background-color: red;border-color: red;">Dislike</button>
+                                <button type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="likeButtonClick(post.nbLikes, post.id)">Like</button>
+                                <button type="button" id="btnSubmit" class="btn btn-primary btn-sm" (click)="dislikeButtonClick(post.nbLikes, post.id)" style="background-color: red;border-color: red;">Dislike</button>
                                 <button type="button" id="btnCancel" class="btn btn-primary btn-sm">Share</button>
                             </div>
                             <h3>Commentaires:</h3>
