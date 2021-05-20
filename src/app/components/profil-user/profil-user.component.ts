@@ -85,7 +85,6 @@ export class ProfilUserComponent implements OnInit {
       )
     ).subscribe(data => {
       this.postUsers = data;
-      console.log(this.postUsers);
     });
   }
 
@@ -118,7 +117,7 @@ export class ProfilUserComponent implements OnInit {
   }
 
   retrieveAbonnement(): void {
-    this.abonnementService.getByUid(this.id).snapshotChanges().pipe(
+    this.abonnementService.getByUide(this.id, this.uid).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -126,11 +125,12 @@ export class ProfilUserComponent implements OnInit {
       )
     ).subscribe(data => {
       this.abonnements = data;
+      console.log(this.abonnements)
     });
   }
 
   retrieveAbonne(): void {
-    this.abonnementService.getByUid(this.id).snapshotChanges().pipe(
+    this.abonnementService.getByUide(this.id, this.uid).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -138,12 +138,12 @@ export class ProfilUserComponent implements OnInit {
       )
     ).subscribe(data => {
       this.abonner = data;
-      console.log(this.abonne);
+      console.log(this.abonner);
     });
   }
 
   retrieveAmis1(): void {
-    this.amisService.getById(this.id).snapshotChanges().pipe(
+    this.amisService.getByIde(this.id, this.uid).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -151,11 +151,12 @@ export class ProfilUserComponent implements OnInit {
       )
     ).subscribe(data => {
       this.amis1 = data;
+      console.log(this.amis1);
     });
   }
 
   retrieveAmis2(): void {
-    this.amisService.getByUid(this.id).snapshotChanges().pipe(
+    this.amisService.getByUide(this.id, this.uid).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -163,6 +164,7 @@ export class ProfilUserComponent implements OnInit {
       )
     ).subscribe(data => {
       this.amis2 = data;
+      console.log(this.amis2);
     });
   }
 

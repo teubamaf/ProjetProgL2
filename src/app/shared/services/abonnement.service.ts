@@ -33,6 +33,14 @@ export class AbonnementService {
     return this.afs.collection<Abonnement>('abonnements', ref => ref.where('uidAbonne', '==', uid));
   }
 
+  getByIde(id: string, uid: string): AngularFirestoreCollection<Abonnement> {
+    return this.afs.collection<Abonnement>('abonnements', ref => ref.where('uidAbonne', '==', id).where('uid', '==', uid));
+  }
+
+  getByUide(id: string, uid: string): AngularFirestoreCollection<Abonnement> {
+    return this.afs.collection<Abonnement>('abonnements', ref => ref.where('uidAbonne', '==', uid).where('uid', '==', id));
+  }
+
   getByUid(uid: string): AngularFirestoreCollection<Abonnement> {
     return this.afs.collection<Abonnement>('abonnements', ref => ref.where('uid', '==', uid));
   }

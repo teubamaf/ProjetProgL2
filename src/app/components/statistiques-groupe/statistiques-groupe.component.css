@@ -13,3 +13,11 @@
     margin-top: -900px;
     margin-left: 70px;
 }
+
+h2 {
+    text-align: center;
+}
+
+.card {
+    width: 200px;
+}

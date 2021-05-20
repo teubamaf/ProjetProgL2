@@ -84,7 +84,28 @@
                         <div *ngFor="let item of items | async">
                             <div *ngIf="item.id == this.id">
                                 <h2>Les statistiques du groupe <strong>{{ item.nom }}</strong></h2>
-                                <p>Nombre de commentaires: {{ this.cpt }}</p>
+                                <div class="d-inline">
+                                    <mat-card class="card">
+                                        <mat-card-header>
+                                            <mat-card-title>Nombre de commentaires:</mat-card-title>
+                                            <mat-card-subtitle>Au total</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <p>{{ this.cpt }}</p>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div class="d-inline">
+                                    <mat-card class="card">
+                                        <mat-card-header>
+                                            <mat-card-title>Nombre de publications:</mat-card-title>
+                                            <mat-card-subtitle>Au total</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <p>{{ item.nbPosts }}</p>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
                                 <p>Nombre de posts: {{ item.nbPosts }} </p>
                                 <p>Nombre de likes: {{ this.cptPost }}</p>
                                 <p>Nombre de membres: {{ item.nbMembres }}</p>
