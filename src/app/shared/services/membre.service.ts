@@ -36,6 +36,10 @@ export class MembreService {
     return this.afs.collection<Membre>(`membres`, ref => ref.where('uid', '==', uid));
   }
 
+  getAdmin(uid: string): AngularFirestoreCollection<Membre> {
+    return this.afs.collection<Membre>(`membres`, ref => ref.where('uid', '==', uid).where('grade', '==', 'Administrateur'));
+  }
+
   create(membre: Membre): any {
     return this.membresRef.add({ ...membre })
                         .then((docRef) => {

@@ -3,15 +3,13 @@
     height: 26px;
 }
 
-
-.users-card{
+.users-card {
     max-width: 20%;
     margin-left: 10px;
     display: inline-block;
 }
 
-
-.chat-content{
+.chat-content {
     border-radius: 5px;
     border: solid 0.5px #424549;
     padding-right: 5px;
@@ -20,13 +18,29 @@
     padding-bottom: 5px;
 }
 
-.date{
+.date {
     display: inline-block;
     font-size: 10px;
     font-style: italic;
     margin-left: 10px;
 }
 
-.formControl{
+.formControl {
     max-width: 100%;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    width: 1000px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
 }

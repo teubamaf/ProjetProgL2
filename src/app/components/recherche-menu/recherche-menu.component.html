@@ -4,38 +4,45 @@
 <!-- Sidebar navigation -->
 <div class="container-fluid">
     <div class="row">
+
         <app-left-menu></app-left-menu>
-        <div class="container">
-            <h2>Les résultats de ma recherche : {{ this.value }}</h2>
-            <div *ngFor="let groupeNom of groupeNoms">
-                <div *ngIf="groupeNom.nom == this.value">
-                    <div *ngFor="let itemUser of itemUsers | async">
-                        <div *ngIf="itemUser.uid == groupeNom.idCreateur">
-                            <h3>Communauté: </h3>
-                            {{ groupeNom.nom }}
-                            <img [src]="groupeNom.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> {{ groupeNom.type }} {{ groupeNom.visibility }} {{ groupeNom.displayName }}
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h2>Les résultats de ma recherche : {{ this.value }}</h2>
+                    <div *ngFor="let groupeNom of groupeNoms">
+                        <div *ngIf="groupeNom.nom == this.value">
+                            <div *ngFor="let itemUser of itemUsers | async">
+                                <div *ngIf="itemUser.uid == groupeNom.idCreateur">
+                                    <h3>Communauté: </h3>
+                                    {{ groupeNom.nom }}
+                                    <img [src]="groupeNom.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> {{ groupeNom.type }} {{ groupeNom.visibility }} {{ groupeNom.displayName }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div *ngFor="let groupeType of groupeTypes">
-                <div *ngFor="let itemUser of itemUsers | async">
-                    <div *ngIf="itemUser.uid == groupeType.idCreateur">
-                        <h3>Communauté: </h3>
-                        {{ groupeType.nom }}
-                        <img [src]="groupeType.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> {{ groupeType.type }} {{ groupeType.visibility }} {{ groupeType.displayName }}
+                    <div *ngFor="let groupeType of groupeTypes">
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="itemUser.uid == groupeType.idCreateur">
+                                <h3>Communauté: </h3>
+                                {{ groupeType.nom }}
+                                <img [src]="groupeType.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /> {{ groupeType.type }} {{ groupeType.visibility }} {{ groupeType.displayName }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div *ngFor="let userPseudo of userPseudos">
-                <h3>Utilisateurs: </h3>
-                {{ userPseudo.displayName }} <img [src]="userPseudo.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
-                <a [routerLink]="['/profil-user', userPseudo.uid]">Voir le profil</a>
-            </div>
-            <div *ngIf="groupeNoms.length == 0">
-                <div *ngIf="groupeTypes.length == 0">
-                    <div *ngIf="userPseudos.length == 0">
-                        <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
+                    <div *ngFor="let userPseudo of userPseudos">
+                        <h3>Utilisateurs: </h3>
+                        {{ userPseudo.displayName }} <img [src]="userPseudo.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
+                        <a [routerLink]="['/profil-user', userPseudo.uid]">Voir le profil</a>
+                    </div>
+                    <div *ngIf="groupeNoms.length == 0">
+                        <div *ngIf="groupeTypes.length == 0">
+                            <div *ngIf="userPseudos.length == 0">
+                                <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

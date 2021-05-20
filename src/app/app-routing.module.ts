@@ -14,14 +14,12 @@ import { AuthGuard } from '././shared/guard/auth.guard';
 import { PageAccueilComponent } from '././components/page-accueil/page-accueil.component';
 import { GroupesListComponent } from '././components/groupes-list/groupes-list.component';
 import { MesMessagesComponent } from '././components/mes-messages/mes-messages.component';
-import { AllGroupesPostComponent } from '././components/all-groupes-post/all-groupes-post.component';
 import { AddGroupeComponent } from '././components/add-groupe/add-groupe.component';
 import { GroupeDetailsComponent } from '././components/groupe-details/groupe-details.component';
 import { MesGroupesComponent } from '././components/mes-groupes/mes-groupes.component';
 
 import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
-import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
 import { ListMembresComponent } from './components/list-membres/list-membres.component';
 import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
 import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
@@ -56,12 +54,10 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'mes-groupes', component: GroupesListComponent},
   { path: 'mes-messages', component: MesMessagesComponent},
-  { path: 'fil-actualite', component: AllGroupesPostComponent},
   { path: 'add-groupe', component: AddGroupeComponent },
   { path: 'update-groupe', component: GroupeDetailsComponent },
   { path: 'groupe/:id', component: MesGroupesComponent },
   { path: 'rejoindre_groupe', component: RejoindreGroupeComponent },
-  { path: 'groupe/:id/menu-add-post', component: MenuAddPostComponent },
   { path: 'groupe/:id/add-post', component: AddPostComponent},
   { path: 'groupe/:id/list-membre-groupe', component: ListMembresComponent },
   { path: 'groupe/:id/list-post-groupe', component: ListPostGroupeComponent },
@@ -72,7 +68,6 @@ const routes: Routes = [
   { path: 'create-conversation', component: CreateConversationComponent },
   { path: 'conversation-list', component: ConversationListComponent },
   { path: 'conversation/:id', component: ChatsComponent },
-  { path: 'mes-messages', component: MesMessagesComponent },
   { path: 'create-groupe-conversation', component: CreateGroupeChatComponent },
   { path: 'conversation-groupe/:id', component: ChatsGroupeComponent },
   { path: 'conversation-groupe/:id/invite-user', component: InviteUserChatComponent },

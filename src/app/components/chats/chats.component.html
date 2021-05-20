@@ -6,38 +6,43 @@
     <div class="row">
 
         <app-left-menu></app-left-menu>
-        <div class="container">
-            <div *ngFor="let tabi of myArray">
-                <div *ngIf="this.uid == tabi.uidCrea">
-                    <h1>Conversation avec {{ tabi.pseudo }}</h1>
-                </div>
-                <div *ngIf="this.uid == tabi.uid">
-                    <h1>Conversation avec {{ tabi.pseudoCrea }}</h1>
-                </div>
-            </div>
-            
-            <div *ngFor="let message of messages">
-                <div *ngFor="let itemUser of itemUsers | async">
-                    <div *ngIf="message.idConversation == this.id">
-                        <div *ngIf="itemUser.uid == message.uid">
-                            <mat-card class="messagestyle">
-                                <mat-card-title class="name">{{ itemUser.displayName }}</mat-card-title>
-                                <mat-card-content class="content">{{ message.message }}</mat-card-content>
-                                <mat-card-subtitle class="date">{{ message.date }}</mat-card-subtitle>
-                            </mat-card>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <div *ngFor="let tabi of myArray">
+                        <div *ngIf="this.uid == tabi.uidCrea">
+                            <h1>Conversation avec {{ tabi.pseudo }}</h1>
+                        </div>
+                        <div *ngIf="this.uid == tabi.uid">
+                            <h1>Conversation avec {{ tabi.pseudoCrea }}</h1>
                         </div>
                     </div>
+                    <div *ngFor="let message of messages">
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="message.idConversation == this.id">
+                                <div *ngIf="itemUser.uid == message.uid">
+                                    <mat-card class="messagestyle">
+                                        <mat-card-title class="name">{{ itemUser.displayName }}</mat-card-title>
+                                        <mat-card-content class="content">{{ message.message }}</mat-card-content>
+                                        <mat-card-subtitle class="date">{{ message.date }}</mat-card-subtitle>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="sticky-footer">
+                        <div class="sendMessage">
+                            <form class="send">
+                                <input type="text" id="message" placeholder="Ecrire votre message ici" #message>
+                                <input type="hidden" value="{{ this.currentDate | date:'dd/MM/yyyy, HH:mm:ss'}}" #date>
+                                <button class="succes" (click)="saveMessage(message.value, date.value); resetForm()" type="button">Send</button>
+                            </form>
+                        </div>
+                    </footer>
                 </div>
             </div>
-            <footer class="sticky-footer">
-                <div class="sendMessage">
-                <form class="send">
-                    <input type="text" id="message" placeholder="Ecrire votre message ici" #message>
-                    <input type="hidden" value="{{ this.currentDate | date:'dd/MM/yyyy, HH:mm:ss'}}" #date>
-                    <button class="succes" (click)="saveMessage(message.value, date.value); resetForm()" type="button">Send</button>
-                </form>
-            </div>
-            </footer>
         </div>
     </div>
 </div>

@@ -4,73 +4,80 @@
 <!-- Sidebar navigation -->
 <div class="container-fluid">
     <div class="row">
+
         <app-left-menu></app-left-menu>
-        <div class="container">
-            <h2>Mon profil</h2>
-            <div *ngFor="let user of users">
-                {{user.displayName}}
-                <img [src]="user.photoUrl" />
-                <h2>Mes abonnements: </h2>
-                <div *ngFor="let abonnement of abonnements">
-                    <ul>
-                        <div *ngFor="let itemUser of itemUsers | async">
-                            <div *ngIf="itemUser.uid == abonnement.uid">
-                                <li>
-                                    <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
-                                    <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
-                                </li>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h2>Mon profil</h2>
+                    <div *ngFor="let user of users">
+                        {{user.displayName}}
+                        <img [src]="user.photoUrl" />
+                        <h2>Mes abonnements: </h2>
+                        <div *ngFor="let abonnement of abonnements">
+                            <ul>
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="itemUser.uid == abonnement.uid">
+                                        <li>
+                                            <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
+                                            <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                        <div *ngIf="abonnements.length == 0">
+                            Vous n'avez aucun abonnement...
+                        </div>
+                        <h2>Mes abonnés: </h2>
+                        <div *ngFor="let abonn of abonne">
+                            <ul>
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="itemUser.uid == abonn.uidAbonne">
+                                        <li>
+                                            <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
+                                            <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                        <div *ngIf="abonne.length == 0">
+                            Vous n'avez aucun abonné ...
+                        </div>
+                        <h2>Mes publications : </h2>
+                        <div *ngFor="let postUser of postUsers">
+                            <div *ngFor="let itemGroupe of itemGroupes | async">
+                                <div *ngIf="itemGroupe.id == postUser.idGroupe">
+                                    {{ itemGroupe.nom }}
+                                </div>
+                            </div>
+                            <h3>Publication: </h3>
+                            {{ postUser.titre }}
+                            <div class="photo" *ngFor="let file of itemDocuments | async">
+                                <div *ngIf="file.id == postUser.idDocument">
+                                    <img src="{{file.url}}" width="30%" />
+                                </div>
+                            </div>
+                            {{ postUser.contenu }} {{ postUser.date }}
+                        </div>
+                        <div *ngIf="postUsers.length == 0">
+                            Vous n'avez pas posté de publications pour le moment...
+                        </div>
+                        <h2>Mes groupes: </h2>
+                        <div *ngFor="let membre of membres">
+                            <div *ngFor="let itemGroupe of itemGroupes | async">
+                                <div *ngIf="itemGroupe.id == membre.idGroupe">
+                                    {{ itemGroupe.nom }}
+                                </div>
                             </div>
                         </div>
-                    </ul>
-                </div>
-                <div *ngIf="abonnements.length == 0">
-                    Vous n'avez aucun abonnement...
-                </div>
-                <h2>Mes abonnés: </h2>
-                <div *ngFor="let abonn of abonne">
-                    <ul>
-                        <div *ngFor="let itemUser of itemUsers | async">
-                            <div *ngIf="itemUser.uid == abonn.uidAbonne">
-                                <li>
-                                    <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
-                                    <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
-                                </li>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-                <div *ngIf="abonne.length == 0">
-                    Vous n'avez aucun abonné ...
-                </div>
-                <h2>Mes publications : </h2>
-                <div *ngFor="let postUser of postUsers">
-                    <div *ngFor="let itemGroupe of itemGroupes | async">
-                        <div *ngIf="itemGroupe.id == postUser.idGroupe">
-                            {{ itemGroupe.nom }}
+                        <div *ngIf="membres.length == 0">
+                            Vous n'avez aucun groupe...
                         </div>
                     </div>
-                    <h3>Publication: </h3>
-                    {{ postUser.titre }}
-                    <div class="photo" *ngFor="let file of itemDocuments | async">
-                        <div *ngIf="file.id == postUser.idDocument">
-                            <img src="{{file.url}}" width="30%" />
-                        </div>
-                    </div>
-                    {{ postUser.contenu }} {{ postUser.date }}
-                </div>
-                <div *ngIf="postUsers.length == 0">
-                    Vous n'avez pas posté de publications pour le moment...
-                </div>
-                <h2>Mes groupes: </h2>
-                <div *ngFor="let membre of membres">
-                    <div *ngFor="let itemGroupe of itemGroupes | async">
-                        <div *ngIf="itemGroupe.id == membre.idGroupe">
-                            {{ itemGroupe.nom }}
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="membres.length == 0">
-                    Vous n'avez aucun groupe...
                 </div>
             </div>
         </div>

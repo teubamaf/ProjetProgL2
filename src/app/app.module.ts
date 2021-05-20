@@ -29,21 +29,17 @@ import { MenuComponent } from './components/menu/menu.component';
 import { PageAccueilComponent } from './components/page-accueil/page-accueil.component';
 import { MesGroupesComponent } from './components/mes-groupes/mes-groupes.component';
 import { MesMessagesComponent } from './components/mes-messages/mes-messages.component';
-import { AllGroupesPostComponent } from './components/all-groupes-post/all-groupes-post.component';
 
 import { AddGroupeComponent } from './components/add-groupe/add-groupe.component';
 import { GroupeDetailsComponent } from './components/groupe-details/groupe-details.component';
 import { GroupesListComponent } from './components/groupes-list/groupes-list.component';
 
 import { AddPostComponent } from './components/add-post/add-post.component';
-import { PostDetailsComponent } from './components/post-details/post-details.component';
-import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
 import { RejoindreGroupeComponent } from './components/rejoindre-groupe/rejoindre-groupe.component';
 import { JoinGroupeDetailsComponent } from './components/join-groupe-details/join-groupe-details.component';
-import { MenuAddPostComponent } from './components/menu-add-post/menu-add-post.component';
 import { ListMembresComponent } from './components/list-membres/list-membres.component';
 import { ListPostGroupeComponent } from './components/list-post-groupe/list-post-groupe.component';
 import { UpdateGroupeComponent } from './components/update-groupe/update-groupe.component';
@@ -70,7 +66,6 @@ import { DatePipe } from '@angular/common';
 import { CreateConversationComponent } from './components/create-conversation/create-conversation.component';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { ChatsComponent } from './components/chats/chats.component';
-import { CommentaireComponent } from './components/commentaire/commentaire.component';
 import { CreateGroupeChatComponent } from './components/create-groupe-chat/create-groupe-chat.component';
 import { GroupChatListComponent } from './components/group-chat-list/group-chat-list.component';
 import { ChatsGroupeComponent } from './components/chats-groupe/chats-groupe.component';
@@ -149,16 +144,12 @@ const customNotifierOptions: NotifierOptions = {
     PageAccueilComponent,
     MesGroupesComponent,
     MesMessagesComponent,
-    AllGroupesPostComponent,
     AddGroupeComponent,
     GroupeDetailsComponent,
     GroupesListComponent,
     AddPostComponent,
-    PostDetailsComponent,
-    PostsListComponent,
     RejoindreGroupeComponent,
     JoinGroupeDetailsComponent,
-    MenuAddPostComponent,
     ListMembresComponent,
     ListPostGroupeComponent,
     UpdateGroupeComponent,
@@ -170,7 +161,6 @@ const customNotifierOptions: NotifierOptions = {
     UploadDetailsComponent,
     CreateConversationComponent,
     ConversationListComponent,
-    CommentaireComponent,
     CreateGroupeChatComponent,
     GroupChatListComponent,
     ChatsGroupeComponent,

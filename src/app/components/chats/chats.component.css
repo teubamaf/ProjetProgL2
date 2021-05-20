@@ -1,44 +1,60 @@
-.messagestyle{
+.messagestyle {
     margin-bottom: 10px;
 }
 
-.content{
+.content {
     font-size: 14px;
 }
 
-.name{
+.name {
     font-size: 15px;
 }
 
-.date{
+.date {
     font-size: 10px;
 }
 
-.sendMessage{
+.sendMessage {
     border-top: 1px solid #c4c4c4;
-	position: relative;
+    position: relative;
 }
 
-.send input{
+.send input {
     border-radius: 10px;
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	border: solid grey 1px;
-	color: #4c4c4c;
-	font-size: 15px;
-	min-height: 48px;
-	width: 100%;
+    border: solid grey 1px;
+    color: #4c4c4c;
+    font-size: 15px;
+    min-height: 48px;
+    width: 100%;
 }
 
 .succes {
-    background:#424549 none repeat scroll 0 0;
-	border: medium none;
-	border-radius: 50%;
-	color: #fff;
-	cursor: pointer;
-	font-size: 10px;
-	height: 35px;
-	position: absolute;
-	right: 8px;
+    background: #424549 none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 10px;
+    height: 35px;
+    position: absolute;
+    right: 8px;
     top: 7px;
-	width: 35px;
+    width: 35px;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    width: 1000px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
 }
