@@ -44,7 +44,10 @@ export class MembreService {
     return this.membresRef.add({ ...membre })
                         .then((docRef) => {
                           this.updateId(docRef.id);
-                          this.updateGrade(docRef.id);
+                          console.log(membre.grade);
+                          if (membre.grade !== 'Administrateur') {
+                            this.updateGrade(docRef.id);
+                          }
                         });
   }
 

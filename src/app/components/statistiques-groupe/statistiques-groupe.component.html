@@ -84,36 +84,77 @@
                         <div *ngFor="let item of items | async">
                             <div *ngIf="item.id == this.id">
                                 <h2>Les statistiques du groupe <strong>{{ item.nom }}</strong></h2>
-                                <div class="d-inline">
-                                    <mat-card class="card">
-                                        <mat-card-header>
-                                            <mat-card-title>Nombre de commentaires:</mat-card-title>
-                                            <mat-card-subtitle>Au total</mat-card-subtitle>
-                                        </mat-card-header>
-                                        <mat-card-content>
-                                            <p>{{ this.cpt }}</p>
-                                        </mat-card-content>
-                                    </mat-card>
+                                <mat-card class="card" id="marge-gauche">
+                                    <mat-card-header>
+                                        <mat-card-title>Nombre de commentaires:</mat-card-title>
+                                        <mat-card-subtitle>au total</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ this.cpt }}</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <mat-card class="card">
+                                    <mat-card-header>
+                                        <mat-card-title>Nombre de publications:</mat-card-title>
+                                        <mat-card-subtitle>au total</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ item.nbPosts }}</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <mat-card class="card">
+                                    <mat-card-header>
+                                        <mat-card-title>Nombre de « Mention J'aime » :</mat-card-title>
+                                        <mat-card-subtitle>au total</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ this.cptPost }}</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <mat-card class="card">
+                                    <mat-card-header>
+                                        <mat-card-title>Nombre de Membres :</mat-card-title>
+                                        <mat-card-subtitle>au total</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ item.nbMembres }}</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <div class="chart-wrapper">
+                                    <canvas height="100px" baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" chartType="line" [plugins]="lineChartPlugins">
+                                    </canvas>
                                 </div>
-                                <div class="d-inline">
-                                    <mat-card class="card">
-                                        <mat-card-header>
-                                            <mat-card-title>Nombre de publications:</mat-card-title>
-                                            <mat-card-subtitle>Au total</mat-card-subtitle>
-                                        </mat-card-header>
-                                        <mat-card-content>
-                                            <p>{{ item.nbPosts }}</p>
-                                        </mat-card-content>
-                                    </mat-card>
+                                <div class="chart-wrapper">
+                                    <canvas height="100px" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels2" [options]="lineChartOptions2" [colors]="lineChartColors2" [legend]="lineChartLegend2" chartType="line" [plugins]="lineChartPlugins2">
+                                    </canvas>
                                 </div>
-                                <p>Nombre de posts: {{ item.nbPosts }} </p>
-                                <p>Nombre de likes: {{ this.cptPost }}</p>
-                                <p>Nombre de membres: {{ item.nbMembres }}</p>
-                                <p>Nombre de nouveau membre ce mois-ci: {{ this.cpt5/2 }}</p>
-                                <p>Nombre de nouveau post ce mois-ci: {{ this.cp5 }}</p>
-                                <p>Membre le plus actif: Nelchel</p>
-                                <p>Nombre de mention j'aime moyen (par post): {{ this.cptPost/item.nbPosts }}</p>
-                                <p>Score moyen par post: {{ this.cptPt/item.nbPosts }}</p>
+                                <mat-card class="card" id="card-bot">
+                                    <mat-card-header>
+                                        <mat-card-title>Membre le plus actif :</mat-card-title>
+                                        <mat-card-subtitle>nombre de post total</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>Nelchel</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <mat-card class="card" id="card-mid">
+                                    <mat-card-header>
+                                        <mat-card-title>« Mention J'aime » :</mat-card-title>
+                                        <mat-card-subtitle>moyen par post</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ this.cptPost/item.nbPosts }}</p>
+                                    </mat-card-content>
+                                </mat-card>
+                                <mat-card class="card" id="card-right">
+                                    <mat-card-header>
+                                        <mat-card-title>Score :</mat-card-title>
+                                        <mat-card-subtitle>moyen par post</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>{{ this.cptPt/item.nbPosts }}</p>
+                                    </mat-card-content>
+                                </mat-card>
                             </div>
                         </div>
                     </div>

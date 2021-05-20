@@ -1,7 +1,7 @@
 .content {
     float: left;
     height: 100%;
-    width: 1000px;
+    width: 1100px;
     border-right: 1px dashed #CCC;
     padding: 20px;
     vertical-align: middle;
@@ -16,8 +16,46 @@
 
 h2 {
     text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .card {
-    width: 200px;
+    width: 230px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#marge-gauche {
+    margin-left: 20px;
+}
+
+#card-bot,
+#card-mid,
+#card-right {
+    width: 300px;
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 50px;
+}
+
+#card-bot {
+    margin-left: 35px;
+}
+
+.chart-wrapper {
+    margin-top: 30px;
+}
+
+mat-card p {
+    text-align: right;
+    font-size: 40px;
+}
+
+mat-card-subtitle {
+    font-style: italic;
+}
+
+mat-card-title {
+    font-size: 24px;
 }

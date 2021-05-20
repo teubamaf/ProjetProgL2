@@ -58,8 +58,8 @@ export class GroupeService {
                           .then((docRef) => {
                             this.updateId(docRef.id);
                             this.membre.idGroupe = docRef.id;
-                            this.membre.uid = this.uid;
                             this.membre.grade = 'Administrateur';
+                            this.membre.uid = this.uid;
                             this.membreService.create(this.membre);
                           });
   }

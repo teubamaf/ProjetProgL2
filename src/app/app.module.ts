@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 // Firebase services + enviorment module
 import { AngularFireModule } from '@angular/fire';
@@ -188,6 +189,7 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    ChartsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

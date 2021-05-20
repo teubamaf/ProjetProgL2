@@ -9,6 +9,8 @@ import { CommentaireService } from 'src/app/shared/services/commentaire.service'
 import { FileService } from 'src/app/shared/services/file.service';
 import { MembreService } from 'src/app/shared/services/membre.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-statistiques-groupe',
@@ -62,6 +64,109 @@ export class StatistiquesGroupeComponent implements OnInit {
   tab: any[] = [];
   tmp: any[][number] = [];
   tabi: any[] = [];
+
+    lineChartData: ChartDataSets[];
+
+    lineChartLabels: Label[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+    lineChartOptions = {
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Nombre de nouveaux membres par mois'
+      },
+      scales: { yAxes:
+        [{
+          display: true,
+          stacked: true,
+          ticks: {
+            min: 0,
+            max: 50,
+            fontColor: 'rgba(0,0,0,0.5)',
+            fontStyle: 'bold',
+            beginAtZero: true,
+            padding: 10
+          },
+          gridLines: {
+              drawTicks: false,
+              display: false
+
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+              zeroLineColor: 'transparent'
+          },
+          ticks: {
+              padding: 20,
+              fontColor: 'rgba(0,0,0,0.5)',
+              fontStyle: 'bold'
+          }
+        }]
+      }
+    };
+
+    lineChartColors: Color[] = [
+    {
+
+    },
+  ];
+
+    lineChartLegend = false;
+    lineChartPlugins = [];
+    lineChartType = 'line';
+
+    lineChartData2: ChartDataSets[];
+
+    // tslint:disable-next-line:max-line-length
+    lineChartLabels2: Label[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+    lineChartOptions2 = {
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Nombre de nouvelles publications par mois'
+      },
+      scales: { yAxes:
+        [{
+          display: true,
+          stacked: true,
+          ticks: {
+            min: 0,
+            max: 50,
+            fontColor: 'rgba(0,0,0,0.5)',
+            fontStyle: 'bold',
+            beginAtZero: true,
+            padding: 10
+          },
+          gridLines: {
+              drawTicks: false,
+              display: false
+
+          }
+        }],
+        xAxes: [{
+          gridLines: {
+              zeroLineColor: 'transparent'
+          },
+          ticks: {
+              padding: 20,
+              fontColor: 'rgba(0,0,0,0.5)',
+              fontStyle: 'bold'
+          }
+        }]
+      }
+    };
+
+    lineChartColors2: Color[] = [
+    {
+
+    },
+  ];
+
+    lineChartLegend2 = false;
+    lineChartPlugins2 = [];
+    lineChartType2 = 'line';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -157,6 +262,24 @@ export class StatistiquesGroupeComponent implements OnInit {
         else if (mois === 12) {
           this.cp12 = this.cp12 + 1;
         }
+        this.lineChartData2 = [
+          {
+            borderColor: '#5DADE2',
+            pointBorderColor: '#5DADE2',
+            pointBackgroundColor: '#5DADE2',
+            pointHoverBackgroundColor: '#5DADE2',
+            pointHoverBorderColor: '#5DADE2',
+            pointBorderWidth: 3,
+            pointHoverRadius: 10,
+            pointHoverBorderWidth: 1,
+            pointRadius: 3,
+            backgroundColor: '#6FD2E7',
+            fill: true,
+            borderWidth: 4,
+            // tslint:disable-next-line:max-line-length
+            data: [this.cp1, this.cp2, this.cp3, this.cp4, this.cp5, this.cp6, this.cp7, this.cp8, this.cp9, this.cp10, this.cp11, this.cp12]
+          },
+        ];
       });
     });
   }
@@ -211,6 +334,24 @@ export class StatistiquesGroupeComponent implements OnInit {
         else if (mois === 12) {
           this.cpt12 = this.cpt12 + 1;
         }
+        this.lineChartData = [
+          {
+            borderColor: '#5DADE2',
+            pointBorderColor: '#5DADE2',
+            pointBackgroundColor: '#5DADE2',
+            pointHoverBackgroundColor: '#5DADE2',
+            pointHoverBorderColor: '#5DADE2',
+            pointBorderWidth: 3,
+            pointHoverRadius: 10,
+            pointHoverBorderWidth: 1,
+            pointRadius: 3,
+            backgroundColor: '#6FD2E7',
+            fill: true,
+            borderWidth: 4,
+            // tslint:disable-next-line:max-line-length
+            data: [this.cpt1, this.cpt2, this.cpt3, this.cpt4, this.cpt5, this.cpt6, this.cpt7, this.cpt8, this.cpt9, this.cpt10, this.cpt11, this.cpt12]
+          },
+        ];
       });
     });
   }
