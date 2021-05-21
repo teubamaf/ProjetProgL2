@@ -51,7 +51,8 @@
                                         <div *ngIf="itemUser.uid == abonnement.uid">
                                             <li class="abo">
                                                 <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
-                                                <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                                <a [routerLink]="['/profil-user', itemUser.uid]"><img class="profil"
+                                                    src="https://img.icons8.com/small/32/000000/parse-resumes.png" /></a>
                                             </li>
                                         </div>
                                     </div>

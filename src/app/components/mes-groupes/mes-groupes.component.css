@@ -2,10 +2,6 @@
     max-width: 600px;
 }
 
-.titre {
-    margin-top: 10px;
-    font-size: 25px;
-}
 
 .date {
     font-size: 12px;
@@ -45,8 +41,8 @@ button {
 }
 
 .likes {
+    display:inline-block;
     margin-left: 10px;
-    border-radius: 10px;
     height: 35px;
     width: 35px;
 }
