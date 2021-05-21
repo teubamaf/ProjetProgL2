@@ -17,7 +17,7 @@
                         <img [src]="user.photoUrl" />
                         <form>
                             <div *ngFor="let item of abonnements">
-                                <div *ngIf="item.uidAbonne == this.uid">
+                                <div *ngIf="item.uidAbonne == this.id">
                                     <button type="button" class="btn btn-light" (click)="deleteAbonnements(item.id)">Se désabonner</button>
                                 </div>
                             </div>

@@ -1,16 +1,19 @@
 <div class="page-container">
     <div class="sidebar">
         <div class="container">
-            <h2>Ma liste d'amis</h2>
+            <div class="inner-header flex">
+                <h2>Ma liste d'amis</h2>
+            </div>
             <div *ngFor="let userAmi of userAmis">
                 <div *ngIf="userAmi.uid1 == this.uid">
-                    <ul>
+                    <ul class="list-group">
                         <div *ngFor="let itemUser of itemUsers | async">
                             <div *ngIf="itemUser.uid == userAmi.uid2">
-                                <li>
-                                    {{ itemUser.displayName }}
-                                    <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
-                                    <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                <li class="list-group-item">
+                                    <img id="user1" [src]="itemUser.photoUrl" class="rounded-circle" />
+                                    <p>{{ itemUser.displayName }}</p>
+                                    <a><img class='icon' id="left" src="https://i.ibb.co/dmR7FVb/discuter.png"></a>
+                                    <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
                                 </li>
                             </div>
                         </div>
@@ -19,13 +22,14 @@
             </div>
             <div *ngFor="let ami of amis">
                 <div *ngIf="ami.uid2 == this.uid">
-                    <ul>
+                    <ul class="list-group">
                         <div *ngFor="let itemUser of itemUsers | async">
                             <div *ngIf="itemUser.uid == ami.uid1">
-                                <li>
-                                    {{ itemUser.displayName }}
-                                    <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
-                                    <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                <li class="list-group-item">
+                                    <img id="user2" [src]="itemUser.photoUrl" class="rounded-circle" />
+                                    <p>{{ itemUser.displayName }}</p>
+                                    <a><img class='icon' src="https://i.ibb.co/dmR7FVb/discuter.png"></a>
+                                    <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
                                 </li>
                             </div>
                         </div>
