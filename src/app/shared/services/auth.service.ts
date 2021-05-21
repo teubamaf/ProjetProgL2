@@ -20,6 +20,7 @@ export class AuthService {
   recherchePseudoRef: AngularFirestoreCollection<User>;
 
   loginRef: any;
+  users: any;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -50,10 +51,11 @@ export class AuthService {
   SignIn(email: string, password: string): any {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
+        this.updateUser(result.user.uid);
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
       });
@@ -155,6 +157,10 @@ export class AuthService {
   }
 
   updateEnLigne(uid: string): any {
+    this.afs.collection('users').doc(uid).update({ enLigne: true });
+  }
+
+  updateUser(uid: string): any {
     this.afs.collection('users').doc(uid).update({ enLigne: true });
   }
 
