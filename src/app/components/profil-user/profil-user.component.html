@@ -13,12 +13,13 @@
                 <div class="container">
                     <h2>Le profil de </h2>
                     <div *ngFor="let user of users">
-                        {{user.displayName}}
-                        <img [src]="user.photoUrl" />
-                        <form>
+                        <img class="avatar" [src]="user.photoUrl" />
+                        <div class="utilisateur">{{user.displayName}}</div>
+                        <form class="buttonfriend">
                             <div *ngFor="let item of abonnements">
                                 <div *ngIf="item.uidAbonne == this.uid">
-                                    <button type="button" class="btn btn-light" (click)="deleteAbonnements(item.id)">Se désabonner</button>
+                                    <button type="button" class="btn btn-light" (click)="deleteAbonnements(item.id)">Se
+                                        désabonner</button>
                                 </div>
                             </div>
                             <div *ngIf="abonnements.length == 0">
@@ -26,75 +27,95 @@
                             </div>
                             <div *ngIf="amis1.length == 0">
                                 <div *ngIf="amis2.length == 0">
-                                    <button type="button" class="btn btn-light" (click)="ajoutAmis()">Ajouter en amis</button>
+                                    <button type="button" class="btn btn-light" (click)="ajoutAmis()">Ajouter en
+                                        amis</button>
                                 </div>
                             </div>
                             <div *ngFor="let ami1 of amis1">
                                 <div *ngIf="ami1.uid2 == this.uid">
-                                    <button type="button" class="btn btn-light" (click)="deleteAmis(ami1.id)">Retirer des amis</button>
+                                    <button type="button" class="btn btn-light" (click)="deleteAmis(ami1.id)">Retirer
+                                        des amis</button>
                                 </div>
                             </div>
                             <div *ngFor="let ami2 of amis2">
                                 <div *ngIf="ami2.uid1 == this.uid">
-                                    <button type="button" class="btn btn-light" (click)="deleteAmis(ami2.id)">Retirer des amis</button>
+                                    <button type="button" class="btn btn-light" (click)="deleteAmis(ami2.id)">Retirer
+                                        des amis</button>
                                 </div>
                             </div>
                         </form>
-                        <h2>Les abonnements: </h2>
-                        <div *ngFor="let abonnement of abonnements">
-                            <ul>
-                                <div *ngFor="let itemUser of itemUsers | async">
-                                    <div *ngIf="itemUser.uid == abonnement.uid">
-                                        <li>
-                                            <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
-                                            <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
-                                        </li>
+                        <div class="listeningabo">
+                            <h2>Les abonnements: </h2>
+                            <div *ngFor="let abonnement of abonnements">
+                                <ul class="listeAbo">
+                                    <div *ngFor="let itemUser of itemUsers | async">
+                                        <div *ngIf="itemUser.uid == abonnement.uid">
+                                            <li class="abo">
+                                                <img src="{{itemUser.photoUrl}}" class="rounded-circle"
+                                                    style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
+                                                <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div *ngIf="abonnements.length == 0">
+                                Vous n'avez aucun abonnement...
+                            </div>
+                        </div>
+                        <div class="listeningabo">
+                            <h2>Les abonnés: </h2>
+                            <div *ngFor="let abonn of abonner">
+                                <ul class="listeAbo">
+                                    <div *ngFor="let itemUser of itemUsers | async">
+                                        <div *ngIf="itemUser.uid == abonn.uidAbonne">
+                                            <li class="abo">
+                                                <img src="{{itemUser.photoUrl}}" class="rounded-circle"
+                                                    style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
+                                                <a [routerLink]="['/profil-user', itemUser.uid]"><img class="profil"
+                                                    src="https://img.icons8.com/small/32/000000/parse-resumes.png" /></a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <div *ngIf="abonner.length == 0">
+                                Vous n'avez aucun abonné ...
+                            </div>
+                        </div>
+                        <div class="publication">
+                            <h2>Les publications : </h2>
+                            <div *ngFor="let postUser of postUsers">
+                                <div *ngFor="let itemGroupe of itemGroupes | async">
+                                    <div *ngIf="itemGroupe.id == postUser.idGroupe">
+                                        {{ itemGroupe.nom }}
                                     </div>
                                 </div>
-                            </ul>
-                        </div>
-                        <div *ngIf="abonnements.length == 0">
-                            Vous n'avez aucun abonnement...
-                        </div>
-                        <h2>Les abonnés: </h2>
-                        <div *ngFor="let abonn of abonner">
-                            <ul>
-                                <div *ngFor="let itemUser of itemUsers | async">
-                                    <div *ngIf="itemUser.uid == abonn.uidAbonne">
-                                        <li>
-                                            <img src="{{itemUser.photoUrl}}" class="rounded-circle" style="width: 35px; height: 35px;"> {{ itemUser.displayName }}
-                                            <a [routerLink]="['/profil-user', itemUser.uid]">Voir le profil</a>
-                                        </li>
+                                <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+                                <mat-card class="card">
+                                    <mat-card-header>
+                                        <mat-card-title>{{ postUser.titre }}</mat-card-title>
+                                        <mat-card-subtitle>{{ postUser.date }}</mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                    <div class="photo" *ngFor="let file of itemDocuments | async">
+                                        <div *ngIf="file.id == postUser.idDocument">
+                                            <img src="{{file.url}}" width="80%" />
+                                        </div>
                                     </div>
-                                </div>
-                            </ul>
-                        </div>
-                        <div *ngIf="abonner.length == 0">
-                            Vous n'avez aucun abonné ...
-                        </div>
-                        <h2>Les publications : </h2>
-                        <div *ngFor="let postUser of postUsers">
-                            <div *ngFor="let itemGroupe of itemGroupes | async">
-                                <div *ngIf="itemGroupe.id == postUser.idGroupe">
-                                    {{ itemGroupe.nom }}
-                                </div>
+                                    {{ postUser.contenu }}
+                                </mat-card-content>
+                                </mat-card>
                             </div>
-                            <h3>Publication: </h3>
-                            {{ postUser.titre }}
-                            <div class="photo" *ngFor="let file of itemDocuments | async">
-                                <div *ngIf="file.id == postUser.idDocument">
-                                    <img src="{{file.url}}" width="30%" />
-                                </div>
                             </div>
-                            {{ postUser.contenu }} {{ postUser.date }}
-                        </div>
-                        <div *ngIf="postUsers.length == 0">
-                            L'utilisateur n'a posté aucune publication pour le moment...
+                            <div *ngIf="postUsers.length == 0">
+                                L'utilisateur n'a posté aucune publication pour le moment...
+                            </div>
                         </div>
                         <h2>Les groupes: </h2>
-                        <div *ngFor="let membre of membres">
+                        <div class="listeGroupe" *ngFor="let membre of membres">
                             <div *ngFor="let itemGroupe of itemGroupes | async">
-                                <div *ngIf="itemGroupe.id == membre.idGroupe">
+                                <div class="groupe" *ngIf="itemGroupe.id == membre.idGroupe">
                                     {{ itemGroupe.nom }}
                                 </div>
                             </div>
