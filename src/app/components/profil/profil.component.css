@@ -1,15 +1,71 @@
-.content {
-    float: left;
-    height: 100%;
-    width: 1100px;
-    border-right: 1px dashed #CCC;
-    padding: 20px;
-    vertical-align: middle;
+h2{
+    margin-top: 10px;
 }
 
-.flex {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -900px;
-    margin-left: 70px;
+.listeAbo{
+    width: 20%;
+}
+
+.abo:hover{
+    border-radius: 15px;
+    border: 1px solid rgb(58, 58, 189);
+}
+
+
+
+.abo{
+    margin-left: -40px;
+    list-style:none;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid;
+    background-color: lightblue;
+    font-size: 13px;
+    grid-gap: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.listeGroupe{
+    max-width: 20%;
+    display: inline-block;
+}
+
+.groupe:hover{
+    border-radius: 15px;
+    border: 1px solid rgb(58, 58, 189);
+}
+
+.groupe{
+    margin-right: 38px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid;
+    background-color: lightblue;
+    font-size: 13px;
+    grid-gap: 10px;
+    border: 1px solid transparent;
+  cursor: pointer;
+}
+
+
+.avatar{
+    border: 2px solid rgb(58, 58, 189);
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+}
+
+.utilisateur{
+    font-size: 25px;
+    margin-left: 25px;
+    display: inline-block;
+    font-family: sans-serif;
+}
+
+.card{
+    text-align: center;
+    width: 200px;
+    height: 250px;
 }
