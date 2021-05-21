@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { GroupeService } from 'src/app/shared/services/groupe.service';
@@ -16,6 +17,7 @@ import { PostService } from 'src/app/shared/services/post.service';
 export class ListPostGroupeComponent implements OnInit {
 
   id: string;
+
   myArray: any[] = [];
   tab: any[] = [];
   tabUsers: any[] = [];
@@ -27,6 +29,8 @@ export class ListPostGroupeComponent implements OnInit {
   itemDocuments: Observable<any[]>;
 
   uid = this.authService.userData.uid;
+
+  posts: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,19 +50,18 @@ export class ListPostGroupeComponent implements OnInit {
   ngOnInit(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
-    this.firestore.collection(`posts`, ref => ref.where('idGroupe', '==', this.id)).get().subscribe(snap => {
-      snap.forEach(doc => {
-        this.myArray.push(doc.data());
-      });
-      this.tab = Array.from(new Set(this.myArray));
-      this.tab.forEach(docs => {
-        const users = this.firestore.collection(`users`, ref => ref.where('uid', '==', docs.idCreateur)).get().subscribe(snaps => {
-          snaps.forEach(docGroupe => {
-            this.tabUsers.push(docGroupe.data());
-          });
-        });
-      });
+    this.retrievePost();
+  }
+
+  retrievePost(): void {
+    this.postService.getPost(this.id).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.posts = data;
     });
   }
 

@@ -54,3 +54,79 @@ button {
     flex-wrap: wrap;
     margin-top: -900px;
 }
+
+mat-card-subtitle {
+    display: inline-block;
+}
+
+.profil {
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+.par {
+    margin-left: 60px;
+    margin-top: -40px;
+}
+
+.date {
+    margin-left: 60px;
+    margin-top: -15px;
+}
+
+.groupe {
+    margin-left: 375px;
+    margin-top: -40px;
+}
+
+mat-card-title {
+    text-align: center;
+    font-size: 26px;
+    font-family: Lato;
+}
+
+mat-card-content {
+    font-family: Lato;
+    font-size: 16px;
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+mat-card-content p {
+    margin-top: 20px;
+}
+
+mat-card-content img {
+    max-width: 550px;
+    margin-top: 20px;
+    border-radius: 2px;
+}
+
+button {
+    border: 1px black;
+    width: 75px;
+    background: transparent;
+    border: none !important;
+    display: inline-block;
+}
+
+.marg {
+    margin-top: 10px;
+}
+
+button img {
+    margin-left: -50px;
+    margin-top: 10px;
+}
+
+input {
+    width: 450px;
+    height: 45px;
+    margin-top: 40px;
+}
+
+.upload {
+    margin-left: 20px;
+    margin-top: -30px;
+}
