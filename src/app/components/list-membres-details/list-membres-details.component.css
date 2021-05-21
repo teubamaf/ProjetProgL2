@@ -1,0 +1,17 @@
+.edit-form{
+    
+    width: 410px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 5px;
+    margin-top: 39px;
+    border: 1px solid lightgray;
+    box-shadow: 5px 5px 5px rgb(184, 178, 178);
+
+}
+
+button{
+    margin-left: 5px;
+}
