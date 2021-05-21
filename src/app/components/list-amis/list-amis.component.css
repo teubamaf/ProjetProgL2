@@ -3,7 +3,7 @@
     margin-top: 0px;
     height: 100%;
     padding: 20px;
-    margin-left: 1100px;
+    margin-left: 1200px;
     align-items: right;
 }
 
@@ -25,7 +25,8 @@ h2 {
 
 li {
     margin-bottom: 10px;
-    width: 300px;
+    width: 310px;
+    border-radius: 10px;
 }
 
 p,
