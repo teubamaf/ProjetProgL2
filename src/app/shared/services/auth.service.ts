@@ -53,7 +53,7 @@ export class AuthService {
         this.ngZone.run(() => {
           this.router.navigate(['home']);
         });
-        // this.SetUserData(result.user);
+        this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
       });
@@ -122,7 +122,8 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoUrl: 'https://i.ibb.co/RPBQX9z/1517547117016.jpg',
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
+      enLigne: true
     };
     return userRef.set(userData, {
       merge: true
@@ -135,6 +136,7 @@ export class AuthService {
     }).catch((error) => {
       console.error('Error removing document: ', error);
     });
+    this.updateHorsLigne(this.userData.uid);
     localStorage.removeItem('user');
     this.router.navigate(['sign-in']);
   }
@@ -142,6 +144,7 @@ export class AuthService {
   // Sign out
   SignOut(): any {
     return this.afAuth.signOut().then(() => {
+      this.updateHorsLigne(this.userData.uid);
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     });
@@ -149,6 +152,14 @@ export class AuthService {
 
   UpdateUser(uid: string, newDisplayName: string, newEmail: string, newPhotoUrl: string): any {
     this.afs.collection('users').doc(uid).update({ displayName: newDisplayName, email: newEmail, photoUrl: newPhotoUrl });
+  }
+
+  updateEnLigne(uid: string): any {
+    this.afs.collection('users').doc(uid).update({ enLigne: true });
+  }
+
+  updateHorsLigne(uid: string): any {
+    this.afs.collection('users').doc(uid).update({ enLigne: false });
   }
 
   ReadUser(uid: string): any {

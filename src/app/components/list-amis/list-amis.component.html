@@ -13,8 +13,16 @@
                                     <li class="list-group-item">
                                         <img id="user1" [src]="itemUser.photoUrl" class="rounded-circle" />
                                         <p>{{ itemUser.displayName }}</p>
-                                        <a><img class='icon' id="left" src="https://i.ibb.co/dmR7FVb/discuter.png"></a>
+                                        <button type="button" (click)="getPseudoCrea(itemUser.displayName, itemUser.uid)">
+                                                    <img src="https://i.ibb.co/dmR7FVb/discuter.png">
+                                        </button>
                                         <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
+                                        <div class="log" id="true" *ngIf="itemUser.enLigne == true">
+                                            ● En Ligne
+                                        </div>
+                                        <div class="log" id="false" *ngIf="itemUser.enLigne == false">
+                                            ● Hors Ligne
+                                        </div>
                                     </li>
                                 </div>
                             </div>
@@ -29,7 +37,9 @@
                                     <li class="list-group-item">
                                         <img id="user2" [src]="itemUser.photoUrl" class="rounded-circle" />
                                         <p>{{ itemUser.displayName }}</p>
-                                        <a><img class='icon' src="https://i.ibb.co/dmR7FVb/discuter.png"></a>
+                                        <button type="button" (click)="getPseudoCrea(itemUser.displayName, itemUser.uid)">
+                                            <img src="https://i.ibb.co/dmR7FVb/discuter.png">
+                                        </button>
                                         <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
                                     </li>
                                 </div>

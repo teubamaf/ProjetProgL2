@@ -4,4 +4,5 @@ export interface User {
     displayName: string;
     photoUrl: string;
     emailVerified: boolean;
+    enLigne: boolean;
 }

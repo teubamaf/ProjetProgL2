@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { runInZone } from '@ng-bootstrap/ng-bootstrap/util/util';
 import Conversation from '../models/conversation.model';
 import { AuthService } from './auth.service';
 
@@ -27,6 +28,14 @@ export class ConversationService {
 
   getAll(): AngularFirestoreCollection<Conversation> {
     return this.conversationsRef;
+  }
+
+  getConversation(uid: string, id: string): AngularFirestoreCollection<Conversation> {
+    return this.afs.collection('conversations', ref => ref.where('uidCrea', '==', uid).where('uid', '==', id));
+  }
+
+  getConv(uid: string, id: string): AngularFirestoreCollection<Conversation> {
+    return this.afs.collection('conversations', ref => ref.where('uid', '==', uid).where('uidCrea', '==', id));
   }
 
   create(conversation: Conversation): any {
