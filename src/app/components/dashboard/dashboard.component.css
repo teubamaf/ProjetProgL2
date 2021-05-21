@@ -7,7 +7,9 @@
     padding: 20px;
     vertical-align: middle;
 }
-
+.media-body{
+    margin-left: 10px;
+}
 .flex {
     display: flex;
     flex-wrap: wrap;

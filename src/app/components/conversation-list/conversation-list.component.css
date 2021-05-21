@@ -1,4 +1,10 @@
-list-group-item:hover{
-    border: solid 1;
-    background-color: cyan;
+.list-group-item:hover{
+    border: solid 1px rgb(141, 141, 230) ;
+    border-radius: 10px;
+    background-color: lightblue;
+    width: 25%;
+}
+
+.list-group-item{
+    margin-top: 10px;
 }
