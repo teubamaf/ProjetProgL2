@@ -2,7 +2,6 @@
     max-width: 600px;
 }
 
-
 .date {
     font-size: 12px;
     font-style: italic;
@@ -41,7 +40,7 @@ button {
 }
 
 .likes {
-    display:inline-block;
+    display: inline-block;
     margin-left: 10px;
     height: 35px;
     width: 35px;
@@ -73,4 +72,12 @@ input {
     flex-wrap: wrap;
     margin-top: -900px;
     margin-left: 70px;
+}
+
+a {
+    color: black;
+}
+
+ul {
+    margin-left: -25px;
 }

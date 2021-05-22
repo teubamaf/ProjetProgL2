@@ -90,3 +90,11 @@ ul#membre {
     margin-left: 650px;
     margin-top: -220px;
 }
+
+a {
+    color: black;
+}
+
+ul {
+    margin-left: -25px;
+}

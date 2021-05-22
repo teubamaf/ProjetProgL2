@@ -14,3 +14,25 @@
     margin-top: -900px;
     margin-left: 70px;
 }
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: Lato;
+}
+
+button {
+    width: 500px;
+    margin-left: 300px;
+    margin-top: 30px;
+}
+
+a {
+    color: black;
+}
+
+ul {
+    margin-left: -25px;
+}

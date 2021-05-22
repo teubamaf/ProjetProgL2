@@ -61,6 +61,10 @@ export class FileService {
     return this.filesRef;
   }
 
+  getById(idGroupe: string): AngularFirestoreCollection<Document> {
+    return this.afs.collection<Document>('uploads', ref => ref.where('idGroupe', '==', idGroupe));
+  }
+
   getFileName(value: string, id: string): AngularFirestoreCollection<Document> {
     this.fileNomRef = this.afs.collection<Document>('uploads', ref => ref.where('titre', '==', value).where('idGroupe', '==', id));
     return this.fileNomRef;

@@ -84,7 +84,7 @@
                         </ul>
                         <div *ngFor="let itemGroupe of itemGroupes | async">
                             <div *ngIf="itemGroupe.id == id">
-                                <h1>Quitter le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                                <h2>Quitter le groupe <strong>{{itemGroupe.nom}}</strong></h2>
                                 <div *ngFor="let itemMembre of itemMembres | async">
                                     <div *ngIf="itemMembre.idGroupe == id">
                                         <div *ngIf="itemMembre.uid == this.uid">

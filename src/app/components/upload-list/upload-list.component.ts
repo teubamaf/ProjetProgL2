@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FileService } from 'src/app/shared/services/file.service';
+import Document from 'src/app/shared/models/document.model';
 
 @Component({
   selector: 'app-upload-list',
@@ -30,6 +31,8 @@ export class UploadListComponent implements OnInit {
 
   uid = this.authService.userData.uid;
 
+  document: Document;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public firestore: AngularFirestore,
@@ -42,22 +45,16 @@ export class UploadListComponent implements OnInit {
       this.itemUsers = firestore.collection(`users`).valueChanges();
       this.itemMembres = firestore.collection(`membres`).valueChanges();
       this.itemDocuments = firestore.collection(`uploads`).valueChanges();
-     }
+  }
 
-    ngOnInit(): void {
-      // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
-      this.id = this.activatedRoute.snapshot.paramMap.get('id');
-      this.retrieveDocuments();
-    }
-
-  refreshList(): void {
-    this.currentDocument = null;
-    this.currentIndex = -1;
-    this.retrieveDocuments();
+  ngOnInit(): void {
+  // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
+  this.id = this.activatedRoute.snapshot.paramMap.get('id');
+  this.retrieveDocuments();
   }
 
   retrieveDocuments(): void {
-    this.fileService.getAll().snapshotChanges().pipe(
+    this.fileService.getById(this.id).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -68,13 +65,12 @@ export class UploadListComponent implements OnInit {
     });
   }
 
-  setActiveDocument(document: any, index: any): void {
-    this.currentDocument = document;
-    this.currentIndex = index;
-  }
-
   rechercher(value: string): any {
     this.router.navigate(['/groupe', this.id, 'recherche-document', value]);
+  }
+
+  deleteFileUpload(id: string, fileUpload: Document): void {
+    this.fileService.delete(id, fileUpload);
   }
 
 }

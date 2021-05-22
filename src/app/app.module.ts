@@ -50,7 +50,6 @@ import { QuitterGroupeComponent } from './components/quitter-groupe/quitter-grou
 
 import { UploadFormComponent } from './components/upload-form/upload-form.component';
 import { UploadListComponent } from './components/upload-list/upload-list.component';
-import { UploadDetailsComponent } from './components/upload-details/upload-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -159,7 +158,6 @@ const customNotifierOptions: NotifierOptions = {
     QuitterGroupeComponent,
     UploadFormComponent,
     UploadListComponent,
-    UploadDetailsComponent,
     CreateConversationComponent,
     ConversationListComponent,
     CreateGroupeChatComponent,
