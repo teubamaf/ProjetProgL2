@@ -12,7 +12,7 @@
 
             <div class="content">
                 <div class="item">
-                    <p class="titrePage">Liste des dernières publications</p>
+                    <h1>Mon fil d'actualité</h1>
                 </div>
                 <div *ngFor="let itemGroupe of itemGroupes">
                     <div *ngFor="let post of posts">
@@ -39,7 +39,6 @@
                                                 </div>
                                             </div>
                                         </mat-card-content>
-
                                         <div class="btn-toolbar">
                                             <button type="button " id="btnSubmit" class="btn btn-primary btn-sm " style="background-color: rgb(99, 74, 240);border-color: rgb(99, 74, 240);">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
@@ -56,22 +55,32 @@
                                         </div>
                                         <div>
                                             <form>
-                                                <input type="text" placeholder="Écrivez votre réponse..." #commentaire>
+                                                <input type="text" placeholder="Écrivez un commentaire..." #commentaire>
                                                 <button class="upload" (click)="saveCommentaire(commentaire.value, post.id, itemGroupe.id)">
                                                     <img src="https://i.ibb.co/C8KD7n3/upload.png" />
                                                 </button>
                                             </form>
                                         </div>
-                                        <h3>Commentaires:</h3>
-                                        <div *ngFor="let itemUser of itemUsers | async">
-                                            <div *ngFor="let commentaire of commentaires">
-                                                <div *ngIf="commentaire.idCrea == itemUser.uid">
-                                                    <div *ngIf="post.id == commentaire.idPost">
-                                                        {{ itemUser.displayName }}: {{ commentaire.contenu }} // {{ commentaire.date }}
+                                        <mat-card class="coms">
+                                            <div *ngFor="let itemUser of itemUsers | async">
+                                                <div *ngFor="let commentaire of commentaires">
+                                                    <div *ngIf="commentaire.idCrea == itemUser.uid">
+                                                        <div *ngIf="post.id == commentaire.idPost">
+                                                            <mat-card-title>
+                                                                <img id="commstitre" src="{{itemUser.photoUrl}} " class="rounded-circle" width="50px " height="50px " />
+                                                                <p id="tit">{{ itemUser.displayName }}</p>
+                                                            </mat-card-title>
+                                                            <mat-card-subtitle>
+                                                                <p class="commsdate ">{{ commentaire.date }}</p>
+                                                            </mat-card-subtitle>
+                                                            <mat-card-content class="comms ">
+                                                                <p>{{ commentaire.contenu }}</p>
+                                                            </mat-card-content>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </mat-card>
                                     </mat-card>
                                 </div>
                             </div>

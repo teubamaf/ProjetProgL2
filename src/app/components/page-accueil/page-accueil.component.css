@@ -1,9 +1,9 @@
 .poste {
-    max-width: 600px;
+    width: 700px;
     margin-top: 15px;
     margin-left: 50px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 2px, 10px 5px 5px #424549;
+    margin-bottom: 50px;
+    box-shadow: 0 0 2px, 1px 1px 1px #424549;
 }
 
 .titre {
@@ -59,11 +59,6 @@ mat-card-subtitle {
     display: inline-block;
 }
 
-.profil {
-    padding-left: 50px;
-    padding-top: 50px;
-}
-
 .par {
     margin-left: 60px;
     margin-top: -40px;
@@ -75,7 +70,7 @@ mat-card-subtitle {
 }
 
 .groupe {
-    margin-left: 375px;
+    margin-left: 475px;
     margin-top: -40px;
 }
 
@@ -95,10 +90,11 @@ mat-card-content {
 
 mat-card-content p {
     margin-top: 20px;
+    overflow-y: auto;
 }
 
 mat-card-content img {
-    max-width: 550px;
+    max-width: 650px;
     margin-top: 20px;
     border-radius: 2px;
 }
@@ -121,12 +117,62 @@ button img {
 }
 
 input {
-    width: 450px;
+    margin-left: 10px;
+    width: 550px;
     height: 45px;
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .upload {
     margin-left: 20px;
     margin-top: -30px;
+}
+
+h1 {
+    font-size: 30px;
+    font-family: Lato;
+    text-align: center;
+    margin-left: -150px;
+    margin-bottom: 50px;
+}
+
+.comment {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.commsdate {
+    margin-top: -100px;
+    margin-left: 60px;
+    font-style: italic;
+}
+
+.coms {
+    max-height: 200px;
+    overflow-y: auto;
+    display: inline-block;
+    width: 650px;
+    margin: 0
+}
+
+.comms {
+    font-size: 15px;
+    margin-top: -100px;
+    margin-left: 60px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    min-height: 30px;
+    padding-left: 10px;
+}
+
+#commstitre {
+    margin-left: -550px;
+}
+
+#tit {
+    font-size: 13px;
+    margin-left: -430px;
+    margin-top: -40px;
+    margin-bottom: -10px;
 }
