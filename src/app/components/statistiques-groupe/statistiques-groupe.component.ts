@@ -56,6 +56,7 @@ export class StatistiquesGroupeComponent implements OnInit {
   cp11 = 0;
   cp12 = 0;
   compteur = 0;
+  cptDis = 0;
 
   commentaires: any;
   posts: any;
@@ -216,6 +217,7 @@ export class StatistiquesGroupeComponent implements OnInit {
       this.posts = data;
       console.log(this.posts);
       this.posts.forEach(doc => {
+        this.cptDis = this.cptDis + doc.nbDislikes;
         this.cptPt = this.cptPt + doc.nbLikes;
         if (doc.nbLikes > 0) {
           this.cptPost = this.cptPost + doc.nbLikes;

@@ -42,8 +42,11 @@
                         </tbody>
                     </table>
                     <div *ngIf="docNames.length == 0">
-                        <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
+                        <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
                     </div>
+                    <form>
+                        <button id="retour" type="button" class="btn btn-primary" [routerLink]="['/groupe', this.id, 'list-doc-groupe']">Retour</button>
+                    </form>
                 </div>
             </div>
         </div>
