@@ -12,17 +12,41 @@
             <div class="content">
                 <div class="container">
                     <h2>Les résultats de ma recherche : {{ this.value }}</h2>
-                    <form class="form-inline my-2 my-lg-0" id="milieu">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre ou une communautée" aria-label="Search" #recherche>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+                    <form class="search-container">
+                        <input type="text" id="search-bar" placeholder="Rechercher un groupe, un utilisateur" #recherche>
+                        <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
                     </form>
-                    <div class="photo" *ngFor="let file of docNames">
-                        <h3>Documents: </h3>
-                        <img src="{{file.url}}" width="30%" />
-                    </div>
+                    <table class="table table-hover" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Titre du post</th>
+                                <th scope="col">Nom du fichier</th>
+                                <th scope="col">Auteur</th>
+                                <th scope="col">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let file of docNames">
+                                <td>{{file.titre}}</td>
+                                <td>{{file.nom}}</td>
+                                <td>
+                                    <div *ngFor="let itemUser of itemUsers | async">
+                                        <div *ngIf="file.idAuteur == itemUser.uid ">
+                                            {{ itemUser.displayName }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger " (click)="deleteFileUpload(file.id, file)">Supprimer</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div *ngIf="docNames.length == 0">
-                        <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
+                        <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
                     </div>
+                    <form>
+                        <button id="retour" type="button" class="btn btn-primary" [routerLink]="['/groupe', this.id, 'list-doc-groupe']">Retour</button>
+                    </form>
                 </div>
             </div>
         </div>

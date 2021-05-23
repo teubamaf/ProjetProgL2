@@ -1,7 +1,7 @@
 .poste {
     width: 700px;
     margin-top: 15px;
-    margin-left: 50px;
+    margin-left: 220px;
     margin-bottom: 50px;
     box-shadow: 0 0 2px, 1px 1px 1px #424549;
 }
@@ -133,7 +133,7 @@ h1 {
     font-size: 30px;
     font-family: Lato;
     text-align: center;
-    margin-left: -150px;
+    margin-left: -100px;
     margin-bottom: 50px;
 }
 

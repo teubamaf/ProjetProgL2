@@ -84,7 +84,7 @@
                         </ul>
                         <h2>Liste des publications du groupe</h2>
                         <form class="search-container">
-                            <input type="text" id="search-bar" placeholder="Rechercher une publication" #recherche>
+                            <input type="text" id="search-bar" placeholder="Rechercher une publication..." #recherche>
                             <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
                         </form>
                         <div *ngFor="let itemGroupe of items | async">
