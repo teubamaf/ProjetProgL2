@@ -9,7 +9,7 @@
             </button>
             <hr>
             <div *ngFor="let itemGroupe of itemGroupes">
-                <a [routerLink]="['/groupe', itemGroupe.id]" type="button " class="btn " id="btn-groupe "><img [src]="itemGroupe.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /></a>
+                <a [routerLink]="['/groupe', itemGroupe.id]" type="button " class="btn "><img [src]="itemGroupe.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " /></a>
             </div>
         </div>
     </div>

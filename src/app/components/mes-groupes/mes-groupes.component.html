@@ -13,7 +13,7 @@
                 <div class="container">
                     <div *ngFor="let itemGroupe of itemGroupes | async">
                         <div *ngIf="itemGroupe.id == id">
-                            <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                            <h1><strong>{{itemGroupe.nom}}</strong></h1>
                         </div>
                     </div>
                     <ul class="nav nav-tabs">
@@ -89,14 +89,13 @@
                     <br />
                     <div *ngFor="let itemGroupe of itemGroupes | async">
                         <div *ngIf="itemGroupe.id == id">
-                            <h2>Les publications du groupe <strong>{{itemGroupe.nom}}</strong></h2>
+                            <h2>Fil d'actualité du groupe</h2>
                         </div>
                     </div>
-                    <form class="form-inline my-2 my-lg-0" id="milieu">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher une publication" aria-label="Search" #recherche>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+                    <form class="search-container">
+                        <input type="text" id="search-bar" placeholder="Rechercher une publication" #recherche>
+                        <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
                     </form>
-                    <br />
                     <div *ngFor="let post of posts">
                         <div *ngIf="post.idGroupe == id">
                             <mat-card class="poste">

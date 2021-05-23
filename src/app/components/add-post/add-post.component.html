@@ -13,7 +13,7 @@
                 <div class="container">
                     <div *ngFor="let itemGroupe of items | async">
                         <div *ngIf="itemGroupe.id == id">
-                            <h1>Bienvenue sur le groupe <strong>{{itemGroupe.nom}}</strong></h1>
+                            <h1><strong>{{itemGroupe.nom}}</strong></h1>
                         </div>
                     </div>
                     <ul class="nav nav-tabs">
@@ -91,7 +91,7 @@
                                         <p>Les champs marqués d'un <i>*</i> sont obligatoires</p>
                                         <div class="form-group">
                                             <label for="titre">Titre <i>* </i></label>
-                                            <input type="text" class="form-control" id="titre" placeholder="Ex: Les animaux de R." [(ngModel)]="post.titre" name="titre" required />
+                                            <input type="text" class="form-control" id="titre" placeholder="Ecrire votre titre ici..." [(ngModel)]="post.titre" name="titre" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="contenu">Contenu <i>* </i></label>
@@ -106,7 +106,7 @@
                                                 {{ percentage }}%
                                             </div>
                                         </div>
-                                        <button type="submit" (click)="savePost(item.nbPosts)" (click)="upload()" class="btn btn-success">Créer</button> {{message}}
+                                        <button type="submit" (click)="savePost(item.nbPosts)" (click)="upload()" class="btn btn-success">Poster</button> {{message}}
                                     </form>
                                 </div>
                             </div>

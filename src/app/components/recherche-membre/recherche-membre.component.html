@@ -11,23 +11,33 @@
         <div class="container flex">
             <div class="content">
                 <div class="container">
-                    <h2>Les résultats de ma recherche : {{ this.value }}</h2>
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre" aria-label="Search" #recherche>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+                    <h2>Les résultats de ma recherche : <strong>{{ this.value }}</strong></h2>
+                    <form class="search-container">
+                        <input type="text" id="search-bar" placeholder="Rechercher un groupe, un utilisateur" #recherche>
+                        <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
                     </form>
-                    <div *ngFor="let membreGroupe of membreGroupes">
-                        <div *ngFor="let itemUser of itemUsers | async">
-                            <div *ngIf="this.value == itemUser.displayName">
-                                <h3>Utilisateurs: </h3>
-                                {{ itemUser.displayName }} <img [src]="itemUser.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
-                                <a>Voir le profil</a>
+                    <div *ngFor="let membre of itemUsers | async">
+                        <div *ngIf="this.value== membre.displayName ">
+                            <ul id="membre" class="list-group list-group-flush">
+                                <li class="list-group-item" *ngFor="let userPseudo of membreGroupes; let i=index " [class.active]="i==currentIndex " (click)="setActiveMembre(userPseudo, i) ">
+                                    {{ membre.displayName }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="details ">
+                        <div class="col-md-6 ">
+                            <div *ngIf="currentMembre ">
+                                <app-list-membres-details (refreshList)="refreshList() " [membre]="currentMembre "></app-list-membres-details>
                             </div>
                         </div>
                     </div>
                     <div *ngIf="users.length == 0">
-                        <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
+                        <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
                     </div>
+                    <form>
+                        <button id="retour" type="button" class="btn btn-primary" [routerLink]="['/groupe', this.id, 'list-membre-groupe']">Retour</button>
+                    </form>
                 </div>
             </div>
         </div>

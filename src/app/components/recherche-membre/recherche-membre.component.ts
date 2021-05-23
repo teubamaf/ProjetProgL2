@@ -29,6 +29,11 @@ export class RechercheMembreComponent implements OnInit, OnDestroy {
   uid: any[] = [];
   tab: any[] = [];
 
+  membres: any;
+  currentMembre = null;
+  currentIndex = -1;
+  nom = '';
+
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
@@ -83,6 +88,7 @@ export class RechercheMembreComponent implements OnInit, OnDestroy {
           )
         ).subscribe(doc => {
           this.membreGroupes = doc;
+          console.log(this.membreGroupes);
         });
       }
     });
@@ -90,6 +96,17 @@ export class RechercheMembreComponent implements OnInit, OnDestroy {
 
   rechercher(value: string): any {
     this.router.navigate(['/groupe', this.id, 'recherche-membre', value]);
+  }
+
+  setActiveMembre(membre: any, index: any): void {
+    this.currentMembre = membre;
+    this.currentIndex = index;
+  }
+
+  refreshList(): void {
+    this.currentMembre = null;
+    this.currentIndex = -1;
+    this.retrieveGroupeMembre();
   }
 
 }

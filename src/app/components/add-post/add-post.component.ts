@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -63,7 +63,8 @@ export class AddPostComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public datepipe: DatePipe,
     public fileService: FileService,
-    notifierService: NotifierService
+    notifierService: NotifierService,
+    public router: Router
 
     ) {
       this.items = firestore.collection(`groupes`).valueChanges();
@@ -126,6 +127,7 @@ export class AddPostComponent implements OnInit {
         console.log('Fichier uploadé');
       }
     }
+    this.router.navigate(['/groupe', this.id]);
   }
 
 }

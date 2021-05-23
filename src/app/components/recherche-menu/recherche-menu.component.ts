@@ -103,4 +103,8 @@ export class RechercheMenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  rechercher(value: string): any {
+    this.router.navigate(['/recherche', value]);
+  }
+
 }
