@@ -1,7 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import Abonnement from 'src/app/shared/models/abonnement.model';
@@ -17,7 +17,7 @@ import { PostService } from 'src/app/shared/services/post.service';
   templateUrl: './profil-user.component.html',
   styleUrls: ['./profil-user.component.css']
 })
-export class ProfilUserComponent implements OnInit {
+export class ProfilUserComponent implements OnInit, OnDestroy {
 
   id: string;
 
@@ -28,6 +28,7 @@ export class ProfilUserComponent implements OnInit {
   amis1: any;
   amis2: any;
   abonner: any;
+  navigationSubscription: any;
 
   itemDocuments: Observable<any[]>;
   itemGroupes: Observable<any[]>;
@@ -45,11 +46,18 @@ export class ProfilUserComponent implements OnInit {
     public firestore: AngularFirestore,
     public membreService: MembreService,
     public amisService: AmisService,
-    public abonnementService: AbonnementService
+    public abonnementService: AbonnementService,
+    public router: Router
   ) {
     this.itemDocuments = firestore.collection(`uploads`).valueChanges();
     this.itemGroupes = firestore.collection(`groupes`).valueChanges();
     this.itemUsers = firestore.collection(`users`).valueChanges();
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -62,6 +70,24 @@ export class ProfilUserComponent implements OnInit {
     this.retrieveAmis1();
     this.retrieveAmis2();
     this.retrieveAbonne();
+  }
+
+  initialiseInvites(): void {
+    // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
+    this.id = this.activatedRoute.snapshot.paramMap.get('uid');
+    this.retrieveUser();
+    this.retrievePostUser();
+    this.retrieveMembre();
+    this.retrieveAbonnement();
+    this.retrieveAmis1();
+    this.retrieveAmis2();
+    this.retrieveAbonne();
+  }
+
+  ngOnDestroy(): void{
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   retrieveUser(): void {

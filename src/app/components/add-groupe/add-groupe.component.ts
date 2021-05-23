@@ -53,12 +53,13 @@ export class AddGroupeComponent implements OnInit {
     this.groupe.nbMembres = 1;
     this.groupe.nbPosts = 0;
     this.printedOption = this.selectedOption;
-    this.groupe.type = this.printedOption;
+    this.groupe.visibility = this.printedOption;
     this.groupe.idCreateur = this.uid;
     this.groupeService.create(this.groupe).then(() => {
       console.log('Created new item successfully!');
       this.submitted = true;
     });
+    this.router.navigate(['/home']);
   }
 
   newGroupe(): void {

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ import { ChatService } from 'src/app/shared/services/chat.service';
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.css']
 })
-export class ChatsComponent implements OnInit {
+export class ChatsComponent implements OnInit, OnDestroy {
 
   id: string;
   myArray: any[] = [];
@@ -30,6 +30,8 @@ export class ChatsComponent implements OnInit {
   date: string;
 
   messages: any;
+  navigationSubscription: any;
+
   itemUsers: Observable<any[]>;
 
   constructor(
@@ -42,12 +44,20 @@ export class ChatsComponent implements OnInit {
   ) {
     this.itemUsers = firestore.collection(`users`).valueChanges();
     this.date = this.datePipe.transform(this.currentDate, 'd/MM/yyyy, HH:mm:ss');
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+        }
+      });
    }
 
   ngOnInit(): void {
+  }
+
+  initialiseInvites(): void {
     // Note: Below 'queryParams' can be replaced with 'params' depending on your requirements
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.id);
     this.firestore.collection(`conversations`, ref => ref.where('id', '==', this.id)).get().subscribe(snap => {
       snap.forEach(doc => {
         this.myArray.push(doc.data());
@@ -56,6 +66,12 @@ export class ChatsComponent implements OnInit {
       this.tab = Array.from(new Set(this.myArray));
     });
     this.retrieveChat();
+  }
+
+  ngOnDestroy(): void{
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   saveMessage(message: string, date: string): void {
@@ -70,7 +86,7 @@ export class ChatsComponent implements OnInit {
   resetForm(){
     this.messages.reset();
   }
-  
+
   retrieveChat(): void {
     this.chatService.getAll().snapshotChanges().pipe(
       map(changes =>

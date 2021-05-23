@@ -3,6 +3,8 @@ import { GroupeService } from 'src/app/shared/services/groupe.service';
 import Groupe from 'src/app/shared/models/groupe.model';
 
 import { NotifierService } from 'angular-notifier';
+import { tick } from '@angular/core/testing';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-groupe-details',
@@ -19,9 +21,12 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
   currentGroupe: Groupe = new Groupe();
   message = '';
 
+  uid = this.authService.userData.uid;
+
   constructor(
     public groupeService: GroupeService,
-    notifierService: NotifierService
+    notifierService: NotifierService,
+    public authService: AuthService
   ) { this.notifier = notifierService; }
 
   ngOnInit(): void {
@@ -36,7 +41,8 @@ export class GroupeDetailsComponent implements OnInit, OnChanges {
   updateGroupe(): void {
     const data = {
       nom: this.currentGroupe.nom,
-      type: this.currentGroupe.type
+      type: this.currentGroupe.type,
+      idCreateur: this.uid
     };
 
     this.groupeService.update(this.currentGroupe.id, data)
