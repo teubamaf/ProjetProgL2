@@ -76,3 +76,14 @@ input#search-bar:focus:-ms-placeholder {
     top: -62px;
     right: -5px;
 }
+
+#none {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button#retour {
+    width: 100px;
+    margin-left: 140px;
+    margin-top: 10px;
+}

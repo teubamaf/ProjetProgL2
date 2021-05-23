@@ -10,6 +10,7 @@ import { CommentaireService } from 'src/app/shared/services/commentaire.service'
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
 import { FileService } from 'src/app/shared/services/file.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import Document from 'src/app/shared/models/document.model';
 
 @Component({
   selector: 'app-recherche-document',
@@ -88,7 +89,11 @@ export class RechercheDocumentComponent implements OnInit, OnDestroy {
   }
 
   rechercher(value: string): any {
-    this.router.navigate(['/groupe', this.id, 'recherche-publications', value]);
+    this.router.navigate(['/groupe', this.id, 'recherche-document', value]);
+  }
+
+  deleteFileUpload(id: string, fileUpload: Document): void {
+    this.fileService.delete(id, fileUpload);
   }
 
 }

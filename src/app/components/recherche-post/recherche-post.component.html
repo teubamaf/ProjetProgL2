@@ -13,7 +13,7 @@
                 <div class="container">
                     <h2>Les résultats de ma recherche : <strong>{{ this.value }}</strong></h2>
                     <form class="search-container">
-                        <input type="text" id="search-bar" placeholder="Rechercher un groupe, un utilisateur" #recherche>
+                        <input type="text" id="search-bar" placeholder="Rechercher une publication..." #recherche>
                         <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
                     </form>
                     <div *ngFor="let postTitre of postTitres">
@@ -43,10 +43,11 @@
                         </table>
                     </div>
                     <div *ngIf="postTitres.length == 0 ">
-                        <div *ngIf="pseudos.length == 0">
-                            <p>Aucun résultat n'a été trouvé pour votre recherche...</p>
-                        </div>
+                        <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
                     </div>
+                    <form>
+                        <button id="retour" type="button" class="btn btn-primary" [routerLink]="['/groupe', this.id, 'list-post-groupe']">Retour</button>
+                    </form>
                 </div>
             </div>
         </div>
