@@ -10,6 +10,8 @@
 }
 
 .chat-content {
+    overflow-y: auto;
+    max-height: 400px;
     border-radius: 5px;
     border: solid 0.5px #424549;
     padding-right: 5px;

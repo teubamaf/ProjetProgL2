@@ -19,6 +19,12 @@
     position: relative;
 }
 
+.content{
+    max-width: 1200px;
+    max-height: 1200px;
+    overflow-y: auto;
+}
+
 .send input {
     border-radius: 10px;
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;

@@ -35,6 +35,13 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
 
   uid = this.authService.userData.uid;
 
+  myArray: any[] = [];
+  tab: any[] = [];
+  itemPosts: any[] = [];
+  tmp: any[] = [];
+  groupes: any;
+  messages: any;
+
   constructor(
     public router: Router,
     private activatedRoute: ActivatedRoute,
@@ -64,7 +71,7 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
   }
 
   public id: string;
-  fileUploads?: any[];
+  fileUploads: any[] = [];
 
   ngOnInit(): void {
   }
@@ -83,7 +90,7 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
       console.log(this.fileUploads);
     });
     this.retrieveCommentaires();
-    this.retrievePost();
+    this.retrievePosts();
   }
 
   ngOnDestroy(): void{
@@ -92,11 +99,11 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveCommentaire(contenu: string, idPost: string): void {
+  saveCommentaire(contenu: string, idPost: string, idGroupe: string): void {
     this.commentaire.contenu = contenu;
     this.commentaire.idPost = idPost;
     this.commentaire.idCrea = this.uid;
-    this.commentaire.idGroupe = this.id;
+    this.commentaire.idGroupe = idGroupe;
     this.commentaire.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
     this.commentaireService.create(this.commentaire).then(() => {
       console.log('Commentaire créé avec succès');
@@ -115,8 +122,8 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
     });
   }
 
-  retrievePost(): void {
-    this.postService.getPost(this.id).snapshotChanges().pipe(
+  retrievePosts(): void {
+    this.postService.getDate().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -140,9 +147,9 @@ export class MesGroupesComponent implements OnInit, OnDestroy {
   }
 
   dislikeButtonClick(nb: number, id: string) {
-    const nouveau_dislikes = nb-1;
+    const nouveau_dislikes = nb+1;
     const data = {
-      nbLikes : nouveau_dislikes
+      nbDislikes : nouveau_dislikes
     };
     this.postService.update(id, data);
   }

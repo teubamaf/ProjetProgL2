@@ -114,4 +114,20 @@ export class PageAccueilComponent implements OnInit {
       this.posts = data;
     });
   }
+
+  likeButtonClick(nb: number, id: string) {
+    const nouveau_Likes = nb+1;
+    const data = {
+      nbLikes : nouveau_Likes
+    };
+    this.postService.update(id, data);
+  }
+
+  dislikeButtonClick(nb: number, id: string) {
+    const nouveau_dislikes = nb+1;
+    const data = {
+      nbDislikes : nouveau_dislikes
+    };
+    this.postService.update(id, data);
+  }
 }
