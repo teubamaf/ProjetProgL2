@@ -1,0 +1,102 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <div class="page-container">
+                        <div *ngFor="let itemGroupe of items | async">
+                            <div *ngIf="itemGroupe.id == id">
+                                <h1><strong>{{itemGroupe.nom}}</strong></h1>
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/groupe', this.id]">Les publications du
+                        groupe</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" [routerLink]="['/groupe', this.id, '\add-post']">Ecrire une publication</a>
+                            </li>
+                            <div *ngFor="let itemMembre of itemMembres | async">
+                                <div *ngIf="itemMembre.idGroupe == id">
+                                    <div *ngIf="itemMembre.uid == this.uid">
+                                        <div *ngIf="itemMembre.grade != 'Membre'">
+                                            <li class="nav-item">
+                                                <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-membre-groupe']">Liste des membres</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let itemMembre of itemMembres | async">
+                                <div *ngIf="itemMembre.idGroupe == id">
+                                    <div *ngIf="itemMembre.uid == this.uid">
+                                        <div *ngIf="itemMembre.grade != 'Membre'">
+                                            <li class="nav-item">
+                                                <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-post-groupe']">Gérer les publications</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let itemMembre of itemMembres | async">
+                                <div *ngIf="itemMembre.idGroupe == id">
+                                    <div *ngIf="itemMembre.uid == this.uid">
+                                        <div *ngIf="itemMembre.grade != 'Membre'">
+                                            <li class="nav-item">
+                                                <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-doc-groupe']">Gérer les documents</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let itemMembre of itemMembres | async">
+                                <div *ngIf="itemMembre.idGroupe == id">
+                                    <div *ngIf="itemMembre.uid == this.uid">
+                                        <div *ngIf="itemMembre.grade != 'Membre'">
+                                            <li class="nav-item">
+                                                <a class="nav-link" [routerLink]="['/groupe', this.id, '\statistiques-groupe']">Les statistiques de
+                                        mon groupe</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let itemMembre of itemMembres | async">
+                                <div *ngIf="itemMembre.idGroupe == id">
+                                    <div *ngIf="itemMembre.uid == this.uid">
+                                        <div *ngIf="itemMembre.grade != 'Administrateur'">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" aria-current="page">Quitter le groupe</a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                        <div *ngFor="let itemGroupe of itemGroupes | async">
+                            <div *ngIf="itemGroupe.id == id">
+                                <h2>Quitter le groupe <strong>{{itemGroupe.nom}}</strong></h2>
+                                <div *ngFor="let itemMembre of itemMembres | async">
+                                    <div *ngIf="itemMembre.idGroupe == id">
+                                        <div *ngIf="itemMembre.uid == this.uid">
+                                            <button type="button" class="btn btn-danger" (click)="quitter(itemMembre.id, itemGroupe.nbMembres)">Quitter le groupe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

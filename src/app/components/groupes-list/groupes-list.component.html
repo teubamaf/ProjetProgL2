@@ -1,0 +1,45 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <div class="page-container">
+                        <div class="list row">
+                            <div class="list-item">
+                                <h4 style="text-align: center;">Liste de mes groupes</h4>
+                                <div class="col-md-12">    
+                                    <ul class="list-group">
+                                        <div *ngFor="let itemGroupe of itemGroupes | async">
+                                            <div *ngFor="let membre of membres; let i = index" [class.active]="i == currentIndex" (click)="setActiveGroupe(itemGroupe, i)">
+                                                <div *ngIf="itemGroupe.id == membre.idGroupe">
+                                                    <li class="list-group-item">{{ itemGroupe.nom }}</li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="col-md-12 ">
+                                    <div class="row" *ngIf="authService.userData as user">
+                                        <div *ngIf="currentGroupe">
+                                            <app-groupe-details (refreshList)="refreshList() " [groupe]="currentGroupe "></app-groupe-details>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

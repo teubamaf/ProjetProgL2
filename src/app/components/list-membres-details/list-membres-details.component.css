@@ -1,0 +1,42 @@
+.edit-form {
+    width: 410px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 15px;
+    border-radius: 5px;
+    margin-top: 50px;
+    border: 1px solid lightgray;
+    box-shadow: 5px 5px 5px rgb(184, 178, 178);
+}
+
+.button {
+    margin-left: 80px;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.user {
+    display: inline-block;
+}
+
+.user p {
+    margin-left: 80px;
+    margin-top: -40px;
+}
+
+.date {
+    font-style: italic;
+    margin-left: 80px;
+    margin-top: -10px;
+}
+
+.membre {
+    text-align: center;
+    font-size: 24px;
+    font-family: Lato;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,36 @@
+<body>
+
+
+    <div class="connexion">
+        <div class="block">
+            <div class="authentification">
+                <h3>Inscription</h3>
+                <div class="pseudo">
+                    <p class="lead">
+                        <input type="pseudo" class="formControl" placeholder="Nom d'utilisateur" #userPseudo required>
+                    </p>
+                </div>
+                <div class="mail">
+                    <p class="lead">
+                        <input type="email" class="formControl" placeholder="Email Address" #userEmail required>
+                    </p>
+                </div>
+
+                <div class="password">
+                    <p class="lead">
+                        <input type="password" class="formControl" placeholder="Password" #userPwd required>
+                    </p>
+                </div>
+
+                <div class="button">
+                    <input type="button" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value, userPseudo.value)" routerLink="/home">
+                </div>
+            </div>
+
+            <div class="redirectToLogin">
+                <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
+            </div>
+        </div>
+    </div>
+
+</body>

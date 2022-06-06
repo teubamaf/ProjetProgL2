@@ -1,0 +1,50 @@
+#droite {
+    margin-left: 100px;
+}
+
+#gauche {
+    margin-left: 30px;
+}
+
+#menu {
+    border-bottom: solid 1px gray;
+}
+
+#milieu {
+    margin-right: 250px;
+}
+
+.dropdown-toggle,
+.dropdown-menu {
+    width: 200px
+}
+
+.btn-group img {
+    margin-right: 10px
+}
+
+.dropdown-toggle {
+    padding-right: 20px
+}
+
+.dropdown-toggle .glyphicon {
+    margin-left: 20px;
+    margin-right: -40px
+}
+
+.dropdown-menu>li>a:hover {
+    background: #f1f9fd
+}
+
+
+/* $search-blue */
+
+.dropdown-header {
+    background: #ccc;
+    font-size: 14px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px
+}

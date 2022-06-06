@@ -1,0 +1,55 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h2>Les résultats de ma recherche : <strong>{{ this.value }}</strong></h2>
+                    <form class="search-container">
+                        <input type="text" id="search-bar" placeholder="Rechercher une publication..." #recherche>
+                        <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+                    </form>
+                    <div *ngFor="let postTitre of postTitres">
+                        <table class="table table-hover" cellpadding="0" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Titre</th>
+                                    <th scope="col">Contenu</th>
+                                    <th scope="col">Auteur</th>
+                                    <th scope="col">-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{postTitre.titre}}</td>
+                                    <td>{{postTitre.contenu}}</td>
+                                    <td>
+                                        <div *ngFor="let itemUser of itemUsers | async">
+                                            <div *ngIf="postTitre.idCreateur == itemUser.uid ">
+                                                {{ itemUser.displayName }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><button class="btn btn-danger " (click)="DeletePost(postTitre.id) ">Supprimer</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="postTitres.length == 0 ">
+                        <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
+                    </div>
+                    <form>
+                        <button id="retour" type="button" class="btn btn-primary" [routerLink]="['/groupe', this.id, 'list-post-groupe']">Retour</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

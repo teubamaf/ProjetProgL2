@@ -1,0 +1,33 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h2>Créer une conversation</h2>
+                    <form class="form-group">
+                        <label>Rechercher un utilisateur: </label>
+                        <input type="text" class="formControl" #pseudoRecherche placeholder="Entrez le pseudo de l'utilisateur">
+                        <button type="button" class="btn btn-success" (click)="(recherche(pseudoRecherche.value))">Rechercher</button>
+                    </form>
+                    {{ this.message }}
+                    <ul class="list-group list-group-flush">
+                        <div *ngFor="let itemUser of itemUsers | async">
+                            <div *ngIf="itemUser.uid != this.uid">
+                                <li class="list-group-item" (click)="getPseudoCrea(itemUser.displayName, itemUser.uid)">{{ itemUser.displayName }}</li>
+                            </div>
+                        </div>
+                    </ul>
+                    <button type="button" class="btn btn-primary" routerLink="/mes-messages">Retour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

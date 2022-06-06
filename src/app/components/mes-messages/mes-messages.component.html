@@ -1,0 +1,24 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h1>Mes messages privés</h1>
+                    <button type="button" class="btn btn-primary" routerLink="/create-conversation">Créer une conversation avec un utilisateur</button>
+                    <button type="button" class="btn btn-primary" routerLink="/create-groupe-conversation">Créer une conversation de groupe</button>
+                    <button type="button" class="btn btn-primary" routerLink="/join-group-chat">Rejoindre une conversation de groupe</button>
+                    <app-conversation-list></app-conversation-list>
+                    <app-group-chat-list></app-group-chat-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

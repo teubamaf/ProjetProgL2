@@ -1,0 +1,55 @@
+<div id="container">
+    <div id="menu">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" routerLink="/home"  href="#" >
+                <img src="https://img.icons8.com/dusk/64/000000/camera.png" alt="" width="35" height="35">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" id="gauche">
+                        <a routerLink="/home" class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item" id="gauche">
+                        <a routerLink="/mes-groupes" class="nav-link" href="#">Mes Groupes</a>
+                    </li>
+                    <li class="nav-item" id="gauche">
+                        <a routerLink="/mes-messages" class="nav-link" href="#">Mes Messages</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" id="milieu">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Rechercher un membre ou une communautée" aria-label="Search" #recherche>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="rechercher(recherche.value)">Rechercher</button>
+                </form>
+                <div class="btn-group">
+                    <div *ngFor="let item of items | async">
+                        <div class="row" *ngIf="authService.userData as user">
+                            <div *ngIf="item.uid == user.uid">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img [src]="item.photoUrl" class="rounded-circle" style="width: 35px; height: 35px;"/>
+                                    Mon Compte
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a [routerLink]="['/profil', this.uid]" title="Voir mon profil">Voir mon profil</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" routerLink="/dashboard" title="Profil">Gérer mon profil</a>
+                                    </li>
+                                    <li>
+                                        <a routerLink="/list-amis" title="Liste d'amis">Liste d'amis</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="Deconnexion" (click)="authService.SignOut()">Déconnexion</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

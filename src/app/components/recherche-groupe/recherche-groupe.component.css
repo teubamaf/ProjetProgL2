@@ -1,0 +1,241 @@
+.content {
+    float: left;
+    height: 100%;
+    width: 1200px;
+    margin-right: -100px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: Lato;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    font-family: Lato;
+}
+
+.search-container {
+    width: 490px;
+    display: block;
+    margin: 0 auto;
+    margin-left: 320px;
+}
+
+input#search-bar {
+    margin: 0 auto;
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #D0CFCE;
+    outline: none;
+}
+
+input#search-bar:focus {
+    border: 1px solid #008ABF;
+    transition: 0.35s ease;
+    color: #008ABF;
+}
+
+input#search-bar:focus::-webkit-input-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+
+input#search-bar:focus::-moz-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+
+input#search-bar:focus:-ms-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+
+.search-icon {
+    position: relative;
+    float: right;
+    width: 75px;
+    height: 75px;
+    top: -62px;
+    right: -5px;
+}
+
+.poste {
+    width: 700px;
+    margin-top: 60px;
+    margin-left: 200px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 2px, 1px 1px 1px #424549;
+}
+
+.titre {
+    margin-top: 20px;
+    font-size: 25px;
+    text-align: center;
+    margin-left: 200px;
+}
+
+.nomGrp {
+    text-align: center;
+    margin-left: 45px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 25px;
+}
+
+.titrePage {
+    text-align: center;
+    margin-left: 150px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+
+.date {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.photoprofil {
+    float: left;
+}
+
+button {
+    margin: 13px;
+}
+
+mat-card-subtitle {
+    display: inline-block;
+}
+
+.par {
+    margin-left: 60px;
+    margin-top: -40px;
+}
+
+.date {
+    margin-left: 60px;
+    margin-top: -15px;
+}
+
+.groupe {
+    margin-left: 475px;
+    margin-top: -40px;
+}
+
+mat-card-title {
+    text-align: center;
+    font-size: 26px;
+    font-family: Lato;
+}
+
+mat-card-content {
+    font-family: Lato;
+    font-size: 16px;
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+mat-card-content p {
+    margin-top: 20px;
+    overflow-y: auto;
+}
+
+mat-card-content img {
+    max-width: 650px;
+    margin-top: 20px;
+    border-radius: 2px;
+}
+
+button {
+    border: 1px black;
+    width: 75px;
+    background: transparent;
+    border: none !important;
+    display: inline-block;
+}
+
+.marg {
+    margin-top: 10px;
+}
+
+button img {
+    margin-left: -50px;
+    margin-top: 10px;
+}
+
+input {
+    margin-left: 10px;
+    width: 550px;
+    height: 45px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.upload {
+    margin-left: 20px;
+    margin-top: -30px;
+}
+
+.comment {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.commsdate {
+    margin-top: -100px;
+    margin-left: 60px;
+    font-style: italic;
+}
+
+.coms {
+    max-height: 200px;
+    overflow-y: auto;
+    display: inline-block;
+    width: 650px;
+    margin: 0
+}
+
+.comms {
+    font-size: 15px;
+    margin-top: -100px;
+    margin-left: 60px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    min-height: 30px;
+    padding-left: 10px;
+}
+
+#commstitre {
+    margin-left: -550px;
+}
+
+#tit {
+    font-size: 13px;
+    margin-left: -430px;
+    margin-top: -40px;
+    margin-bottom: -10px;
+}
+
+#none {
+    text-align: center;
+    margin-top: 30px;
+}

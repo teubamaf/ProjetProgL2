@@ -1,0 +1,39 @@
+.message {
+    margin: 10px 0;
+}
+
+.messages {
+    height: 200px;
+    overflow-y: scroll;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.messages-component {
+    display: inline-block;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 5px;
+}
+
+button {
+    margin: 13px;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    width: 1200px;
+    margin-right: -100px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
+}

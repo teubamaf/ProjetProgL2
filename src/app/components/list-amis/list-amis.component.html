@@ -1,0 +1,64 @@
+<div class="page-container">
+    <div class="sidebar">
+        <div class="container">
+            <div class="scroller">
+                <div class="inner-header flex">
+                    <h2>Ma liste d'amis</h2>
+                </div>
+                <div *ngFor="let userAmi of userAmis">
+                    <div *ngIf="userAmi.uid1 == this.uid">
+                        <ul class="list-group">
+                            <div *ngFor="let itemUser of itemUsers | async">
+                                <div *ngIf="itemUser.uid == userAmi.uid2">
+                                    <li class="list-group-item">
+                                        <img id="user1" [src]="itemUser.photoUrl" class="rounded-circle" />
+                                        <p>{{ itemUser.displayName }}</p>
+                                        <button type="button" (click)="getPseudoCrea(itemUser.displayName, itemUser.uid)">
+                                                    <img src="https://i.ibb.co/dmR7FVb/discuter.png">
+                                        </button>
+                                        <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
+                                        <div class="log" id="true" *ngIf="itemUser.enLigne == true">
+                                            ● En Ligne
+                                        </div>
+                                        <div class="log" id="false" *ngIf="itemUser.enLigne == false">
+                                            ● Hors Ligne
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngFor="let ami of amis">
+                    <div *ngIf="ami.uid2 == this.uid">
+                        <ul class="list-group">
+                            <div *ngFor="let itemUser of itemUsers | async">
+                                <div *ngIf="itemUser.uid == ami.uid1">
+                                    <li class="list-group-item">
+                                        <img id="user2" [src]="itemUser.photoUrl" class="rounded-circle" />
+                                        <p>{{ itemUser.displayName }}</p>
+                                        <button type="button" (click)="getPseudoCrea(itemUser.displayName, itemUser.uid)">
+                                            <img src="https://i.ibb.co/dmR7FVb/discuter.png">
+                                        </button>
+                                        <a [routerLink]="['/profil-user', itemUser.uid]"><img id="right" class='icon' src="https://i.ibb.co/jWTTbNW/user.png" /></a>
+                                        <div class="log" id="true" *ngIf="itemUser.enLigne == true">
+                                            ● En Ligne
+                                        </div>
+                                        <div class="log" id="false" *ngIf="itemUser.enLigne == false">
+                                            ● Hors Ligne
+                                        </div>
+                                    </li>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div *ngIf="userAmis.length == 0">
+                    <div *ngIf="amis.length == 0">
+                        Il semblerait que vous n'ayez pas d'amis....
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

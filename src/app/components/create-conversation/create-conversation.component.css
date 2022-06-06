@@ -1,0 +1,16 @@
+.content {
+    float: left;
+    height: 100%;
+    width: 1200px;
+    margin-right: -100px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
+}

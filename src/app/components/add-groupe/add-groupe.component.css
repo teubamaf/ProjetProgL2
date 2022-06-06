@@ -1,0 +1,58 @@
+input,
+select {
+    border: 2px solid;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 0.25rem;
+    min-width: 125px;
+    padding: 0.5rem;
+    transition: border-color 0.5s ease-out;
+}
+
+input:optional,
+select:optional {
+    border-color: gray;
+}
+
+input:required:valid,
+select:required:valid {
+    border-color: green;
+}
+
+input:invalid,
+select:invalid {
+    border-color: red;
+}
+
+input:required:focus:valid,
+select:required:focus:valid {
+    background: url("https://s3.gifyu.com/images/icons8-coche.gif") no-repeat 95% 50% white;
+    background-size: 25px;
+}
+
+input:focus:invalid,
+select:focus:invalid {
+    background: url("https://s3.gifyu.com/images/icons8-effacer-48.png") no-repeat 95% 50% white;
+    background-size: 25px;
+}
+
+i {
+    color: red;
+}
+
+.content {
+    float: left;
+    height: 100%;
+    width: 1200px;
+    margin-right: -100px;
+    border-right: 1px dashed #CCC;
+    padding: 20px;
+    vertical-align: middle;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -900px;
+    margin-left: 70px;
+}

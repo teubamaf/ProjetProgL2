@@ -1,0 +1,80 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <!-- Main content -->
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                        <div class="inner-adjust">
+
+                            <div class="pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">Mon Profil</h1>
+                            </div>
+                            <!-- Show user data when logged in -->
+                            <div *ngFor="let item of items | async">
+                                <div class="row" *ngIf="authService.userData as user">
+                                    <div *ngIf="item.uid == user.uid">
+                                        <div class="col-md-12">
+                                            <div class="media">
+                                                <img [src]="item.photoUrl" class="rounded-circle" style="width: 125px; height: 100px; display:block;" />
+                                                <div class="media-body">
+                                                    <h1>Hello: <strong>{{item.displayName}}</strong></h1>
+                                                    <p>User ID: <strong>{{item.uid}}</strong></p>
+                                                    <p>Email: <strong>{{item.email}}</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/><br/>
+                                        <div class="pt-3 pb-2 mb-3 border-bottom">
+                                            <h1 class="h2">Modifier mon profil</h1>
+                                        </div>
+                                        <div class="formGroup">
+                                            <p class="lead">
+                                                <label for="displayName">Nom d'utilisateur</label>
+                                            </p>
+                                            <p class="lead">
+                                                <input type="text" class="formControl" [value]="item.displayName" #userDisplayName required>
+                                            </p>
+                                        </div>
+                                        <div class="formGroup">
+                                            <p class="lead">
+                                                <label for="displayName">Adresse Mail</label>
+                                            </p>
+                                            <p class="lead">
+                                                <input type="text" class="formControl" placeholder="Adresse email" [value]="item.email" #userEmail required>
+                                            </p>
+                                        </div>
+                                        <div class="formGroup">
+                                            <p class="lead">
+                                                <label for="displayName">Image de profil</label>
+                                            </p>
+                                            <p class="lead">
+                                                <input type="text" class="formControl" placeholder="https://blabla.com" [value]="item.photoUrl" #userPhotoURL required>
+                                            </p>
+                                        </div>
+                                        <div class="formGroup">
+                                            <input type="button" class="btn btn-success" value="Modifier mon profil" (click)="authService.UpdateUser(user.uid, userDisplayName.value, userEmail.value, userPhotoURL.value)">
+                                        </div>
+                                        <br/>
+                                        <div class="formGroup">
+                                            <input type="button" class="btn btn-danger" value="Supprimer mon compte" (click)="deleteUser()">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

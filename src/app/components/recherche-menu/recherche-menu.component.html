@@ -1,0 +1,79 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <h2>Les résultats de ma recherche : <strong>{{ this.value }}</strong></h2>
+                    <form class="search-container">
+                        <input type="text" id="search-bar" placeholder="Rechercher un groupe, un utilisateur" #recherche>
+                        <a (click)="rechercher(recherche.value)"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+                    </form>
+                    <ul class="list-group list-group-flush">
+                        <div *ngFor="let groupeNom of groupeNoms">
+                            <div *ngIf="groupeNom.nom == this.value">
+                                <div *ngFor="let itemUser of itemUsers | async">
+                                    <div *ngIf="itemUser.uid == groupeNom.idCreateur">
+                                        <h3>Les communautés correspondant à votre recherche : </h3>
+                                        <li class="list-group-item list-group-item-action">
+                                            <img id="imgGroupe2" [src]="groupeNom.photoUrl " class="rounded-circle " style="width: 50px; height: 50px;" />
+                                            <p class="nom">{{ groupeNom.nom }}</p>
+                                            <p class="type">Groupe {{ groupeNom.visibility }}</p>
+                                            <p class="crea">Créateur : {{ itemUser.displayName }}</p>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul id="animo" class="list-group list-group-flush">
+                        <div *ngFor="let groupeType of groupeTypes">
+                            <h3>Les communautés correspondant à votre recherche : </h3>
+                            <div *ngFor="let itemUser of itemUsers | async">
+                                <div *ngIf="itemUser.uid == groupeType.idCreateur">
+                                    <li class="list-group-item list-group-item-action">
+                                        <img id="imgGroupe" [src]="groupeType.photoUrl " class="rounded-circle " style="width: 50px; height: 50px;" />
+                                        <p class="nom">{{ groupeType.nom }}</p>
+                                        <p class="type">Groupe {{ groupeType.visibility }}</p>
+                                        <p class="crea">Créateur : {{ itemUser.displayName }}</p>
+                                    </li>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul id="user" class="list-group list-group-flush">
+                        <div *ngFor="let userPseudo of userPseudos">
+                            <h3>Les utilisateurs correspondant à votre recherche : </h3>
+                            <li class="list-group-item list-group-item-action">
+                                <img [src]="userPseudo.photoUrl " class="rounded-circle " style="width: 50px; height: 50px; margin-left: 15px; " />
+                                <p class="pseudo">{{ userPseudo.displayName }}</p>
+                                <div class="ligne" id="non" *ngIf="userPseudo.enLigne == false">
+                                    <p>● Hors Ligne</p>
+                                </div>
+                                <div class="ligne" id="oui" *ngIf="userPseudo.enLigne == true">
+                                    <p>● En Ligne</p>
+                                </div>
+                                <button type="button" class="btn btn-light" id="link" [routerLink]="['/profil-user', userPseudo.uid]">Voir le profil</button>
+                            </li>
+
+                        </div>
+                    </ul>
+                    <div *ngIf="groupeNoms.length == 0">
+                        <div *ngIf="groupeTypes.length == 0">
+                            <div *ngIf="userPseudos.length == 0">
+                                <h3 id="none">Aucun résultat n'a été trouvé pour votre recherche...</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

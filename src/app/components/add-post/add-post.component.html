@@ -1,0 +1,119 @@
+<!-- Top navigation -->
+<app-menu></app-menu>
+
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+    <div class="row">
+
+        <app-left-menu></app-left-menu>
+        <app-list-amis></app-list-amis>
+
+        <div class="container flex">
+            <div class="content">
+                <div class="container">
+                    <div *ngFor="let itemGroupe of items | async">
+                        <div *ngIf="itemGroupe.id == id">
+                            <h1><strong>{{itemGroupe.nom}}</strong></h1>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/groupe', this.id]">Les publications du
+                        groupe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page">Ecrire une publication</a>
+                        </li>
+                        <div *ngFor="let itemMembre of itemMembres | async">
+                            <div *ngIf="itemMembre.idGroupe == id">
+                                <div *ngIf="itemMembre.uid == this.uid">
+                                    <div *ngIf="itemMembre.grade != 'Membre'">
+                                        <li class="nav-item">
+                                            <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-membre-groupe']">Liste des membres</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let itemMembre of itemMembres | async">
+                            <div *ngIf="itemMembre.idGroupe == id">
+                                <div *ngIf="itemMembre.uid == this.uid">
+                                    <div *ngIf="itemMembre.grade != 'Membre'">
+                                        <li class="nav-item">
+                                            <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-post-groupe']">Gérer les
+                                        publications</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let itemMembre of itemMembres | async">
+                            <div *ngIf="itemMembre.idGroupe == id">
+                                <div *ngIf="itemMembre.uid == this.uid">
+                                    <div *ngIf="itemMembre.grade != 'Membre'">
+                                        <li class="nav-item">
+                                            <a class="nav-link" [routerLink]="['/groupe', this.id, '\list-doc-groupe']">Gérer les documents</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let itemMembre of itemMembres | async">
+                            <div *ngIf="itemMembre.idGroupe == id">
+                                <div *ngIf="itemMembre.uid == this.uid">
+                                    <div *ngIf="itemMembre.grade != 'Membre'">
+                                        <li class="nav-item">
+                                            <a class="nav-link" [routerLink]="['/groupe', this.id, '\statistiques-groupe']">Les statistiques de
+                                        mon groupe</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngFor="let itemMembre of itemMembres | async">
+                            <div *ngIf="itemMembre.idGroupe == id">
+                                <div *ngIf="itemMembre.uid == this.uid">
+                                    <div *ngIf="itemMembre.grade != 'Administrateur'">
+                                        <li class="nav-item">
+                                            <a class="nav-link" [routerLink]="['/groupe', this.id, '\quit']">Quitter le groupe</a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="container">
+                        <div *ngFor="let item of items | async">
+                            <div *ngIf="item.id == this.id">
+                                <div class="submit-form">
+                                    <h2>Ecrire une publication :</h2>
+                                    <form>
+                                        <p>Les champs marqués d'un <i>*</i> sont obligatoires</p>
+                                        <div class="form-group">
+                                            <label for="titre">Titre <i>* </i></label>
+                                            <input type="text" class="form-control" id="titre" placeholder="Ecrire votre titre ici..." [(ngModel)]="post.titre" name="titre" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="contenu">Contenu <i>* </i></label>
+                                            <textarea class="form-control" id="contenu" placeholder="Ecrire votre message ici.." [(ngModel)]="post.contenu" name="contenu" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="file">Ajouter une image à votre publication</label>
+                                            <input type="file" class="form-control-file" id="customFile" (change)="selectFile($event)">
+                                        </div>
+                                        <div *ngIf="currentDocument" class="progress mt-2">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
+                                                {{ percentage }}%
+                                            </div>
+                                        </div>
+                                        <button type="submit" (click)="savePost(item.nbPosts)" (click)="upload()" class="btn btn-success">Poster</button> {{message}}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

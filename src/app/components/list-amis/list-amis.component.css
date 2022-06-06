@@ -1,0 +1,86 @@
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+.sidebar {
+    margin-top: 0px;
+    height: 100%;
+    padding: 20px;
+    margin-left: 1200px;
+    align-items: right;
+}
+
+.page-container {
+    display: flex;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-left: 40px;
+    font-family: 'Raleway', Arial, sans-serif;
+    box-shadow: 5 5 5px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+    margin: 0 auto;
+}
+
+li {
+    margin-bottom: 10px;
+    width: 310px;
+    border-radius: 10px;
+}
+
+p,
+img,
+a {
+    display: inline-block;
+    height: 50px;
+}
+
+#user1,
+#user2 {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+p {
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 15px;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+}
+
+#left {
+    margin-left: 20px;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background: transparent;
+    border: none !important;
+}
+
+.log {
+    margin-top: -40px;
+    margin-left: 60px;
+}
+
+#true {
+    color: green;
+}
+
+#false {
+    color: red;
+}
