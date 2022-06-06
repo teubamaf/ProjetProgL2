@@ -1,16 +1,16 @@
 # ProjetAngular L2
 
-#Social Media Website
+# Social Media Website
 
 School project where the subject was to create a social media Website.
 We choose to use angular for this website with Firebase database.
 
-#Contributor
+# Contributor
 
 [@Nelchel](https://github.com/Nelchel)
 [@KajaRang](https://github.com/KajaRang)
 
-#NEED TO SETUP A FIREBASE DATABASE
+# NEED TO SETUP A FIREBASE DATABASE
 
 ## Development server
 
